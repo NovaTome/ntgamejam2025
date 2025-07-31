@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://btvl2e15nmict"]
+
+[ext_resource type="Script" uid="uid://dagka628f2phv" path="res://Scripts/Entities/command_node.gd" id="1_01hsm"]
+
+[node name="CommandNode" type="Node"]
+script = ExtResource("1_01hsm")

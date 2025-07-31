@@ -16,9 +16,3 @@ ghost_scene = ExtResource("2_4g5cr")
 
 [node name="PlayerPath" type="Path2D" parent="SelfManagement"]
 curve = SubResource("Curve2D_pq8q7")
-
-[node name="LifeTick" type="Timer" parent="SelfManagement"]
-wait_time = 0.01
-autostart = true
-
-[connection signal="timeout" from="SelfManagement/LifeTick" to="SelfManagement" method="_on_life_tick_timeout"]

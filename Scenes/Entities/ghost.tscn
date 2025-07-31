@@ -1,15 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqvhoyc8hm3u0"]
+[gd_scene load_steps=5 format=3 uid="uid://bqvhoyc8hm3u0"]
 
 [ext_resource type="Texture2D" uid="uid://yup846x5e2qf" path="res://icon.svg" id="1_3mxmt"]
 [ext_resource type="Script" uid="uid://dxiilpwi3l5r5" path="res://Scripts/Entities/ghost.gd" id="1_e3r4w"]
+[ext_resource type="PackedScene" uid="uid://btvl2e15nmict" path="res://Scenes/Entities/command_node.tscn" id="3_nm3md"]
 
-[node name="GhostPath" type="PathFollow2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n2t0o"]
+size = Vector2(62, 65)
+
+[node name="GhostPath" type="CharacterBody2D"]
+collision_layer = 2
 script = ExtResource("1_e3r4w")
-metadata/_custom_type_script = "uid://dxiilpwi3l5r5"
 
-[node name="Ghost" type="Node2D" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="Ghost"]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_3mxmt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_n2t0o")
+
+[node name="CommandNode" parent="." node_paths=PackedStringArray("character") instance=ExtResource("3_nm3md")]
+character = NodePath("..")
