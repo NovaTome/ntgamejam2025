@@ -1,28 +1,43 @@
 class_name Ghost
-extends PathFollow2D # path follow has to be a direct child of path2d
+extends CharacterBody2D
 
-@onready var ghost: Node2D = $Ghost
+var movement_direction: Vector2 = Vector2.ZERO
+@onready var sprite_2d: Sprite2D = $Sprite2D
+@export var speed: int = 250
+@onready var command_node: CommandNode = $CommandNode
 
-# time created on tick
-var life_tick_created: int
-var biography: Dictionary[int, HistoryPoint]
+#List of commands for the Ghost to use
+var commands:Array[Command]
 
-# the fact that you cant init packaged scenes is so dumb
-# https://www.reddit.com/r/godot/comments/180oo9c/comment/ka75aqx/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
-func initalize(p_life_tick: int, p_biography: Dictionary[int, HistoryPoint]):
-	rotates = false # rotates causes the node to rotate with path direction instead of our own
-	life_tick_created = p_life_tick
-	biography = p_biography
+#Ticks from start of life
+var currentTicks:int = 0
 
-# copy the moves of the biography according to the time given from it's creation
-func progress_life(tick: int):
-	var current_tick = get_current_life_tick(tick)
-	if (current_tick <= biography.size()):
-		var current_life_point = biography[current_tick]
-		progress = current_life_point.curve_progress
-		ghost.rotation = current_life_point.rotation
+func _ready() -> void:
+	sprite_2d.self_modulate.a = 0.5 #Make ghost transparent :3
+	if commands.size() == 0:
+		printerr("Ghost has no commands!")
+		queue_free()
+
+func _process(delta: float) -> void:
+	movement_direction = Vector2.ZERO
+	var currentCommand:Command = commands.front()
+	if currentTicks < currentCommand.endTick: #Check if the top command should still be running
+		if currentCommand.hasMovementCommands(): command_node.processMovement(currentCommand.inputs) #Handle all movement
+		else:
+			for i:String in currentCommand.inputs:
+				command_node.processCommand(i) #Run through all inputs pressed at this time
 		
+		var validRotations:Array[Dictionary] = currentCommand.rotations.filter(func(a): return a.tick == currentTicks)
+		if validRotations.size() != 0:
+			rotation = validRotations.pop_front().rotation
+		
+	else: #If top command is expired, move to next command
+		commands.pop_front()
+		if commands.size() == 0: #Kill ghost when it has nothing to do
+			queue_free()
+			return
+	currentTicks+=1
 
-# Calculates the tick corisponding the manager life tick to the biography
-func get_current_life_tick(tick: int) -> int:
-	return tick - life_tick_created
+func _physics_process(delta: float) -> void:
+	self.velocity = movement_direction * speed
+	move_and_slide()

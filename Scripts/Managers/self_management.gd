@@ -4,50 +4,68 @@ extends Node2D
 @onready var player: Player = $Player
 @onready var player_path: Path2D = $PlayerPath
 
-@export var ghost_scene: PackedScene 
+@export var ghost_scene: PackedScene
 
-var life_ticks_passed: int = 0
-var previous_player_pos: Vector2
+var bio:Array[Command] = []
 
-# Reference of all player moves
-# I could see the size of this getting out of hand
-var biography: Dictionary[int, HistoryPoint] = {}
+var currentTicks:int = 0 #Current tick from start of the program
+var inputTickStart:int = 0 #Tick from when current set of inputs has been running
+var inputs:Array[String] = [] #List of inputs currently pressed
 
-# This should probably be in process later
-func _on_life_tick_timeout():
-	life_ticks_passed += 1
-	if (previous_player_pos != player.position):
-		player_path.curve.add_point(player.position)
-	previous_player_pos = player.position
-	record_to_biography(life_ticks_passed)
-	progress_ghosts(life_ticks_passed)
+var rotations:Array[Dictionary] = [] #Array of rotations with what tick they apply to
+var currentRotation:float = 0:set=_set_current_rotation #Player's current rotation
 
-# updates the biography of all player moves
-func record_to_biography(tick: int):
-	biography[tick] = HistoryPoint.new(
-		player_path.curve.get_baked_length(),
-		player.rotation,
-		player.record_fire())
+func _ready() -> void:
+	currentRotation = player.rotation #Probably redundant but eh
 
-# ticks the ghost further on their own replication of the biography
-func progress_ghosts(tick: int):
-	var path_children = player_path.get_children()
-	for child in path_children:
-		if child.has_method("progress_life"):
-			child.progress_life(tick)
+func _process(delta: float) -> void:
+	currentTicks+=1
+	currentRotation = player.rotation
 
-# Gives a unqiue copy so new moves aren't added to the ghost 
-# We should consider setting cut off indexs for memory
-func clone_biograhy() -> Dictionary[int, HistoryPoint]:
-	return biography.duplicate(false)
+#On input, log what is happening to "bio"
+func _input(event: InputEvent) -> void:
+	var inputTypes:Array[String] = ["left","up","down","right","fire"]
+	if event is InputEventKey:
+		for it:String in inputTypes:
+			if event.is_action_pressed(it):
+				addToInputArray(it)
+			elif event.is_action_released(it):
+				removeFromInputArray(it)
+
+#Adds to the input array and logs it as a new command
+func addToInputArray(str:String) -> void:
+	if not inputs.has(str):
+		bio.append(Command.new(inputTickStart,currentTicks,inputs.duplicate(false),rotations.duplicate(false)))
+		rotations.clear()
+		inputs.append(str)
+		inputTickStart = currentTicks
+
+#Removes from the input array and logs it as a new command
+func removeFromInputArray(str:String) -> void:
+	if inputs.has(str):
+		bio.append(Command.new(inputTickStart,currentTicks,inputs.duplicate(false), rotations.duplicate(false)))
+		rotations.clear()
+		inputs.remove_at(inputs.find(str))
+		inputTickStart = currentTicks
+
+# Clones the list of commands
+func clone_bio() -> Array[Command]:
+	return bio.duplicate(false)
 
 # Spawns a ghost with clone biography
 func spawn_ghost():
 	var new_ghost:Ghost = ghost_scene.instantiate()
-	new_ghost.initalize(life_ticks_passed, clone_biograhy())
+	new_ghost.commands = clone_bio()
 	player_path.add_child(new_ghost)
+	bio.clear()
 
 # Debug method for creating ghosts
 func _unhandled_input(event):
 	if event.is_action_pressed("spawn"):
 		spawn_ghost()
+
+# Logs any change in rotation to the rotation log
+func _set_current_rotation(_rotation:float) -> void:
+	if _rotation != currentRotation:
+		rotations.append({"rotation":_rotation,"tick":currentTicks})
+	currentRotation = _rotation

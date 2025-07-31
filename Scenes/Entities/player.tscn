@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqcub1i5w633w"]
+[gd_scene load_steps=5 format=3 uid="uid://cqcub1i5w633w"]
 
 [ext_resource type="Script" uid="uid://bar4gwgrfy1qu" path="res://Scripts/Entities/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://yup846x5e2qf" path="res://icon.svg" id="2_6t5aa"]
+[ext_resource type="PackedScene" uid="uid://btvl2e15nmict" path="res://Scenes/Entities/command_node.tscn" id="3_qbyki"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pq8q7"]
 size = Vector2(55, 56)
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 0
 script = ExtResource("1_cvnsp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -17,3 +19,6 @@ texture = ExtResource("2_6t5aa")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_pq8q7")
+
+[node name="CommandNode" parent="." node_paths=PackedStringArray("character") instance=ExtResource("3_qbyki")]
+character = NodePath("..")
