@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://caaf4rvngrwuc"]
+[gd_scene load_steps=5 format=3 uid="uid://caaf4rvngrwuc"]
 
 [ext_resource type="Script" uid="uid://4lcqyy5f7tj2" path="res://Scripts/Managers/self_management.gd" id="1_vnucn"]
-[ext_resource type="PackedScene" uid="uid://bqvhoyc8hm3u0" path="res://Scenes/Entities/ghost.tscn" id="2_4g5cr"]
 [ext_resource type="PackedScene" uid="uid://ciq371u7ni228" path="res://Scenes/UI/gui.tscn" id="3_4g5cr"]
 [ext_resource type="PackedScene" uid="uid://cqcub1i5w633w" path="res://Scenes/Entities/player.tscn" id="3_vnucn"]
 [ext_resource type="PackedScene" uid="uid://c3s13cnlrktl0" path="res://Scenes/Entities/Enemies/regular_enemy.tscn" id="5_4g5cr"]
@@ -10,7 +9,6 @@
 
 [node name="SelfManagement" type="Node2D" parent="."]
 script = ExtResource("1_vnucn")
-ghost_scene = ExtResource("2_4g5cr")
 
 [node name="GUI" parent="SelfManagement" instance=ExtResource("3_4g5cr")]
 

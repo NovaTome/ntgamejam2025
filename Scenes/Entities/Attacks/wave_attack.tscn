@@ -1,20 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://c0uxw7slsr53l"]
+[gd_scene load_steps=2 format=3 uid="uid://c0uxw7slsr53l"]
 
 [ext_resource type="Script" uid="uid://doar8yt87gfh3" path="res://Scripts/Attacks/wave_attack.gd" id="1_kh5xa"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_kh5xa"]
-size = Vector2(5, 5)
-
 [node name="WaveAttack" type="Node2D"]
 script = ExtResource("1_kh5xa")
-
-[node name="Line2D" type="Line2D" parent="."]
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.1
-autostart = true
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("PlaceholderTexture2D_kh5xa")
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

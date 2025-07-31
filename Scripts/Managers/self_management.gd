@@ -4,7 +4,7 @@ extends Node2D
 @onready var player: Player = $Player
 @onready var gui:GUI = $GUI
 
-@export var ghost_scene: PackedScene
+@export var ghost_scene: PackedScene = preload("res://Scenes/Entities/ghost.tscn")
 @export var projectile_scene:PackedScene = preload("res://Scenes/Entities/projectile.tscn")
 
 var bio:Array[Command] = []
@@ -34,23 +34,23 @@ func _input(event: InputEvent) -> void:
 			elif event.is_action_released(it):
 				removeFromInputArray(it)
 
+func logCommand() -> void:
+	var newCommand:Command = Command.new(inputTickStart,currentTicks,inputs.duplicate(false),rotations.duplicate(false))
+	if newCommand.inputs.has("fire"): newCommand.pos = get_global_mouse_position()
+	bio.append(newCommand)
+	rotations.clear()
+
 #Adds to the input array and logs it as a new command
 func addToInputArray(str:String) -> void:
 	if not inputs.has(str):
-		var newCommand:Command = Command.new(inputTickStart,currentTicks,inputs.duplicate(false),rotations.duplicate(false))
-		if str == "fire": newCommand.pos = get_global_mouse_position()
-		bio.append(newCommand)
-		rotations.clear()
+		logCommand()
 		inputs.append(str)
 		inputTickStart = currentTicks
 
 #Removes from the input array and logs it as a new command
 func removeFromInputArray(str:String) -> void:
 	if inputs.has(str):
-		var newCommand:Command = Command.new(inputTickStart,currentTicks,inputs.duplicate(false),rotations.duplicate(false))
-		if str == "fire": newCommand.pos = get_global_mouse_position()
-		bio.append(newCommand)
-		rotations.clear()
+		logCommand()
 		inputs.remove_at(inputs.find(str))
 		inputTickStart = currentTicks
 
@@ -62,7 +62,7 @@ func clone_bio() -> Array[Command]:
 func spawn_ghost():
 	var new_ghost:Ghost = ghost_scene.instantiate()
 	new_ghost.commands = clone_bio()
-	add_child(new_ghost)
+	call_deferred("add_child",new_ghost)
 
 func fire_shot(executor:CharacterBody2D, pos: Vector2, type:Projectile.TYPES) -> void:
 	var proj:Projectile = projectile_scene.instantiate()
@@ -73,6 +73,8 @@ func fire_shot(executor:CharacterBody2D, pos: Vector2, type:Projectile.TYPES) ->
 	add_child(proj)
 
 func handlePlayerDeath() -> void:
+	logCommand()
+	inputTickStart = currentTicks
 	spawn_ghost()
 	gui.resetProgress()
 	bio.clear()

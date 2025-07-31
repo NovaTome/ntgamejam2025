@@ -16,7 +16,7 @@ var destination:Vector2 = Vector2.ZERO
 var lastChange:Vector2 = Vector2.ZERO
 var shooter:CharacterBody2D
 
-@export var speed:float = 5.0
+@export var speed:float = 4.0
 @export var type:TYPES = TYPES.REGULAR
 var velocity
 
@@ -45,6 +45,8 @@ func canHitBody(body:CharacterBody2D) -> bool:
 func _on_body_entered(body: Node2D) -> void:
 	if body != shooter and canHitBody(body):
 		hit.emit(body)
+		if body is Player:
+			body.die()
 		queue_free()
 
 
