@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://caaf4rvngrwuc"]
+
+[ext_resource type="Script" uid="uid://4lcqyy5f7tj2" path="res://Scripts/Managers/self_management.gd" id="1_vnucn"]
+[ext_resource type="PackedScene" uid="uid://b7cqux5l4tq06" path="res://Scenes/ghost.tscn" id="2_4g5cr"]
+[ext_resource type="Script" uid="uid://bar4gwgrfy1qu" path="res://Scripts/player.gd" id="2_c3mwy"]
+[ext_resource type="Texture2D" uid="uid://yup846x5e2qf" path="res://icon.svg" id="3_4g5cr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pq8q7"]
+size = Vector2(55, 56)
+
+[sub_resource type="Curve2D" id="Curve2D_pq8q7"]
+
+[node name="Root" type="Node2D"]
+
+[node name="SelfManagement" type="Node2D" parent="."]
+script = ExtResource("1_vnucn")
+ghost_scene = ExtResource("2_4g5cr")
+
+[node name="Player" type="CharacterBody2D" parent="SelfManagement"]
+script = ExtResource("2_c3mwy")
+
+[node name="Sprite2D" type="Sprite2D" parent="SelfManagement/Player"]
+rotation = 1.5708
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_4g5cr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelfManagement/Player"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_pq8q7")
+
+[node name="PlayerPath" type="Path2D" parent="SelfManagement"]
+curve = SubResource("Curve2D_pq8q7")
+
+[node name="LifeTick" type="Timer" parent="SelfManagement"]
+wait_time = 0.01
+autostart = true
+
+[connection signal="timeout" from="SelfManagement/LifeTick" to="SelfManagement" method="_on_life_tick_timeout"]

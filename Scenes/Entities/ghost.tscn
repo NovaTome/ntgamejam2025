@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqvhoyc8hm3u0"]
+
+[ext_resource type="Texture2D" uid="uid://yup846x5e2qf" path="res://icon.svg" id="1_3mxmt"]
+[ext_resource type="Script" uid="uid://dxiilpwi3l5r5" path="res://Scripts/Entities/ghost.gd" id="1_e3r4w"]
+
+[node name="GhostPath" type="PathFollow2D"]
+script = ExtResource("1_e3r4w")
+metadata/_custom_type_script = "uid://dxiilpwi3l5r5"
+
+[node name="Ghost" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Ghost"]
+rotation = 1.5708
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_3mxmt")
