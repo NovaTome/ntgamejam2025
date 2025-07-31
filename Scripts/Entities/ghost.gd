@@ -17,15 +17,15 @@ func _ready() -> void:
 	if commands.size() == 0:
 		printerr("Ghost has no commands!")
 		queue_free()
+	else:
+		for c:Command in commands:
+			c.executor = self
 
 func _process(delta: float) -> void:
 	movement_direction = Vector2.ZERO
 	var currentCommand:Command = commands.front()
 	if currentTicks < currentCommand.endTick: #Check if the top command should still be running
-		if currentCommand.hasMovementCommands(): command_node.processMovement(currentCommand.inputs) #Handle all movement
-		else:
-			for i:String in currentCommand.inputs:
-				command_node.processCommand(i) #Run through all inputs pressed at this time
+		command_node.processCommand(currentCommand)
 		
 		var validRotations:Array[Dictionary] = currentCommand.rotations.filter(func(a): return a.tick == currentTicks)
 		if validRotations.size() != 0:

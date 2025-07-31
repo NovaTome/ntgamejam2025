@@ -1,0 +1,34 @@
+extends Area2D
+class_name Projectile
+
+signal hit(target)
+
+var destination:Vector2 = Vector2.ZERO
+var lastChange:Vector2 = Vector2.ZERO
+var shooter:CharacterBody2D
+
+@export var speed:float = 5.0
+
+func _ready() -> void:
+	if destination == Vector2.ZERO:
+		queue_free()
+		return
+	look_at(destination)
+
+func _process(delta: float) -> void:
+	var velocity = global_position.direction_to(destination).normalized() * speed
+	global_position += velocity
+	if global_position.distance_to(destination) <= 2 || abs(velocity.x) < 0.1 || lastChangeIsZero(velocity):
+		#print(velocity)
+		queue_free()
+	else: lastChange = velocity
+
+func lastChangeIsZero(change:Vector2) -> bool:
+	var deltaX = abs(lastChange.x + change.x)
+	var deltaY = abs(lastChange.y + change.y)
+	return deltaX < 0.01 && deltaY < 0.01
+
+func _on_body_entered(body: Node2D) -> void:
+	if body != shooter:
+		hit.emit(body)
+		queue_free()

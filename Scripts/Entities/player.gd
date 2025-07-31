@@ -21,23 +21,24 @@ func _physics_process(delta):
 
 func _process_actions():
 	
-	var actions:Array[String] = []
+	var command:Command = Command.new(self)
 	
 	#Basic Movement
 	if Input.is_action_pressed("up"):
-		actions.append("up")
+		command.inputs.append("up")
 	if Input.is_action_pressed("down"):
-		actions.append("down")
+		command.inputs.append("down")
 	if Input.is_action_pressed("left"):
-		actions.append("left")
+		command.inputs.append("left")
 	if Input.is_action_pressed("right"):
-		actions.append("right")
-	
-	command_node.processMovement(actions)
+		command.inputs.append("right")
 	
 	# Actions
 	if Input.is_action_just_pressed("fire"):
-		command_node.processCommand("fire")
+		command.inputs.append("fire")
+		command.pos = get_global_mouse_position()
+		
+	command_node.processCommand(command)
 	
 # used for SelfManagement to record the fire action
 # sets to false after recorded

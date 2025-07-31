@@ -1,6 +1,8 @@
 extends Node
 class_name CommandNode
 
+signal firedShot(who:CharacterBody2D,pos:Vector2)
+
 @export var character:CharacterBody2D
 
 func _ready() -> void:
@@ -8,10 +10,11 @@ func _ready() -> void:
 		if get_parent() is CharacterBody2D: character = get_parent()
 		else: printerr("No CharacterBody assigned to Command Node!")
 
-func processMovement(movementInput:Array[String]) -> void:
+func processCommand(cmd:Command) -> void:
+	var manager:SelfManagement = character.get_parent()
 	character.movement_direction = Vector2.ZERO
-	for str:String in movementInput:
-		match str:
+	for i:String in cmd.inputs:
+		match i:
 			"up":
 				character.movement_direction.y = -1
 			"down":
@@ -20,11 +23,7 @@ func processMovement(movementInput:Array[String]) -> void:
 				character.movement_direction.x = -1
 			"right":
 				character.movement_direction.x = 1
-			_:
-				processCommand(str)
+			"fire":
+				if not cmd.singleUse: manager.fire_shot(character,cmd.pos)
 	character.movement_direction = character.movement_direction.normalized()
-
-func processCommand(str:String) -> void:
-	match str:
-		"fire":
-			pass
+	cmd.singleUse = true

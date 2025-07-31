@@ -2,9 +2,9 @@ class_name SelfManagement
 extends Node2D
 
 @onready var player: Player = $Player
-@onready var player_path: Path2D = $PlayerPath
 
 @export var ghost_scene: PackedScene
+@export var projectile_scene:PackedScene = preload("res://Scenes/Entities/projectile.tscn")
 
 var bio:Array[Command] = []
 
@@ -35,7 +35,9 @@ func _input(event: InputEvent) -> void:
 #Adds to the input array and logs it as a new command
 func addToInputArray(str:String) -> void:
 	if not inputs.has(str):
-		bio.append(Command.new(inputTickStart,currentTicks,inputs.duplicate(false),rotations.duplicate(false)))
+		var newCommand:Command = Command.new(player,inputTickStart,currentTicks,inputs.duplicate(false),rotations.duplicate(false))
+		if str == "fire": newCommand.pos = get_global_mouse_position()
+		bio.append(newCommand)
 		rotations.clear()
 		inputs.append(str)
 		inputTickStart = currentTicks
@@ -43,7 +45,9 @@ func addToInputArray(str:String) -> void:
 #Removes from the input array and logs it as a new command
 func removeFromInputArray(str:String) -> void:
 	if inputs.has(str):
-		bio.append(Command.new(inputTickStart,currentTicks,inputs.duplicate(false), rotations.duplicate(false)))
+		var newCommand:Command = Command.new(player,inputTickStart,currentTicks,inputs.duplicate(false),rotations.duplicate(false))
+		if str == "fire": newCommand.pos = get_global_mouse_position()
+		bio.append(newCommand)
 		rotations.clear()
 		inputs.remove_at(inputs.find(str))
 		inputTickStart = currentTicks
@@ -56,8 +60,15 @@ func clone_bio() -> Array[Command]:
 func spawn_ghost():
 	var new_ghost:Ghost = ghost_scene.instantiate()
 	new_ghost.commands = clone_bio()
-	player_path.add_child(new_ghost)
-	bio.clear()
+	add_child(new_ghost)
+	#bio.clear()
+
+func fire_shot(executor:CharacterBody2D, pos: Vector2) -> void:
+	var proj:Projectile = projectile_scene.instantiate()
+	proj.shooter = executor
+	proj.global_position = executor.global_position
+	proj.destination = pos
+	add_child(proj)
 
 # Debug method for creating ghosts
 func _unhandled_input(event):
