@@ -17,6 +17,7 @@ var currentRotation:float = 0:set=_set_current_rotation #Player's current rotati
 
 func _ready() -> void:
 	currentRotation = player.rotation #Probably redundant but eh
+	player.connect("died",handlePlayerDeath)
 
 func _process(delta: float) -> void:
 	currentTicks+=1
@@ -35,7 +36,7 @@ func _input(event: InputEvent) -> void:
 #Adds to the input array and logs it as a new command
 func addToInputArray(str:String) -> void:
 	if not inputs.has(str):
-		var newCommand:Command = Command.new(player,inputTickStart,currentTicks,inputs.duplicate(false),rotations.duplicate(false))
+		var newCommand:Command = Command.new(inputTickStart,currentTicks,inputs.duplicate(false),rotations.duplicate(false))
 		if str == "fire": newCommand.pos = get_global_mouse_position()
 		bio.append(newCommand)
 		rotations.clear()
@@ -45,7 +46,7 @@ func addToInputArray(str:String) -> void:
 #Removes from the input array and logs it as a new command
 func removeFromInputArray(str:String) -> void:
 	if inputs.has(str):
-		var newCommand:Command = Command.new(player,inputTickStart,currentTicks,inputs.duplicate(false),rotations.duplicate(false))
+		var newCommand:Command = Command.new(inputTickStart,currentTicks,inputs.duplicate(false),rotations.duplicate(false))
 		if str == "fire": newCommand.pos = get_global_mouse_position()
 		bio.append(newCommand)
 		rotations.clear()
@@ -61,7 +62,6 @@ func spawn_ghost():
 	var new_ghost:Ghost = ghost_scene.instantiate()
 	new_ghost.commands = clone_bio()
 	add_child(new_ghost)
-	#bio.clear()
 
 func fire_shot(executor:CharacterBody2D, pos: Vector2) -> void:
 	var proj:Projectile = projectile_scene.instantiate()
@@ -70,10 +70,18 @@ func fire_shot(executor:CharacterBody2D, pos: Vector2) -> void:
 	proj.destination = pos
 	add_child(proj)
 
+func handlePlayerDeath() -> void:
+	spawn_ghost()
+	bio.clear()
+	currentTicks = 0
+	inputTickStart = 0
+	inputs.clear()
+	rotations.clear()
+
 # Debug method for creating ghosts
 func _unhandled_input(event):
 	if event.is_action_pressed("spawn"):
-		spawn_ghost()
+		player.die()
 
 # Logs any change in rotation to the rotation log
 func _set_current_rotation(_rotation:float) -> void:

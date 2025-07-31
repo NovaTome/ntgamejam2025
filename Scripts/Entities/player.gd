@@ -2,6 +2,8 @@
 class_name Player
 extends CharacterBody2D
 
+signal died()
+
 var movement_direction: Vector2 = Vector2.ZERO
 @export var speed: int = 250
 @onready var command_node: CommandNode = $CommandNode
@@ -21,7 +23,7 @@ func _physics_process(delta):
 
 func _process_actions():
 	
-	var command:Command = Command.new(self)
+	var command:Command = Command.new()
 	
 	#Basic Movement
 	if Input.is_action_pressed("up"):
@@ -39,11 +41,7 @@ func _process_actions():
 		command.pos = get_global_mouse_position()
 		
 	command_node.processCommand(command)
-	
-# used for SelfManagement to record the fire action
-# sets to false after recorded
-func record_fire() -> bool:
-	var ret = _unrecorded_fire
-	_unrecorded_fire = false
-	return ret
-	
+
+func die() -> void:
+	global_position = Vector2(0,0)
+	died.emit()

@@ -8,6 +8,7 @@ var movement_direction: Vector2 = Vector2.ZERO
 
 #List of commands for the Ghost to use
 var commands:Array[Command]
+var oldCommands:Array[Command] = []
 
 #Ticks from start of life
 var currentTicks:int = 0
@@ -17,9 +18,6 @@ func _ready() -> void:
 	if commands.size() == 0:
 		printerr("Ghost has no commands!")
 		queue_free()
-	else:
-		for c:Command in commands:
-			c.executor = self
 
 func _process(delta: float) -> void:
 	movement_direction = Vector2.ZERO
@@ -32,11 +30,19 @@ func _process(delta: float) -> void:
 			rotation = validRotations.pop_front().rotation
 		
 	else: #If top command is expired, move to next command
-		commands.pop_front()
+		oldCommands.append(commands.pop_front())
 		if commands.size() == 0: #Kill ghost when it has nothing to do
-			queue_free()
+			reload()
 			return
 	currentTicks+=1
+
+func reload() -> void:
+	global_position = Vector2(0,0)
+	commands = oldCommands.duplicate(false)
+	oldCommands.clear()
+	currentTicks = 0
+	for c:Command in commands.filter(func(a:Command): return a.singleUse):
+		c.singleUse = false
 
 func _physics_process(delta: float) -> void:
 	self.velocity = movement_direction * speed
