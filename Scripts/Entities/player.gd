@@ -7,6 +7,12 @@ signal died()
 var movement_direction: Vector2 = Vector2.ZERO
 @export var speed: int = 250
 @onready var command_node: CommandNode = $CommandNode
+var manager:SelfManagement
+
+func _ready() -> void:
+	if get_parent() is SelfManagement:
+		manager = get_parent()
+	else: printerr("Player does not have a manager!")
 
 # used to determine if next life tick should record fire
 var _unrecorded_fire: bool = false

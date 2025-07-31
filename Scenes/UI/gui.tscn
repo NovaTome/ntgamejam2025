@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://ciq371u7ni228"]
+
+[ext_resource type="Script" uid="uid://dblvl5rd8204o" path="res://Scripts/UI/gui.gd" id="1_vqpta"]
+
+[node name="GUI" type="CanvasLayer"]
+script = ExtResource("1_vqpta")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 27.0
+grow_horizontal = 2
+max_value = 60.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

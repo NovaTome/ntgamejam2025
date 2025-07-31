@@ -7,8 +7,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n2t0o"]
 size = Vector2(62, 65)
 
-[node name="GhostPath" type="CharacterBody2D"]
+[node name="Ghost" type="CharacterBody2D"]
 collision_layer = 2
+collision_mask = 0
 script = ExtResource("1_e3r4w")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

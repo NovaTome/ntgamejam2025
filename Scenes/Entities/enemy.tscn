@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddknmqi5sb88o"]
+
+[ext_resource type="Script" uid="uid://bktap66c1hvla" path="res://Scripts/Entities/enemy.gd" id="1_o6kgl"]
+[ext_resource type="Texture2D" uid="uid://yup846x5e2qf" path="res://icon.svg" id="1_r2gkr"]
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_o6kgl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+texture = ExtResource("1_r2gkr")
+
+[node name="AggroRange" type="Area2D" parent="."]
+
+[node name="AttackRange" type="Area2D" parent="."]
+
+[node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="AggroRange" to="." method="_on_aggro_range_body_entered"]
+[connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]

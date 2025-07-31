@@ -6,6 +6,8 @@ var movement_direction: Vector2 = Vector2.ZERO
 @export var speed: int = 250
 @onready var command_node: CommandNode = $CommandNode
 
+var manager:SelfManagement
+
 #List of commands for the Ghost to use
 var commands:Array[Command]
 var oldCommands:Array[Command] = []
@@ -18,6 +20,13 @@ func _ready() -> void:
 	if commands.size() == 0:
 		printerr("Ghost has no commands!")
 		queue_free()
+		return
+	if get_parent() is SelfManagement:
+		manager = get_parent()
+	else:
+		printerr("Ghost has no manager!")
+		queue_free()
+		return
 
 func _process(delta: float) -> void:
 	movement_direction = Vector2.ZERO

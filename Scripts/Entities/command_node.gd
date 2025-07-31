@@ -11,7 +11,7 @@ func _ready() -> void:
 		else: printerr("No CharacterBody assigned to Command Node!")
 
 func processCommand(cmd:Command) -> void:
-	var manager:SelfManagement = character.get_parent()
+	var manager:SelfManagement = character.manager
 	character.movement_direction = Vector2.ZERO
 	for i:String in cmd.inputs:
 		match i:
@@ -24,6 +24,6 @@ func processCommand(cmd:Command) -> void:
 			"right":
 				character.movement_direction.x = 1
 			"fire":
-				if not cmd.singleUse: manager.fire_shot(character,cmd.pos)
+				if not cmd.singleUse: manager.fire_shot(character,cmd.pos,Projectile.TYPES.ENEMY if character is Player else Projectile.TYPES.ENEMY_GHOST)
 	character.movement_direction = character.movement_direction.normalized()
 	cmd.singleUse = true

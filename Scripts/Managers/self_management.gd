@@ -2,6 +2,7 @@ class_name SelfManagement
 extends Node2D
 
 @onready var player: Player = $Player
+@onready var gui:GUI = $GUI
 
 @export var ghost_scene: PackedScene
 @export var projectile_scene:PackedScene = preload("res://Scenes/Entities/projectile.tscn")
@@ -63,15 +64,17 @@ func spawn_ghost():
 	new_ghost.commands = clone_bio()
 	add_child(new_ghost)
 
-func fire_shot(executor:CharacterBody2D, pos: Vector2) -> void:
+func fire_shot(executor:CharacterBody2D, pos: Vector2, type:Projectile.TYPES) -> void:
 	var proj:Projectile = projectile_scene.instantiate()
 	proj.shooter = executor
 	proj.global_position = executor.global_position
 	proj.destination = pos
+	proj.type = type
 	add_child(proj)
 
 func handlePlayerDeath() -> void:
 	spawn_ghost()
+	gui.resetProgress()
 	bio.clear()
 	currentTicks = 0
 	inputTickStart = 0
@@ -88,3 +91,7 @@ func _set_current_rotation(_rotation:float) -> void:
 	if _rotation != currentRotation:
 		rotations.append({"rotation":_rotation,"tick":currentTicks})
 	currentRotation = _rotation
+
+
+func _on_gui_timer_up() -> void:
+	player.die()
