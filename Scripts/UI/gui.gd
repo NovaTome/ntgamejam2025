@@ -8,6 +8,9 @@ class_name GUI
 
 signal timerUp()
 
+func _ready():
+	ghost_label.text = "Ghosts Remaining: " + str(GameConstants.STARTING_MAX_GHOSTS)
+
 func _on_timer_timeout() -> void:
 	if not hint_timer.is_stopped(): return
 	progress_bar.value+=0.2
