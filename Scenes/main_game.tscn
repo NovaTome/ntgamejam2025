@@ -7,6 +7,21 @@
 [ext_resource type="Script" uid="uid://dm305gi7va2nd" path="res://Scripts/Managers/bullet_manager.gd" id="5_6y7pd"]
 [ext_resource type="PackedScene" uid="uid://by48x72g25wal" path="res://Scenes/Entities/Enemies/boss_enemy.tscn" id="6_bb2iq"]
 
+[sub_resource type="Animation" id="Animation_73nn6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_6y7pd"]
 resource_name = "camera_shake"
 length = 0.5
@@ -24,25 +39,37 @@ tracks/0/keys = {
 "values": [Vector2(0, 0), Vector2(-15, 0), Vector2(15, 0), Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_73nn6"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r0mdn"]
+_data = {
+&"RESET": SubResource("Animation_73nn6"),
+&"camera_shake": SubResource("Animation_6y7pd")
+}
+
+[sub_resource type="Animation" id="Animation_18r40"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:offset")
+tracks/0/path = NodePath("SelfManagement:process_mode")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
+"update": 1,
+"values": [4]
 }
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_r0mdn"]
-_data = {
-&"RESET": SubResource("Animation_73nn6"),
-&"camera_shake": SubResource("Animation_6y7pd")
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera2D:enabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_bb2iq"]
@@ -81,33 +108,6 @@ tracks/2/loop_wrap = true
 tracks/2/keys = {
 "clips": PackedStringArray("camera_shake", "[stop]"),
 "times": PackedFloat32Array(0.5, 2.5)
-}
-
-[sub_resource type="Animation" id="Animation_18r40"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SelfManagement:process_mode")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Camera2D:enabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_18r40"]
