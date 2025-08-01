@@ -38,7 +38,6 @@ func _input(event: InputEvent) -> void:
 func addToInputArray(str:String) -> void:
 	if not inputs.has(str):
 		var newCommand:Command = Command.new(inputTickStart,currentTicks,inputs.duplicate(false),rotations.duplicate(false))
-		if str == "fire": newCommand.pos = get_global_mouse_position()
 		bio.append(newCommand)
 		rotations.clear()
 		inputs.append(str)
@@ -48,7 +47,6 @@ func addToInputArray(str:String) -> void:
 func removeFromInputArray(str:String) -> void:
 	if inputs.has(str):
 		var newCommand:Command = Command.new(inputTickStart,currentTicks,inputs.duplicate(false),rotations.duplicate(false))
-		if str == "fire": newCommand.pos = get_global_mouse_position()
 		bio.append(newCommand)
 		rotations.clear()
 		inputs.remove_at(inputs.find(str))
@@ -63,14 +61,6 @@ func spawn_ghost():
 	var new_ghost:Ghost = ghost_scene.instantiate()
 	new_ghost.commands = clone_bio()
 	add_child(new_ghost)
-
-func fire_shot(executor:CharacterBody2D, pos: Vector2, type:Projectile.TYPES) -> void:
-	var proj:Projectile = projectile_scene.instantiate()
-	proj.shooter = executor
-	proj.global_position = executor.global_position
-	proj.destination = pos
-	proj.type = type
-	add_child(proj)
 
 func handlePlayerDeath() -> void:
 	spawn_ghost()
