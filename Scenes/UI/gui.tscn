@@ -52,7 +52,7 @@ offset_left = -158.0
 offset_top = 46.0
 offset_bottom = 69.0
 grow_horizontal = 0
-text = "Ghosts Remaining: 5"
+text = "Ghosts Remaining:"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="HintTimer" to="." method="_on_hint_timer_timeout"]

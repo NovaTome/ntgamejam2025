@@ -19,7 +19,7 @@ var rotations:Array[Dictionary] = [] #Array of rotations with what tick they app
 var currentRotation:float = 0:set=_set_current_rotation #Player's current rotation
 
 var tutorialWaves:int = 0
-var ghostsRemaining:int = 5:set=_set_ghost_count
+var ghostsRemaining:int = GameConstants.STARTING_MAX_GHOSTS:set=_set_ghost_count
 
 func _ready() -> void:
 	currentRotation = player.rotation #Probably redundant but eh
@@ -67,7 +67,7 @@ func clone_bio() -> Array[Command]:
 # Spawns a ghost with clone biography
 func spawn_ghost():
 	if bio.is_empty(): return
-	if ghostsRemaining == 0: # If you have more than 5 ghosts, it will remove the oldest one
+	if ghostsRemaining == 0: # If you have more than starting_max_ghosts ghosts, it will remove the oldest one
 		var firstGhost:Ghost = get_children().filter(func(a): return a is Ghost).front()
 		if firstGhost != null: firstGhost.queue_free()
 	else: ghostsRemaining-=1
@@ -104,7 +104,7 @@ func handlePlayerDeath() -> void:
 	
 	player.deaths+=1
 	var allGhosts = get_children().filter(func(a): return a is Ghost)
-	ghostsRemaining = clampi(5-allGhosts.size(),0,5)
+	ghostsRemaining = clampi(GameConstants.STARTING_MAX_GHOSTS-allGhosts.size(),0,GameConstants.STARTING_MAX_GHOSTS)
 	for c in allGhosts:
 		if c is Ghost:
 			c.reload()

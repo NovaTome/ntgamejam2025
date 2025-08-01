@@ -10,6 +10,7 @@ var movement_direction: Vector2 = Vector2.ZERO
 @onready var command_node: CommandNode = $CommandNode
 @onready var death_timer: Timer = $DeathTimer
 @onready var bullet_source = $BulletSource
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 var startingLocation:Vector2
 
@@ -23,7 +24,19 @@ var oldCommands:Array[Command] = []
 var currentTicks:int = 0
 var secondsAlive:int = 0
 
+var active: bool = true:
+	get:
+		return active
+	set(value):
+		visible = value
+		active = value
+		var deferred_set_collision = func():
+			collision_shape_2d.disabled = !value
+		deferred_set_collision.call_deferred()
+		
+
 func _ready() -> void:
+	active = true
 	startingLocation = global_position
 	command_node.bullet_source = bullet_source
 	sprite_2d.self_modulate.a = 0.5 #Make ghost transparent :3
@@ -35,11 +48,15 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	movement_direction = Vector2.ZERO
 	if not death_timer.is_stopped(): return
+	if not active: return
 	if commands.size() == 0 and oldCommands.size() == 0: #Idk why this is happening
 		died.emit()
 		queue_free()
 		return
+
 	var currentCommand:Command = commands.front()
+	if currentCommand == null: return
+
 	if currentTicks < currentCommand.endTick: #Check if the top command should still be running
 		command_node.processCommand(currentCommand)
 		
@@ -61,6 +78,7 @@ func reload() -> void:
 	oldCommands.clear()
 	currentTicks = 0
 	secondsAlive = 0
+	active = true
 	for c:Command in commands.filter(func(a:Command): return a.singleUse):
 		c.singleUse = false
 
@@ -70,7 +88,8 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_death_timer_timeout() -> void:
-	reload()
+	#reload()
+	active = false
 
 
 func _on_life_timer_timeout() -> void:
