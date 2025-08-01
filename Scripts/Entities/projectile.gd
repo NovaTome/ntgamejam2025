@@ -13,7 +13,7 @@ signal hit(target)
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
 var direction:Vector2 = Vector2.ZERO
-var shooter:CharacterBody2D
+var shooter:Node2D
 
 @export var speed:float = 4.0
 @export var type:TYPES = TYPES.REGULAR

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bktap66c1hvla" path="res://Scripts/Entities/enemy.gd" id="1_o6kgl"]
 [ext_resource type="Texture2D" uid="uid://yup846x5e2qf" path="res://icon.svg" id="1_r2gkr"]
-[ext_resource type="PackedScene" uid="uid://dsyta32xcu57i" path="res://Scenes/Entities/Attacks/bullet_source.tscn" id="3_ge2ll"]
+[ext_resource type="PackedScene" uid="uid://dxtlhaoalm7os" path="res://Scenes/Entities/Attacks/bullet_source.tscn" id="3_ge2ll"]
 [ext_resource type="PackedScene" uid="uid://b3ifmidv1nnnd" path="res://Scenes/Entities/projectile.tscn" id="4_ygq1y"]
 
 [node name="Enemy" type="CharacterBody2D"]
