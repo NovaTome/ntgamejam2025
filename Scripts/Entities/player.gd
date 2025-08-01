@@ -7,12 +7,10 @@ signal died()
 var movement_direction: Vector2 = Vector2.ZERO
 @export var speed: int = 250
 @onready var command_node: CommandNode = $CommandNode
-var manager:SelfManagement
+@onready var bullet_source = $BulletSource
 
 func _ready() -> void:
-	if get_parent() is SelfManagement:
-		manager = get_parent()
-	else: printerr("Player does not have a manager!")
+	command_node.bullet_source = bullet_source
 
 # used to determine if next life tick should record fire
 var _unrecorded_fire: bool = false
@@ -44,7 +42,7 @@ func _process_actions():
 	# Actions
 	if Input.is_action_just_pressed("fire"):
 		command.inputs.append("fire")
-		command.pos = get_global_mouse_position()
+		#command.pos = get_global_mouse_position()
 		
 	command_node.processCommand(command)
 

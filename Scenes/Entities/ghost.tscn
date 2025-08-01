@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bqvhoyc8hm3u0"]
+[gd_scene load_steps=7 format=3 uid="uid://bqvhoyc8hm3u0"]
 
 [ext_resource type="Texture2D" uid="uid://yup846x5e2qf" path="res://icon.svg" id="1_3mxmt"]
 [ext_resource type="Script" uid="uid://dxiilpwi3l5r5" path="res://Scripts/Entities/ghost.gd" id="1_e3r4w"]
 [ext_resource type="PackedScene" uid="uid://btvl2e15nmict" path="res://Scenes/Entities/command_node.tscn" id="3_nm3md"]
+[ext_resource type="PackedScene" uid="uid://dsyta32xcu57i" path="res://Scenes/Entities/Attacks/bullet_source.tscn" id="4_aqrip"]
+[ext_resource type="PackedScene" uid="uid://b3ifmidv1nnnd" path="res://Scenes/Entities/projectile.tscn" id="5_tepbg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n2t0o"]
 size = Vector2(62, 65)
@@ -33,3 +35,6 @@ autostart = true
 
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
 [connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]
+[node name="BulletSource" parent="." instance=ExtResource("4_aqrip")]
+projectile = ExtResource("5_tepbg")
+projectile_type = 4

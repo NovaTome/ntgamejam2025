@@ -4,6 +4,7 @@ class_name CommandNode
 signal firedShot(who:CharacterBody2D,pos:Vector2)
 
 @export var character:CharacterBody2D
+var bullet_source: BulletSource
 
 func _ready() -> void:
 	if character == null:
@@ -11,7 +12,6 @@ func _ready() -> void:
 		else: printerr("No CharacterBody assigned to Command Node!")
 
 func processCommand(cmd:Command) -> void:
-	var manager:SelfManagement = character.manager
 	character.movement_direction = Vector2.ZERO
 	for i:String in cmd.inputs:
 		match i:
@@ -24,6 +24,6 @@ func processCommand(cmd:Command) -> void:
 			"right":
 				character.movement_direction.x = 1
 			"fire":
-				if not cmd.singleUse: manager.fire_shot(character,cmd.pos,Projectile.TYPES.ENEMY if character is Player else Projectile.TYPES.ENEMY_GHOST)
+				if not cmd.singleUse && bullet_source != null: bullet_source.fire()
 	character.movement_direction = character.movement_direction.normalized()
 	cmd.singleUse = true

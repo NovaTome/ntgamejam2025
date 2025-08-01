@@ -66,14 +66,6 @@ func spawn_ghost():
 	new_ghost.global_position = playerStartingLocation
 	call_deferred("add_child",new_ghost)
 
-func fire_shot(executor:CharacterBody2D, pos: Vector2, type:Projectile.TYPES) -> void:
-	var proj:Projectile = projectile_scene.instantiate()
-	proj.shooter = executor
-	proj.global_position = executor.global_position
-	proj.destination = pos
-	proj.type = type
-	add_child(proj)
-
 func handlePlayerDeath() -> void:
 	logCommand()
 	inputTickStart = currentTicks

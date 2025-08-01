@@ -7,6 +7,8 @@ var movement_direction: Vector2 = Vector2.ZERO
 @export var minLifeTime:int = 3
 @onready var command_node: CommandNode = $CommandNode
 @onready var death_timer: Timer = $DeathTimer
+@onready var bullet_source = $BulletSource
+
 
 var manager:SelfManagement
 
@@ -19,15 +21,10 @@ var currentTicks:int = 0
 var secondsAlive:int = 0
 
 func _ready() -> void:
+	command_node.bullet_source = bullet_source
 	sprite_2d.self_modulate.a = 0.5 #Make ghost transparent :3
 	if commands.size() == 0:
 		printerr("Ghost has no commands!")
-		queue_free()
-		return
-	if get_parent() is SelfManagement:
-		manager = get_parent()
-	else:
-		printerr("Ghost has no manager!")
 		queue_free()
 		return
 
