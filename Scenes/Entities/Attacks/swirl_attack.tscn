@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://du0y8aanpwib0"]
+
+[ext_resource type="PackedScene" uid="uid://dxtlhaoalm7os" path="res://Scenes/Entities/Attacks/bullet_source.tscn" id="1_eow5e"]
+[ext_resource type="Script" uid="uid://cybbyw5gkg1di" path="res://Scripts/Attacks/swirl_attack.gd" id="1_gum0f"]
+[ext_resource type="PackedScene" uid="uid://b3ifmidv1nnnd" path="res://Scenes/Entities/projectile.tscn" id="2_gum0f"]
+
+[sub_resource type="Curve2D" id="Curve2D_lshpw"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -44, 33, 0, 0, 0, 0, -40, 304, 0, 0, 0, 0, 23, 357, 0, 0, 0, 0, 160, 358, 0, 0, 0, 0, 211, 310, 0, 0, 0, 0, 209, -2, 0, 0, 0, 0, 0, 0)
+}
+point_count = 8
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_gum0f"]
+size = Vector2(5, 5)
+
+[node name="SwirlAttack" type="Node2D"]
+script = ExtResource("1_gum0f")
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_lshpw")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+rotation = 2.49809
+
+[node name="BulletSource" parent="Path2D/PathFollow2D" instance=ExtResource("1_eow5e")]
+rotation = 1.5708
+projectile = ExtResource("2_gum0f")
+group = "SwirlAttack"
+
+[node name="Test" type="Sprite2D" parent="Path2D/PathFollow2D"]
+rotation = -2.49809
+texture = SubResource("PlaceholderTexture2D_gum0f")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
