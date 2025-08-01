@@ -2,6 +2,7 @@ class_name SelfManagement
 extends Node2D
 
 @onready var player: Player = $Player
+@onready var playerStartingLocation:Vector2 = Vector2($Player.global_position)
 @onready var gui:GUI = $GUI
 
 @export var ghost_scene: PackedScene = preload("res://Scenes/Entities/ghost.tscn")
@@ -62,6 +63,7 @@ func clone_bio() -> Array[Command]:
 func spawn_ghost():
 	var new_ghost:Ghost = ghost_scene.instantiate()
 	new_ghost.commands = clone_bio()
+	new_ghost.global_position = playerStartingLocation
 	call_deferred("add_child",new_ghost)
 
 func fire_shot(executor:CharacterBody2D, pos: Vector2, type:Projectile.TYPES) -> void:
