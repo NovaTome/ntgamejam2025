@@ -35,15 +35,28 @@ func set_direction(dir: Vector2) -> void:
 	if type == TYPES.PLAYER: #TODO: Make it so that homing missles actually rotate towards the person instead of using square projectiles
 		global_rotation = global_position.angle_to(shooter.target.global_position)
 
-func canHitBody(body:CharacterBody2D) -> bool:
-	return body is Player or (body is Ghost and type != TYPES.GHOST) or (body is Enemy and (type == TYPES.ENEMY or type == TYPES.ENEMY_GHOST))
+func canHitBody(body:Node2D) -> bool:
+	match type:
+		TYPES.REGULAR, TYPES.PLAYER: # Always shot from enemy
+			return body is Player or body is Ghost
+		TYPES.GHOST:
+			return body is Player
+		TYPES.ENEMY:
+			return body is Enemy or body is BossEnemy or body is BossCrystal
+		TYPES.ENEMY_GHOST:
+			return body is Enemy or body is BossEnemy
+		_:
+			return false
 
 func _on_body_entered(body: Node2D) -> void:
 	if body != shooter and canHitBody(body):
 		hit.emit(body)
 		if body is Player:
 			body.die()
-		elif body is Ghost: body.died.emit()
+		elif body is Ghost: pass
+		elif body is Enemy: body.queue_free()
+		elif body is BossEnemy: body.hitByProjectile(self)
+		elif body is BossCrystal: body.gotHit(self)
 		queue_free()
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:

@@ -1,0 +1,81 @@
+[gd_scene load_steps=7 format=3 uid="uid://cqer7l2x77sgr"]
+
+[ext_resource type="Script" uid="uid://mg52gdm3s42v" path="res://Scripts/Attacks/ground_explosion.gd" id="1_li5yb"]
+
+[sub_resource type="Animation" id="Animation_o3rdn"]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1),
+"transitions": PackedFloat32Array(4.14106, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 0, 0.0666667), Color(1, 1, 0, 1), Color(1, 1, 0, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.8, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"hitEveryoneInRadius"
+}, {
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_e2sog"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_unaw7"]
+_data = {
+&"RESET": SubResource("Animation_e2sog"),
+&"default": SubResource("Animation_o3rdn")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_anfcc"]
+radius = 83.4865
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_00ill"]
+size = Vector2(120, 120)
+
+[node name="GroundExplosion" type="Node2D"]
+script = ExtResource("1_li5yb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_unaw7")
+}
+autoplay = "default"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_anfcc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("PlaceholderTexture2D_00ill")

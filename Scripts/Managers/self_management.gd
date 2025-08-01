@@ -66,6 +66,7 @@ func clone_bio() -> Array[Command]:
 
 # Spawns a ghost with clone biography
 func spawn_ghost():
+	if bio.is_empty(): return
 	if ghostsRemaining == 0: # If you have more than 5 ghosts, it will remove the oldest one
 		var firstGhost:Ghost = get_children().filter(func(a): return a is Ghost).front()
 		if firstGhost != null: firstGhost.queue_free()
@@ -73,7 +74,11 @@ func spawn_ghost():
 	var new_ghost:Ghost = ghost_scene.instantiate()
 	new_ghost.commands = clone_bio()
 	new_ghost.global_position = playerStartingLocation
+	new_ghost.connect("died",handleGhostDeath)
 	call_deferred("add_child",new_ghost)
+
+func handleGhostDeath() -> void:
+	pass
 
 # Clear all data for the next ghost
 func clearEverything() -> void:
@@ -87,7 +92,7 @@ func clearEverything() -> void:
 # Handle player death
 func handlePlayerDeath() -> void:
 	logCommand()
-	if player.deaths == 0: # If it is their first death, give the tutorial
+	if player.deaths == 0 and get_parent() is not BossRoom: # If it is their first death, give the tutorial
 		gui.resetProgress()
 		gui.startJumpScare()
 		gui.death_hint.show()
@@ -96,7 +101,13 @@ func handlePlayerDeath() -> void:
 		player.set_process(false)
 		player.deaths+=1
 		return
+	
 	player.deaths+=1
+	var allGhosts = get_children().filter(func(a): return a is Ghost)
+	ghostsRemaining = clampi(5-allGhosts.size(),0,5)
+	for c in allGhosts:
+		if c is Ghost:
+			c.reload()
 	spawn_ghost()
 	clearEverything()
 	player.global_position = playerStartingLocation
@@ -105,11 +116,14 @@ func handlePlayerDeath() -> void:
 # Only handles the tutorial wave to track if the person kept dying over and over again
 func handleWaveEnd() -> void:
 	tutorialWaves+=1
+	if boss.phase != 0 and get_parent() is BossRoom:
+		player.connect("died",boss.reset)
 	if tutorialWaves <= player.deaths and tutorialWaves != 1:
 		boss.reset()
 		tutorialWaves = player.deaths
 	elif tutorialWaves != 1:
 		player.camera_2d.enabled = true
+		boss.phase = 1
 
 # Debug method for creating ghosts
 func _unhandled_input(event):

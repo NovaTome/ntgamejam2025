@@ -32,6 +32,7 @@ script = ExtResource("2_cq3fe")
 [node name="BulletSource" parent="Path2D/MovingBulletPattern" instance=ExtResource("3_yb0mj")]
 rotation = 1.5708
 projectile = ExtResource("4_cq3fe")
+group = "TwinAttack"
 
 [node name="FireTimer" type="Timer" parent="Path2D/MovingBulletPattern"]
 wait_time = 0.05
@@ -45,6 +46,7 @@ script = ExtResource("2_cq3fe")
 [node name="BulletSource" parent="Path2D/MovingBulletPattern2" instance=ExtResource("3_yb0mj")]
 rotation = 1.5708
 projectile = ExtResource("4_cq3fe")
+group = "TwinAttack"
 
 [node name="FireTimer" type="Timer" parent="Path2D/MovingBulletPattern2"]
 wait_time = 0.05

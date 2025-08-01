@@ -35,6 +35,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	movement_direction = Vector2.ZERO
 	if not death_timer.is_stopped(): return
+	if commands.size() == 0 and oldCommands.size() == 0: #Idk why this is happening
+		died.emit()
+		queue_free()
+		return
 	var currentCommand:Command = commands.front()
 	if currentTicks < currentCommand.endTick: #Check if the top command should still be running
 		command_node.processCommand(currentCommand)
@@ -52,7 +56,8 @@ func _process(delta: float) -> void:
 
 func reload() -> void:
 	global_position = startingLocation
-	commands = oldCommands.duplicate(false)
+	commands.append_array(oldCommands.duplicate(false))
+	commands.sort_custom(func(a,b): return b.startTick > a.startTick)
 	oldCommands.clear()
 	currentTicks = 0
 	secondsAlive = 0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://by48x72g25wal"]
+[gd_scene load_steps=10 format=3 uid="uid://by48x72g25wal"]
 
 [ext_resource type="Script" uid="uid://cmnxtp5mk7kd" path="res://Scripts/Entities/Enemies/boss_enemy.gd" id="1_4tvdv"]
 [ext_resource type="Texture2D" uid="uid://yup846x5e2qf" path="res://icon.svg" id="1_7cs6j"]
@@ -18,6 +18,44 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.407843, 0, 0, 1)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stopAllAttacks"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:health")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
 }
 
 [sub_resource type="Animation" id="Animation_8bvao"]
@@ -51,11 +89,108 @@ tracks/1/keys = {
 "method": &"hide"
 }]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_4tvdv"]
+resource_name = "phase_1"
+length = 60.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 25, 26, 26.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1e-05),
+"update": 0,
+"values": [Color(0.407843, 0, 0, 1), Color(0.407843, 0, 0, 1), Color(1, 1, 0, 1), Color(0.407843, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1056, 324)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(3, 4, 6, 6.5, 7, 26, 28, 30, 34, 34.5, 35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"fireGroundAttack"
+}, {
+"args": [],
+"method": &"fireGroundAttack"
+}, {
+"args": [],
+"method": &"fireGroundAttack"
+}, {
+"args": [],
+"method": &"fireGroundAttack"
+}, {
+"args": [],
+"method": &"fireGroundAttack"
+}, {
+"args": [],
+"method": &"fireTwinAttack"
+}, {
+"args": [],
+"method": &"fireGroundAttack"
+}, {
+"args": [],
+"method": &"stopTwinAttack"
+}, {
+"args": [],
+"method": &"spawnCrystal"
+}, {
+"args": [],
+"method": &"spawnCrystal"
+}, {
+"args": [],
+"method": &"spawnCrystal"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:health")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.0666667),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rdnf5"]
 _data = {
 &"RESET": SubResource("Animation_xgipe"),
-&"phase_0": SubResource("Animation_8bvao")
+&"phase_0": SubResource("Animation_8bvao"),
+&"phase_1": SubResource("Animation_4tvdv")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vvxoj"]
@@ -68,16 +203,18 @@ script = ExtResource("1_4tvdv")
 libraries = {
 &"": SubResource("AnimationLibrary_rdnf5")
 }
-autoplay = "phase_0"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.407843, 0, 0, 1)
 texture = ExtResource("1_7cs6j")
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_vvxoj")
+metadata/_edit_lock_ = true
 
 [node name="BulletSource" parent="." instance=ExtResource("3_wmgoi")]
 position = Vector2(-67, 0)
 rotation = 3.14159
 projectile = ExtResource("4_fj6eq")
+metadata/_edit_lock_ = true

@@ -54,6 +54,7 @@ func _process_actions():
 func die() -> void:
 	if not dead:
 		dead = true
+		Managers.sound_manager.playSound(SoundManager.SOUNDS.DEATH,global_position)
 		died.emit()
 
 
