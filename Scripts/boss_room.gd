@@ -4,6 +4,7 @@ class_name BossRoom
 @onready var self_management = $SelfManagement
 @onready var bullet_manager = $BulletManager
 @onready var sound_manager: SoundManager = $SoundManager
+@onready var spawners:Node2D = $EnemySpawners
 
 func _ready():
 	Managers.bullet_manager = bullet_manager

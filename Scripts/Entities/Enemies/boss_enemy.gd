@@ -84,6 +84,7 @@ func crystalDestroyed() -> void:
 	health-=1
 	if health==0:
 		phase+=1
+		Managers.self_management.gui.resetProgress()
 		if phase > 3: queue_free() # TODO: Handle boss death
 		else: reset()
 

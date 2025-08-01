@@ -27,3 +27,14 @@ script = ExtResource("5_q04ek")
 
 [node name="SoundManager" type="Node" parent="."]
 script = ExtResource("7_bnrw0")
+
+[node name="EnemySpawners" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="EnemySpawners"]
+position = Vector2(887, 149)
+
+[node name="Marker2D2" type="Marker2D" parent="EnemySpawners"]
+position = Vector2(887, 342)
+
+[node name="Marker2D3" type="Marker2D" parent="EnemySpawners"]
+position = Vector2(887, 561)

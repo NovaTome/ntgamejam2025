@@ -124,6 +124,7 @@ func handleWaveEnd() -> void:
 	elif tutorialWaves != 1:
 		player.camera_2d.enabled = true
 		boss.phase = 1
+		get_tree().change_scene_to_file("res://Scenes/boss_room.tscn")
 
 # Debug method for creating ghosts
 func _unhandled_input(event):
