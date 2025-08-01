@@ -4,3 +4,4 @@
 
 [node name="WaveAttack" type="Node2D"]
 script = ExtResource("1_kh5xa")
+DEBUG_MODE = false

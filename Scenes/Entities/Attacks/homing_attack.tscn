@@ -1,0 +1,77 @@
+[gd_scene load_steps=6 format=3 uid="uid://cwy3gwf38qtt8"]
+
+[ext_resource type="Script" uid="uid://bjtyqhweb0fba" path="res://Scripts/Attacks/homing_attack.gd" id="1_wvqro"]
+[ext_resource type="PackedScene" uid="uid://dxtlhaoalm7os" path="res://Scenes/Entities/Attacks/bullet_source.tscn" id="2_m5ty4"]
+[ext_resource type="PackedScene" uid="uid://vb6igl0gyj4p" path="res://Scenes/Entities/square_projectile.tscn" id="3_8383i"]
+
+[sub_resource type="Animation" id="Animation_8383i"]
+resource_name = "default"
+length = 2.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BulletSource")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"fire"
+}, {
+"args": [],
+"method": &"fire"
+}, {
+"args": [],
+"method": &"fire"
+}, {
+"args": [],
+"method": &"fire"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.99, 1.49, 1.99),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [0.0, 200.0],
+"method": &"moveBulletSource"
+}, {
+"args": [100.0, -100.0],
+"method": &"moveBulletSource"
+}, {
+"args": [-200.0, 0.0],
+"method": &"moveBulletSource"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8phfq"]
+_data = {
+&"default": SubResource("Animation_8383i")
+}
+
+[node name="HomingAttack" type="Node2D"]
+script = ExtResource("1_wvqro")
+
+[node name="BulletSource" parent="." instance=ExtResource("2_m5ty4")]
+position = Vector2(0, -100)
+rotation = 4.71239
+projectile = ExtResource("3_8383i")
+projectile_type = 2
+group = "HomingAttack"
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8phfq")
+}
+autoplay = "default"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

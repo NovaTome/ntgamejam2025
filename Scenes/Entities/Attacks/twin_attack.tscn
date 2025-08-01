@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://dqc8vaitliuep"]
+
+[ext_resource type="Script" uid="uid://drajhdo55m2k6" path="res://Scripts/Attacks/twin_attack.gd" id="1_ihjqb"]
+[ext_resource type="Script" uid="uid://lmj71ifk8n0y" path="res://Scripts/Attacks/moving_bullet_pattern.gd" id="2_cq3fe"]
+[ext_resource type="PackedScene" uid="uid://dxtlhaoalm7os" path="res://Scenes/Entities/Attacks/bullet_source.tscn" id="3_yb0mj"]
+[ext_resource type="PackedScene" uid="uid://b3ifmidv1nnnd" path="res://Scenes/Entities/projectile.tscn" id="4_cq3fe"]
+
+[sub_resource type="Curve" id="Curve_yb0mj"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_3aetu"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -500, 0, 0, 0, 0, 0, 500, 0)
+}
+point_count = 2
+
+[node name="TwinAttack" type="Node2D"]
+script = ExtResource("1_ihjqb")
+speed_curve = SubResource("Curve_yb0mj")
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(0, -1)
+curve = SubResource("Curve2D_3aetu")
+
+[node name="MovingBulletPattern" type="PathFollow2D" parent="Path2D"]
+position = Vector2(500, 0)
+progress = 1000.0
+rotates = false
+script = ExtResource("2_cq3fe")
+
+[node name="BulletSource" parent="Path2D/MovingBulletPattern" instance=ExtResource("3_yb0mj")]
+rotation = 1.5708
+projectile = ExtResource("4_cq3fe")
+
+[node name="FireTimer" type="Timer" parent="Path2D/MovingBulletPattern"]
+wait_time = 0.05
+autostart = true
+
+[node name="MovingBulletPattern2" type="PathFollow2D" parent="Path2D"]
+position = Vector2(-500, 0)
+rotates = false
+script = ExtResource("2_cq3fe")
+
+[node name="BulletSource" parent="Path2D/MovingBulletPattern2" instance=ExtResource("3_yb0mj")]
+rotation = 1.5708
+projectile = ExtResource("4_cq3fe")
+
+[node name="FireTimer" type="Timer" parent="Path2D/MovingBulletPattern2"]
+wait_time = 0.05
+autostart = true
+
+[connection signal="timeout" from="Path2D/MovingBulletPattern/FireTimer" to="Path2D/MovingBulletPattern" method="_on_fire_timer_timeout"]
+[connection signal="timeout" from="Path2D/MovingBulletPattern2/FireTimer" to="Path2D/MovingBulletPattern2" method="_on_fire_timer_timeout"]
