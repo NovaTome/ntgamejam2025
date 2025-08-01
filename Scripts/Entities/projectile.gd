@@ -19,13 +19,21 @@ var shooter:Node2D
 @export var type:TYPES = TYPES.REGULAR
 var velocity
 
+func _ready() -> void:
+	if type == TYPES.PLAYER:
+		speed/=4
+
 func _process(delta: float) -> void:
+	if type == TYPES.PLAYER:
+		direction = global_position.direction_to(shooter.target.global_position).normalized()
 	velocity = direction * speed
 	global_position += velocity
 
 func set_direction(dir: Vector2) -> void:
 	direction = dir
 	rotation += dir.angle()
+	if type == TYPES.PLAYER: #TODO: Make it so that homing missles actually rotate towards the person instead of using square projectiles
+		global_rotation = global_position.angle_to(shooter.target.global_position)
 
 func canHitBody(body:CharacterBody2D) -> bool:
 	return body is Player or (body is Ghost and type != TYPES.GHOST) or (body is Enemy and (type == TYPES.ENEMY or type == TYPES.ENEMY_GHOST))

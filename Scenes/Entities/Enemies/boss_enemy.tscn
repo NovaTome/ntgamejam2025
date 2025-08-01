@@ -1,5 +1,83 @@
-[gd_scene format=3 uid="uid://by48x72g25wal"]
+[gd_scene load_steps=9 format=3 uid="uid://by48x72g25wal"]
+
+[ext_resource type="Script" uid="uid://cmnxtp5mk7kd" path="res://Scripts/Entities/Enemies/boss_enemy.gd" id="1_4tvdv"]
+[ext_resource type="Texture2D" uid="uid://yup846x5e2qf" path="res://icon.svg" id="1_7cs6j"]
+[ext_resource type="PackedScene" uid="uid://dxtlhaoalm7os" path="res://Scenes/Entities/Attacks/bullet_source.tscn" id="3_wmgoi"]
+[ext_resource type="PackedScene" uid="uid://b3ifmidv1nnnd" path="res://Scenes/Entities/projectile.tscn" id="4_fj6eq"]
+
+[sub_resource type="Animation" id="Animation_xgipe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8bvao"]
+resource_name = "start"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1079, 0), Vector2(1079, 500), Vector2(1079, -500)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"fireWaveAttack"
+}, {
+"args": [],
+"method": &"hide"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rdnf5"]
+_data = {
+&"RESET": SubResource("Animation_xgipe"),
+&"phase_0": SubResource("Animation_8bvao")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vvxoj"]
+size = Vector2(128, 128)
 
 [node name="BossEnemy" type="CharacterBody2D"]
+script = ExtResource("1_4tvdv")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_rdnf5")
+}
+autoplay = "phase_0"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.407843, 0, 0, 1)
+texture = ExtResource("1_7cs6j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vvxoj")
+
+[node name="BulletSource" parent="." instance=ExtResource("3_wmgoi")]
+position = Vector2(-67, 0)
+rotation = 3.14159
+projectile = ExtResource("4_fj6eq")

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bar4gwgrfy1qu" path="res://Scripts/Entities/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://yup846x5e2qf" path="res://icon.svg" id="2_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://btvl2e15nmict" path="res://Scenes/Entities/command_node.tscn" id="3_qbyki"]
-[ext_resource type="PackedScene" uid="uid://dsyta32xcu57i" path="res://Scenes/Entities/Attacks/bullet_source.tscn" id="4_svftf"]
+[ext_resource type="PackedScene" uid="uid://dxtlhaoalm7os" path="res://Scenes/Entities/Attacks/bullet_source.tscn" id="4_svftf"]
 [ext_resource type="PackedScene" uid="uid://b3ifmidv1nnnd" path="res://Scenes/Entities/projectile.tscn" id="5_a1rq5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pq8q7"]
@@ -30,3 +30,9 @@ position = Vector2(32, 0)
 scale = Vector2(40110.9, -50.7781)
 projectile = ExtResource("5_a1rq5")
 projectile_type = 3
+
+[node name="DeathGap" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="DeathGap" to="." method="_on_death_gap_timeout"]

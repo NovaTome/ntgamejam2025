@@ -8,6 +8,10 @@ var movement_direction: Vector2 = Vector2.ZERO
 @export var speed: int = 250
 @onready var command_node: CommandNode = $CommandNode
 @onready var bullet_source = $BulletSource
+@onready var death_gap: Timer = $DeathGap
+
+var deaths:int = 0
+var dead:bool = false
 
 func _ready() -> void:
 	command_node.bullet_source = bullet_source
@@ -47,5 +51,10 @@ func _process_actions():
 	command_node.processCommand(command)
 
 func die() -> void:
-	global_position = Vector2(0,0)
-	died.emit()
+	if not dead:
+		dead = true
+		died.emit()
+
+
+func _on_death_gap_timeout() -> void:
+	dead = false

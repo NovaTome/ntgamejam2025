@@ -2,6 +2,7 @@ class_name SelfManagement
 extends Node2D
 
 @onready var player: Player = $Player
+@onready var boss:BossEnemy = $BossEnemy
 @onready var playerStartingLocation:Vector2 = Vector2($Player.global_position)
 @onready var gui:GUI = $GUI
 
@@ -27,6 +28,7 @@ func _process(delta: float) -> void:
 
 #On input, log what is happening to "bio"
 func _input(event: InputEvent) -> void:
+	if not gui.hint_timer.is_stopped(): return
 	var inputTypes:Array[String] = ["left","up","down","right","fire"]
 	if event is InputEventKey:
 		for it:String in inputTypes:
@@ -37,7 +39,6 @@ func _input(event: InputEvent) -> void:
 
 func logCommand() -> void:
 	var newCommand:Command = Command.new(inputTickStart,currentTicks,inputs.duplicate(false),rotations.duplicate(false))
-	if newCommand.inputs.has("fire"): newCommand.pos = get_global_mouse_position()
 	bio.append(newCommand)
 	rotations.clear()
 
@@ -66,9 +67,24 @@ func spawn_ghost():
 	new_ghost.global_position = playerStartingLocation
 	call_deferred("add_child",new_ghost)
 
+func clearEverything() -> void:
+	gui.resetProgress()
+	bio.clear()
+	currentTicks = 0
+	inputTickStart = 0
+	inputs.clear()
+	rotations.clear()
+
 func handlePlayerDeath() -> void:
 	logCommand()
-	inputTickStart = currentTicks
+	if player.deaths == 0:
+		gui.resetProgress()
+		gui.death_hint.show()
+		gui.hint_timer.start(3)
+		player.hide()
+		player.set_process(false)
+		player.deaths+=1
+		return
 	spawn_ghost()
 	gui.resetProgress()
 	bio.clear()
@@ -76,6 +92,8 @@ func handlePlayerDeath() -> void:
 	inputTickStart = 0
 	inputs.clear()
 	rotations.clear()
+	player.global_position = playerStartingLocation
+	player.death_gap.start()
 
 # Debug method for creating ghosts
 func _unhandled_input(event):

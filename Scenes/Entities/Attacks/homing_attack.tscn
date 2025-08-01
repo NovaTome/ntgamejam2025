@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwy3gwf38qtt8"]
+
+[ext_resource type="Script" uid="uid://bjtyqhweb0fba" path="res://Scripts/Attacks/homing_attack.gd" id="1_wvqro"]
+
+[node name="HomingAttack" type="Node2D"]
+script = ExtResource("1_wvqro")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

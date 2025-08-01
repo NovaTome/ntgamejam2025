@@ -9,6 +9,7 @@ var movement_direction: Vector2 = Vector2.ZERO
 @onready var death_timer: Timer = $DeathTimer
 @onready var bullet_source = $BulletSource
 
+var startingLocation:Vector2
 
 var manager:SelfManagement
 
@@ -21,6 +22,7 @@ var currentTicks:int = 0
 var secondsAlive:int = 0
 
 func _ready() -> void:
+	startingLocation = global_position
 	command_node.bullet_source = bullet_source
 	sprite_2d.self_modulate.a = 0.5 #Make ghost transparent :3
 	if commands.size() == 0:
@@ -47,7 +49,7 @@ func _process(delta: float) -> void:
 	currentTicks+=1
 
 func reload() -> void:
-	global_position = Vector2(0,0)
+	global_position = startingLocation
 	commands = oldCommands.duplicate(false)
 	oldCommands.clear()
 	currentTicks = 0
