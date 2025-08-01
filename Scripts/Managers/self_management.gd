@@ -79,6 +79,7 @@ func handlePlayerDeath() -> void:
 	logCommand()
 	if player.deaths == 0:
 		gui.resetProgress()
+		gui.startJumpScare()
 		gui.death_hint.show()
 		gui.hint_timer.start(3)
 		player.hide()

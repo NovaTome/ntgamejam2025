@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ciq371u7ni228"]
+[gd_scene load_steps=3 format=3 uid="uid://ciq371u7ni228"]
 
 [ext_resource type="Script" uid="uid://dblvl5rd8204o" path="res://Scripts/UI/gui.gd" id="1_vqpta"]
+[ext_resource type="Texture2D" uid="uid://bieclbc2u0d4p" path="res://Assets/face.png" id="2_q081c"]
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_vqpta")
@@ -35,6 +36,13 @@ text = "Your ghosts can help you block projectiles..."
 [node name="HintTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="JumpScare" type="Sprite2D" parent="."]
+visible = false
+self_modulate = Color(1, 1, 1, 0.0862745)
+z_index = -1
+position = Vector2(578, 294)
+texture = ExtResource("2_q081c")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="HintTimer" to="." method="_on_hint_timer_timeout"]
