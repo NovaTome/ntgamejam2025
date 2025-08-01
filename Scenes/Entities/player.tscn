@@ -35,4 +35,8 @@ projectile_type = 3
 wait_time = 0.5
 one_shot = true
 
+[node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
+zoom = Vector2(0.75, 0.75)
+
 [connection signal="timeout" from="DeathGap" to="." method="_on_death_gap_timeout"]

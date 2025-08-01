@@ -4,6 +4,7 @@ class_name GUI
 @onready var death_hint: Label = $DeathHint
 @onready var hint_timer: Timer = $HintTimer
 @onready var jump_scare: Sprite2D = $JumpScare
+@onready var ghost_label: Label = $GhostLabel
 
 signal timerUp()
 
@@ -26,7 +27,7 @@ func startJumpScare() -> void:
 	tween.tween_callback(jump_scare.hide)
 
 func _on_hint_timer_timeout() -> void:
-	death_hint.queue_free()
+	death_hint.hide()
 	Managers.self_management.spawn_ghost()
 	Managers.self_management.clearEverything()
 	Managers.self_management.player.death_gap.start()

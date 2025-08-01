@@ -9,6 +9,7 @@ var movement_direction: Vector2 = Vector2.ZERO
 @onready var command_node: CommandNode = $CommandNode
 @onready var bullet_source = $BulletSource
 @onready var death_gap: Timer = $DeathGap
+@onready var camera_2d: Camera2D = $Camera2D
 
 var deaths:int = 0
 var dead:bool = false

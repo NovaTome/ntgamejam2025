@@ -16,7 +16,7 @@ script = ExtResource("1_vnucn")
 [node name="GUI" parent="SelfManagement" instance=ExtResource("3_4g5cr")]
 
 [node name="Player" parent="SelfManagement" instance=ExtResource("3_vnucn")]
-position = Vector2(28, 404)
+position = Vector2(382, 373)
 
 [node name="BossEnemy" parent="SelfManagement" instance=ExtResource("6_dun2r")]
 

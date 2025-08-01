@@ -12,7 +12,11 @@ func reset() -> void:
 	show()
 	animation_player.play("phase_"+str(phase))
 
-func fireWaveAttack() -> void:
+func fireWaveAttack() -> WaveAttack:
 	var wave:WaveAttack = waveAttack.instantiate()
 	wave.global_position = bullet_source.origin.global_position
 	get_parent().add_child(wave)
+	return wave
+
+func connectTutorialWave() -> void:
+	fireWaveAttack().connect("finished",Managers.self_management.handleWaveEnd)

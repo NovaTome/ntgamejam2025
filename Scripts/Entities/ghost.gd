@@ -1,6 +1,8 @@
 class_name Ghost
 extends CharacterBody2D
 
+signal died()
+
 var movement_direction: Vector2 = Vector2.ZERO
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @export var speed: int = 250

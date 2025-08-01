@@ -1,6 +1,8 @@
 extends Node2D
 class_name WaveAttack
 
+signal finished()
+
 const radius = 5000
 @export var projectile_scene:PackedScene = preload("res://Scenes/Entities/square_projectile.tscn")
 @export var bullet_source_scene:PackedScene = preload("res://Scenes/Entities/Attacks/bullet_source.tscn")
@@ -31,5 +33,9 @@ func _process(delta: float) -> void:
 	for p:Projectile in Managers.bullet_manager.get_children().filter(func(a:Node2D): return a.is_in_group("WaveAttack")):
 		if p.get_overlapping_areas().size() == 0:
 			p.scale = Vector2(p.scale.x,p.scale.y+0.05)
-	if DEBUG_MODE and allProjects.filter(func(a): return a != null).size() == 0:
+	var allValidProjectiles:Array = allProjects.filter(func(a): return a != null)
+	if DEBUG_MODE and allValidProjectiles.size() == 0:
 		fire()
+	elif allValidProjectiles.size() == 0:
+		finished.emit()
+		queue_free()

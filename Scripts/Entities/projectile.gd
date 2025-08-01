@@ -43,6 +43,7 @@ func _on_body_entered(body: Node2D) -> void:
 		hit.emit(body)
 		if body is Player:
 			body.die()
+		elif body is Ghost: body.died.emit()
 		queue_free()
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
