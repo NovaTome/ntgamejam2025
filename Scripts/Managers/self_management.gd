@@ -108,6 +108,8 @@ func handleWaveEnd() -> void:
 	if tutorialWaves <= player.deaths and tutorialWaves != 1:
 		boss.reset()
 		tutorialWaves = player.deaths
+	elif tutorialWaves != 1:
+		player.camera_2d.enabled = true
 
 # Debug method for creating ghosts
 func _unhandled_input(event):

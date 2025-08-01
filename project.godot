@@ -13,6 +13,7 @@ config_version=5
 config/name="ntgamejam2025"
 run/main_scene="uid://caaf4rvngrwuc"
 config/features=PackedStringArray("4.4", "Forward Plus")
+boot_splash/image="uid://djxx7u1bh4ieu"
 config/icon="res://icon.svg"
 
 [autoload]

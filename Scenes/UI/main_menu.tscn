@@ -1,38 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://bprfexjtdl7pq"]
+[gd_scene load_steps=11 format=3 uid="uid://bprfexjtdl7pq"]
 
 [ext_resource type="Texture2D" uid="uid://c1gvisew0ga4f" path="res://Assets/Background-grainy.jpg" id="1_5wsvm"]
+[ext_resource type="Script" uid="uid://c2o60mlp1vp2" path="res://Scripts/UI/main_menu.gd" id="1_gih0s"]
 [ext_resource type="Texture2D" uid="uid://7uh5hxl4frqg" path="res://Assets/DEADRINGER.png" id="2_i2xx2"]
 [ext_resource type="Script" uid="uid://0oq8bfuxjrfu" path="res://Scripts/Animations/animation_player.gd" id="3_o14dv"]
 [ext_resource type="Texture2D" uid="uid://bbua21511rhx5" path="res://Assets/StraightProjectiles-01.png" id="4_u7lva"]
 [ext_resource type="Texture2D" uid="uid://c0ej8we4j7ate" path="res://Assets/StraightProjectiles-02.png" id="5_mrfpk"]
 [ext_resource type="FontFile" uid="uid://lcrbq1y7yp2m" path="res://Assets/Orbitron-VariableFont_wght.ttf" id="6_4pqbp"]
-
-[sub_resource type="Animation" id="Animation_o14dv"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LogoTextureRect:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("BackgroundTextureRect:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
 
 [sub_resource type="Animation" id="Animation_i2xx2"]
 resource_name = "ScaleAnimation"
@@ -64,23 +38,43 @@ tracks/1/keys = {
 "values": [0.0, 3.14159, 6.28319]
 }
 
+[sub_resource type="Animation" id="Animation_o14dv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LogoTextureRect:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BackgroundTextureRect:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u7lva"]
 _data = {
 &"MainMenuAnimation": SubResource("Animation_i2xx2"),
 &"RESET": SubResource("Animation_o14dv")
 }
 
-[node name="MainMenu" type="Control"]
-layout_mode = 3
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -1152.0
-offset_bottom = -648.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_gih0s")
 
 [node name="BackgroundTextureRect" type="TextureRect" parent="."]
-layout_mode = 0
 offset_left = -694.0
 offset_top = -381.5
 offset_right = 1898.0
@@ -90,7 +84,6 @@ texture = ExtResource("1_5wsvm")
 expand_mode = 1
 
 [node name="LogoTextureRect" type="TextureRect" parent="."]
-layout_mode = 0
 offset_left = 152.0
 offset_top = 16.0
 offset_right = 1071.0
@@ -99,8 +92,7 @@ pivot_offset = Vector2(459.5, 104)
 texture = ExtResource("2_i2xx2")
 expand_mode = 1
 
-[node name="TextureButton" type="TextureButton" parent="."]
-layout_mode = 0
+[node name="StartButton" type="TextureButton" parent="."]
 offset_left = 128.0
 offset_top = 304.0
 offset_right = 736.0
@@ -112,7 +104,7 @@ texture_hover = ExtResource("5_mrfpk")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TextureButton"]
+[node name="RichTextLabel" type="RichTextLabel" parent="StartButton"]
 layout_mode = 0
 offset_left = 180.0
 offset_top = 12.0
@@ -126,7 +118,7 @@ text = "Start"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureButton2" type="TextureButton" parent="."]
+[node name="SettingsButton" type="TextureButton" parent="."]
 offset_left = 128.0
 offset_top = 400.0
 offset_right = 736.0
@@ -138,7 +130,8 @@ texture_hover = ExtResource("5_mrfpk")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TextureButton2"]
+[node name="RichTextLabel" type="RichTextLabel" parent="SettingsButton"]
+layout_mode = 0
 offset_left = 168.0
 offset_top = 12.0
 offset_right = 272.0
@@ -151,7 +144,7 @@ text = "Settings"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureButton3" type="TextureButton" parent="."]
+[node name="QuitButton" type="TextureButton" parent="."]
 offset_left = 128.0
 offset_top = 496.0
 offset_right = 736.0
@@ -163,7 +156,8 @@ texture_hover = ExtResource("5_mrfpk")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TextureButton3"]
+[node name="RichTextLabel" type="RichTextLabel" parent="QuitButton"]
+layout_mode = 0
 offset_left = 191.0
 offset_top = 12.0
 offset_right = 247.0
@@ -181,3 +175,5 @@ libraries = {
 &"": SubResource("AnimationLibrary_u7lva")
 }
 script = ExtResource("3_o14dv")
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

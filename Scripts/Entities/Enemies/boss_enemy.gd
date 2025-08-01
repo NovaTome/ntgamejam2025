@@ -19,4 +19,5 @@ func fireWaveAttack() -> WaveAttack:
 	return wave
 
 func connectTutorialWave() -> void:
+	Managers.sound_manager.playSound(SoundManager.SOUNDS.EXPLOSION, global_position)
 	fireWaveAttack().connect("finished",Managers.self_management.handleWaveEnd)
