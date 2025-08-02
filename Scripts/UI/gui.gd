@@ -23,6 +23,17 @@ const default_ringer_unlock = [CLOCK_TICK_INTERVAL, CLOCK_MAX / 2, CLOCK_MAX]
 var ringer_unlock = default_ringer_unlock.duplicate()
 
 var clock_progress: int = 0
+var ringer_clock_on: bool = false:
+	set(value):
+		if (value):
+			ringer_clock.show()
+			clock_face.hide()
+			ringer_clock.play("default")
+			set_ring_timer()
+		else:
+			ringer_clock.hide()
+			clock_face.show()
+		ringer_clock_on = value
 
 func _ready():
 	ghost_label.text = "Ghosts Remaining: " + str(GameConstants.STARTING_MAX_GHOSTS)
@@ -49,7 +60,9 @@ func _on_timer_timeout() -> void:
 		var clock_face_asset_index = 1 + clock_progress / CLOCK_TICK_INTERVAL
 		clock_face.texture = load("res://Assets/Clock/TheClock-%02d.png" % clock_face_asset_index)
 	
-	if !ringer_unlock.is_empty() && clock_progress >= ringer_unlock.front():
+	if !ringer_unlock.is_empty() \
+ 		&& ringer_clock_on == false \
+		&& clock_progress >= ringer_unlock.front():
 		ringer_unlock.pop_front()
 		ringer_unlocked.emit()
 	
@@ -85,5 +98,4 @@ func _on_hint_timer_timeout() -> void:
 
 
 func _on_ringer_clock_animation_finished() -> void:
-	ringer_clock.hide()
-	clock_face.show()
+	ringer_clock_on = false
