@@ -67,7 +67,7 @@ func _process(delta: float) -> void:
 			rotation = validRotations.pop_front().rotation
 			if (rotation_degrees < 0 and rotation_degrees < -180) or (rotation_degrees > 90 and rotation_degrees < 180):
 				flip(true)
-			else: sprite.flip_v = flip(false)
+			else: flip(false)
 			
 		
 	else: #If top command is expired, move to next command
