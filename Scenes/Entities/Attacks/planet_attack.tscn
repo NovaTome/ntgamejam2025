@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkf4ra4ranyh"]
+
+[ext_resource type="Script" uid="uid://qum2pf6s11qa" path="res://Scripts/Attacks/planet_attack.gd" id="1_1xcsc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x5qey"]
+radius = 56.0357
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1xcsc"]
+radius = 129.93
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_me3q2"]
+radius = 80.0
+
+[node name="PlanetAttack" type="Node2D"]
+script = ExtResource("1_1xcsc")
+mercury_speed = 0.01
+venus_speed = 0.001
+mars_speed = 0.01
+
+[node name="Mercury" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="Mercury"]
+position = Vector2(0, -200)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mercury/Area2D"]
+shape = SubResource("CircleShape2D_x5qey")
+
+[node name="Venus" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="Venus"]
+position = Vector2(0, -600)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Venus/Area2D"]
+shape = SubResource("CircleShape2D_1xcsc")
+
+[node name="Mars" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="Mars"]
+position = Vector2(0, -1400)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mars/Area2D"]
+shape = SubResource("CircleShape2D_me3q2")

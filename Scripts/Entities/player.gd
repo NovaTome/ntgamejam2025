@@ -8,7 +8,7 @@ signal ring_ability()
 var movement_direction: Vector2 = Vector2.ZERO
 @export var speed: int = 250
 @onready var command_node: CommandNode = $CommandNode
-@onready var bullet_source = $BulletSource
+@onready var ak_47_source: BulletSource = $AK47Source
 @onready var death_gap: Timer = $DeathGap
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var sprite:AnimatedSprite2D = $Sprite2D
@@ -19,7 +19,7 @@ var ringed: bool = false
 var rings: int = 0
 
 func _ready() -> void:
-	command_node.bullet_source = bullet_source
+	command_node.bullet_source = ak_47_source
 
 # used to determine if next life tick should record fire
 var _unrecorded_fire: bool = false

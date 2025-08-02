@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bqvhoyc8hm3u0"]
+[gd_scene load_steps=6 format=3 uid="uid://bqvhoyc8hm3u0"]
 
 [ext_resource type="Script" uid="uid://dxiilpwi3l5r5" path="res://Scripts/Entities/ghost.gd" id="1_e3r4w"]
 [ext_resource type="SpriteFrames" uid="uid://xccyeoay8wel" path="res://Assets/Player/ghost.tres" id="2_tepbg"]
 [ext_resource type="PackedScene" uid="uid://btvl2e15nmict" path="res://Scenes/Entities/command_node.tscn" id="3_nm3md"]
-[ext_resource type="PackedScene" uid="uid://dxtlhaoalm7os" path="res://Scenes/Entities/Attacks/bullet_source.tscn" id="4_aqrip"]
-[ext_resource type="PackedScene" uid="uid://b3ifmidv1nnnd" path="res://Scenes/Entities/projectile.tscn" id="5_tepbg"]
+[ext_resource type="PackedScene" uid="uid://bhygnmkhvep4j" path="res://Scenes/Entities/Attacks/ak_47_source.tscn" id="4_aqrip"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n2t0o"]
 size = Vector2(73, 130)
@@ -32,9 +31,7 @@ one_shot = true
 [node name="LifeTimer" type="Timer" parent="."]
 autostart = true
 
-[node name="BulletSource" parent="." instance=ExtResource("4_aqrip")]
-position = Vector2(52, 14)
-projectile = ExtResource("5_tepbg")
+[node name="AK47Source" parent="." instance=ExtResource("4_aqrip")]
 projectile_type = 4
 
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

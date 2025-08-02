@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cbtglpxb0kn4j" path="res://Assets/Projectile/PlayerBullet-01.png" id="2_2dlm4"]
 
 [node name="Projectile" instance=ExtResource("1_qx7xc")]
+speed = 8.0
 type = 3
 
 [node name="Sprite2D" parent="." index="0"]

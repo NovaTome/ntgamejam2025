@@ -10,8 +10,8 @@ var movement_direction: Vector2 = Vector2.ZERO
 @export var minLifeTime:int = 3
 @onready var command_node: CommandNode = $CommandNode
 @onready var death_timer: Timer = $DeathTimer
-@onready var bullet_source = $BulletSource
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var ak_47_source = $AK47Source
 
 var startingLocation:Vector2
 
@@ -40,7 +40,7 @@ var active: bool = true:
 func _ready() -> void:
 	active = true
 	startingLocation = global_position
-	command_node.bullet_source = bullet_source
+	command_node.bullet_source = ak_47_source
 	sprite.self_modulate.a = 0.5 #Make ghost transparent :3
 	if commands.size() == 0:
 		printerr("Ghost has no commands!")
