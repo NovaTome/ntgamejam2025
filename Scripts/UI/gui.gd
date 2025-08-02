@@ -19,8 +19,10 @@ const CLOCK_MAX: int = 300
 const CLOCK_TICK_COUNT = 12;
 const CLOCK_TICK_INTERVAL: int = CLOCK_MAX / CLOCK_TICK_COUNT;
 
-const default_ringer_unlock = [CLOCK_TICK_INTERVAL, CLOCK_MAX / 2, CLOCK_MAX]
-var ringer_unlock = default_ringer_unlock.duplicate()
+const PHASE_ONE_RINGER_UNLOCK: float = CLOCK_MAX / 4
+const PHASE_TWO_RINGER_UNLOCK: float = CLOCK_MAX / 2
+const PHASE_THREE_RINGER_UNLOCK:float = CLOCK_MAX * (3/4)
+var ringer_unlock: Array[float] = []
 
 var clock_progress: int = 0
 var ringer_clock_on: bool = false:
@@ -36,6 +38,7 @@ var ringer_clock_on: bool = false:
 		ringer_clock_on = value
 
 func _ready():
+	SignalBus.phase_change.connect(_handle_phase_change)
 	ghost_label.text = "Ghosts Remaining: " + str(GameConstants.STARTING_MAX_GHOSTS)
 
 func hideAll() -> void:
@@ -63,8 +66,8 @@ func _on_timer_timeout() -> void:
 	if !ringer_unlock.is_empty() \
  		&& ringer_clock_on == false \
 		&& clock_progress >= ringer_unlock.front():
-		ringer_unlock.pop_front()
-		ringer_unlocked.emit()
+			ringer_unlock.pop_front()
+			ringer_unlocked.emit()
 	
 	# At the end of the clock, time's up
 	if clock_progress == CLOCK_MAX:
@@ -96,6 +99,13 @@ func _on_hint_timer_timeout() -> void:
 	if Managers.self_management.boss != null: Managers.self_management.boss.reset()
 	
 
-
 func _on_ringer_clock_animation_finished() -> void:
 	ringer_clock_on = false
+
+func _handle_phase_change(phase: int):
+	if phase == 1:
+		ringer_unlock.append(PHASE_ONE_RINGER_UNLOCK)
+	if phase == 2:
+		ringer_unlock.append(PHASE_TWO_RINGER_UNLOCK)
+	if phase == 3:
+		ringer_unlock.append(PHASE_THREE_RINGER_UNLOCK)

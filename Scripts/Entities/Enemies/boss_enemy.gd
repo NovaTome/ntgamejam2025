@@ -128,6 +128,7 @@ func crystalDestroyed() -> void:
 
 func _phase_changed(_phase:int) -> void:
 	phase = _phase
+	SignalBus.phase_change.emit(_phase)
 
 func _get_target() -> Player:
 	if target == null:
