@@ -5,8 +5,13 @@ class_name GUI
 @onready var hint_timer: Timer = $HintTimer
 @onready var jump_scare: Sprite2D = $JumpScare
 @onready var ghost_label: Label = $GhostLabel
+@onready var ringer_label: Label = $RingerLabel
+
+const default_ringer_unlock = [5, 30, 60]
+var ringer_unlock = default_ringer_unlock.duplicate()
 
 signal timerUp()
+signal ringer_unlocked()
 
 func _ready():
 	ghost_label.text = "Ghosts Remaining: " + str(GameConstants.STARTING_MAX_GHOSTS)
@@ -14,6 +19,11 @@ func _ready():
 func _on_timer_timeout() -> void:
 	if not hint_timer.is_stopped(): return
 	progress_bar.value+=0.2
+	
+	if !ringer_unlock.is_empty() && progress_bar.value >= ringer_unlock.front():
+		ringer_unlock.pop_front()
+		ringer_unlocked.emit()
+		
 	if progress_bar.value == 60:
 		timerUp.emit()
 		resetProgress()

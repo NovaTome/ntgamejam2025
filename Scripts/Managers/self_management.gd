@@ -150,6 +150,7 @@ func handleWaveEnd() -> void:
 func handle_ring_ability() -> void:
 	clearEverything() 
 	gui.set_ring_timer()
+	gui.ringer_label.text = "Ringer Remaining " + str(player.rings)
 	ringer_position = player.global_position
 
 # Debug method for creating ghosts
@@ -170,3 +171,7 @@ func _set_ghost_count(_ghostsRemaining:int) -> void:
 
 func _on_gui_timer_up() -> void:
 	player.die(Enums.DeathType.TIME)
+
+func _on_gui_ringer_unlocked():
+	player.rings += 1
+	gui.ringer_label.text = "Ringer Remaining " + str(player.rings)

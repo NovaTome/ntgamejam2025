@@ -16,6 +16,7 @@ var movement_direction: Vector2 = Vector2.ZERO
 var deaths:int = 0
 var dead:bool = false
 var ringed: bool = false
+var rings: int = 0
 
 func _ready() -> void:
 	command_node.bullet_source = bullet_source
@@ -53,8 +54,9 @@ func _process_actions():
 	if Input.is_action_pressed("right"):
 		command.inputs.append("right")
 	if Input.is_action_pressed("ring"):
-		ring_ability.emit()
-		ringer_on()
+		if rings > 0:
+			ring_ability.emit()
+			ringer_on()
 	
 	# Actions
 	if Input.is_action_just_pressed("fire"):
@@ -73,6 +75,7 @@ func die(cause: Enums.DeathType = Enums.DeathType.UNKNOWN) -> void:
 		died.emit()
 
 func ringer_on() -> void:
+	rings -= 1
 	ringed = true
 	modulate = Color.YELLOW
 	

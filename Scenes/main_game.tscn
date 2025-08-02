@@ -151,4 +151,5 @@ libraries = {
 &"": SubResource("AnimationLibrary_18r40")
 }
 
+[connection signal="ringer_unlocked" from="SelfManagement/GUI" to="SelfManagement" method="_on_gui_ringer_unlocked"]
 [connection signal="timerUp" from="SelfManagement/GUI" to="SelfManagement" method="_on_gui_timer_up"]
