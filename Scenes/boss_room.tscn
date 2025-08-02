@@ -20,7 +20,7 @@ position = Vector2(110, 383)
 [node name="GUI" parent="SelfManagement" instance=ExtResource("4_b2mui")]
 
 [node name="BossEnemy" parent="SelfManagement" instance=ExtResource("5_l7on7")]
-phase = 1
+phase = 2
 
 [node name="BulletManager" type="Node2D" parent="."]
 script = ExtResource("5_q04ek")
@@ -38,3 +38,8 @@ position = Vector2(887, 342)
 
 [node name="Marker2D3" type="Marker2D" parent="EnemySpawners"]
 position = Vector2(887, 561)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://by48x72g25wal"]
+[gd_scene load_steps=11 format=3 uid="uid://by48x72g25wal"]
 
 [ext_resource type="Script" uid="uid://cmnxtp5mk7kd" path="res://Scripts/Entities/Enemies/boss_enemy.gd" id="1_4tvdv"]
 [ext_resource type="Texture2D" uid="uid://yup846x5e2qf" path="res://icon.svg" id="1_7cs6j"]
@@ -136,11 +136,11 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(3, 4, 6, 6.5, 7, 26, 28, 30, 34, 34.5, 35),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(1.3, 3, 4, 6, 6.5, 7, 10.0333, 14.0333, 26, 28, 30, 34, 34.5, 35, 44.5333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "values": [{
 "args": [],
-"method": &"fireGroundAttack"
+"method": &"fireWaveAttack"
 }, {
 "args": [],
 "method": &"fireGroundAttack"
@@ -153,6 +153,15 @@ tracks/2/keys = {
 }, {
 "args": [],
 "method": &"fireGroundAttack"
+}, {
+"args": [],
+"method": &"fireGroundAttack"
+}, {
+"args": [5],
+"method": &"spawnEnemy"
+}, {
+"args": [8],
+"method": &"spawnEnemy"
 }, {
 "args": [],
 "method": &"fireTwinAttack"
@@ -171,6 +180,9 @@ tracks/2/keys = {
 }, {
 "args": [],
 "method": &"spawnCrystal"
+}, {
+"args": [5],
+"method": &"spawnEnemy"
 }]
 }
 tracks/3/type = "value"
@@ -186,11 +198,48 @@ tracks/3/keys = {
 "values": [3]
 }
 
+[sub_resource type="Animation" id="Animation_wmgoi"]
+resource_name = "phase_2"
+length = 60.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1056, 324), Vector2(1056, -300), Vector2(1056, 324)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 1.5, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"fireWaveAttack"
+}, {
+"args": [],
+"method": &"fireWaveAttack"
+}, {
+"args": [],
+"method": &"fireWaveAttack"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rdnf5"]
 _data = {
 &"RESET": SubResource("Animation_xgipe"),
 &"phase_0": SubResource("Animation_8bvao"),
-&"phase_1": SubResource("Animation_4tvdv")
+&"phase_1": SubResource("Animation_4tvdv"),
+&"phase_2": SubResource("Animation_wmgoi")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vvxoj"]

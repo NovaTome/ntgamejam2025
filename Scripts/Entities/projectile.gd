@@ -14,6 +14,7 @@ signal hit(target)
 
 var direction:Vector2 = Vector2.ZERO
 var shooter:Node2D
+var target:Node2D
 
 @export var speed:float = 4.0
 @export var type:TYPES = TYPES.REGULAR
@@ -25,7 +26,9 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if type == TYPES.PLAYER:
-		direction = global_position.direction_to(shooter.target.global_position).normalized()
+		if target == null and shooter != null:
+			target = shooter.target
+		direction = global_position.direction_to(target.global_position).normalized()
 	velocity = direction * speed
 	global_position += velocity
 

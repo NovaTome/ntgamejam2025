@@ -61,8 +61,13 @@ func spawnCrystal() -> void:
 	crystal.destroyed.connect(crystalDestroyed)
 	Managers.self_management.add_child(crystal)
 
+func spawnEnemy(num:int) -> void:
+	var room:BossRoom = Managers.self_management.get_parent()
+	room.spawnAd(num,Projectile.TYPES.REGULAR)
+
 func stopAllAttacks() -> void:
 	stopTwinAttack(true)
+	stopWaveAttack()
 	
 
 func stopTwinAttack(hardStop:bool=false) -> void:
@@ -71,6 +76,10 @@ func stopTwinAttack(hardStop:bool=false) -> void:
 			p.queue_free()
 	if currentTwinAttack != null:
 		currentTwinAttack.queue_free()
+
+func stopWaveAttack() -> void:
+	for p:Projectile in Managers.bullet_manager.get_children().filter(func(a:Projectile): return a.is_in_group("WaveAttack")):
+		p.queue_free()
 
 func connectTutorialWave() -> void:
 	target = Managers.self_management.player

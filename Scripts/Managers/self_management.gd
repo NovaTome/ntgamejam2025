@@ -33,7 +33,7 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if not gui.hint_timer.is_stopped(): return
 	var inputTypes:Array[String] = ["left","up","down","right","fire"]
-	if event is InputEventKey:
+	if event is InputEventKey or event is InputEventMouseButton:
 		for it:String in inputTypes:
 			if event.is_action_pressed(it):
 				addToInputArray(it)
