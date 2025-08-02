@@ -22,7 +22,7 @@ var velocity
 
 func _ready() -> void:
 	if type == TYPES.PLAYER:
-		speed/=4
+		speed/=2
 
 func _process(delta: float) -> void:
 	if type == TYPES.PLAYER:

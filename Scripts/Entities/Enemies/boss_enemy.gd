@@ -8,6 +8,7 @@ signal resetting()
 @export var explosionAttack:PackedScene = preload("res://Scenes/Entities/Attacks/ground_explosion.tscn")
 @export var swirlAttack:PackedScene = preload("res://Scenes/Entities/Attacks/swirl_attack.tscn")
 @export var crystalScene:PackedScene = preload("res://Scenes/Entities/Enemies/boss_crystal.tscn")
+@export var homingAttack:PackedScene = preload("res://Scenes/Entities/Attacks/homing_attack.tscn")
 
 @onready var bullet_source: BulletSource = $BulletSource
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -63,6 +64,12 @@ func fireGroundAttack() -> GroundExplosion:
 	get_parent().add_child(groundAttack)
 	return groundAttack
 
+func fireHomingAttack() -> HomingAttack:
+	var homing:HomingAttack = homingAttack.instantiate()
+	homing.global_position = bullet_source.origin.global_position
+	get_parent().add_child(homing)
+	return homing
+
 func spawnCrystal() -> void:
 	var crystal:BossCrystal = crystalScene.instantiate()
 	var randomLocation:Vector2 = Vector2(global_position.x-randf_range(200,300),global_position.y+randf_range(-200,200))
@@ -82,8 +89,10 @@ func stopAllAttacks() -> void:
 	stopSwirlAttack(true)
 	for e:Enemy in Managers.self_management.get_children().filter(func(n): return n is Enemy):
 		e.queue_free()
+	for p:Projectile in Managers.self_management.get_children().filter(func(proj): return proj is Projectile and proj.is_in_group("HomingAttack")):
+		p.queue_free()
 
-func stopSwirlAttack(hardStop:bool=true) -> void:
+func stopSwirlAttack(hardStop:bool=false) -> void:
 	if hardStop: 
 		for p:Projectile in Managers.bullet_manager.get_children().filter(func(a:Projectile): return a.is_in_group("SwirlAttack")):
 			p.queue_free()
