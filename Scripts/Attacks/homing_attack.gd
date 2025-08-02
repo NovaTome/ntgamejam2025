@@ -32,6 +32,6 @@ func _on_timer_timeout() -> void:
 	
 
 func handleProjectileReady(proj:BulletSource) -> void:
-	proj.origin.global_position = Vector2(global_position.x,global_position.y)
-	proj.direction.global_position = Vector2(radius,0)
+	proj.look_at(target)
 	var projectile:Projectile = proj.fire()
+	projectile.look_at(target)
