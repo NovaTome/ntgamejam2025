@@ -150,3 +150,5 @@ speed_scale = 1.705
 libraries = {
 &"": SubResource("AnimationLibrary_18r40")
 }
+
+[connection signal="timerUp" from="SelfManagement/GUI" to="SelfManagement" method="_on_gui_timer_up"]

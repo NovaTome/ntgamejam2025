@@ -55,7 +55,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if body != shooter and canHitBody(body):
 		hit.emit(body)
 		if body is Player:
-			body.die()
+			body.die(Enums.DeathType.ATTACK)
 		elif body is Ghost: pass
 		elif body is Enemy: body.queue_free()
 		elif body is BossEnemy: body.hitByProjectile(self)

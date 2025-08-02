@@ -6,6 +6,7 @@ signal died()
 var movement_direction: Vector2 = Vector2.ZERO
 @onready var sprite_2d: AnimatedSprite2D = $Sprite2D
 @export var speed: int = 250
+@export var ringer_ghost = false
 @export var minLifeTime:int = 3
 @onready var command_node: CommandNode = $CommandNode
 @onready var death_timer: Timer = $DeathTimer
@@ -13,6 +14,7 @@ var movement_direction: Vector2 = Vector2.ZERO
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 var startingLocation:Vector2
+
 
 var manager:SelfManagement
 
@@ -71,7 +73,10 @@ func _process(delta: float) -> void:
 	else: #If top command is expired, move to next command
 		oldCommands.append(commands.pop_front())
 		if commands.size() == 0: #Kill ghost when it has nothing to do
-			death_timer.start(clampi(minLifeTime-secondsAlive,0.1,minLifeTime))
+			if ringer_ghost:
+				_on_death_timer_timeout() #ringer ghosts just auto start
+			else:
+				death_timer.start(clampi(minLifeTime-secondsAlive,0.1,minLifeTime))
 			return
 	currentTicks+=1
 
@@ -92,8 +97,10 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_death_timer_timeout() -> void:
-	#reload()
-	active = false
+	if ringer_ghost:
+		reload()
+	else:
+		active = false
 
 
 func _on_life_timer_timeout() -> void:

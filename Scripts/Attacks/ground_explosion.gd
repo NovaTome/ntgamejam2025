@@ -5,6 +5,6 @@ class_name GroundExplosion
 func hitEveryoneInRadius() -> void:
 	for b:Node2D in area_2d.get_overlapping_bodies():
 		if b is Player:
-			b.die()
+			b.die(Enums.DeathType.ATTACK)
 		elif b is Ghost:
 			b.reload()
