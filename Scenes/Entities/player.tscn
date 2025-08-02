@@ -18,8 +18,7 @@ script = ExtResource("1_cvnsp")
 position = Vector2(0, 1)
 scale = Vector2(0.103571, 0.103571)
 sprite_frames = ExtResource("2_a1rq5")
-animation = &"walk"
-frame_progress = 0.809014
+frame_progress = 0.812568
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

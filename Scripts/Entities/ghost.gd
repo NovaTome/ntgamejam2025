@@ -63,6 +63,10 @@ func _process(delta: float) -> void:
 		var validRotations:Array[Dictionary] = currentCommand.rotations.filter(func(a): return a.tick == currentTicks)
 		if validRotations.size() != 0:
 			rotation = validRotations.pop_front().rotation
+			if (rotation_degrees < 0 and rotation_degrees < -180) or (rotation_degrees > 90 and rotation_degrees < 180):
+				sprite_2d.flip_v = true
+			else: sprite_2d.flip_v = false
+			
 		
 	else: #If top command is expired, move to next command
 		oldCommands.append(commands.pop_front())

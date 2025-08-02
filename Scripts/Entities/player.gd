@@ -31,9 +31,14 @@ func _process(delta: float) -> void:
 func _physics_process(delta):
 	self.velocity = movement_direction * speed
 	move_and_slide()
-
+	
+	var mousePos:Vector2 = get_global_mouse_position()
 	#Cursor rotation
-	look_at(get_global_mouse_position())
+	look_at(mousePos)
+	if mousePos.x < global_position.x:
+		sprite.flip_v = true
+	else:
+		sprite.flip_v = false
 
 func _process_actions():
 	
