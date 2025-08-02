@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bprfexjtdl7pq"]
+[gd_scene load_steps=12 format=3 uid="uid://bprfexjtdl7pq"]
 
 [ext_resource type="Texture2D" uid="uid://c1gvisew0ga4f" path="res://Assets/Background-grainy.jpg" id="1_5wsvm"]
 [ext_resource type="Script" uid="uid://c2o60mlp1vp2" path="res://Scripts/UI/main_menu.gd" id="1_gih0s"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bbua21511rhx5" path="res://Assets/StraightProjectiles-01.png" id="4_u7lva"]
 [ext_resource type="Texture2D" uid="uid://c0ej8we4j7ate" path="res://Assets/StraightProjectiles-02.png" id="5_mrfpk"]
 [ext_resource type="FontFile" uid="uid://lcrbq1y7yp2m" path="res://Assets/Orbitron-VariableFont_wght.ttf" id="6_4pqbp"]
+[ext_resource type="Texture2D" uid="uid://7mcbfvs0ljrx" path="res://Assets/Player/ghost_1.png" id="8_k33u3"]
 
 [sub_resource type="Animation" id="Animation_i2xx2"]
 resource_name = "ScaleAnimation"
@@ -176,4 +177,13 @@ libraries = {
 }
 script = ExtResource("3_o14dv")
 
+[node name="Ghost1" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.392157)
+position = Vector2(984, 552)
+rotation = 0.127409
+scale = Vector2(0.150838, 0.150838)
+texture = ExtResource("8_k33u3")
+flip_h = true
+
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]

@@ -1,18 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://ciq371u7ni228"]
+[gd_scene load_steps=6 format=3 uid="uid://ciq371u7ni228"]
 
 [ext_resource type="Script" uid="uid://dblvl5rd8204o" path="res://Scripts/UI/gui.gd" id="1_vqpta"]
 [ext_resource type="Texture2D" uid="uid://bieclbc2u0d4p" path="res://Assets/face.png" id="2_q081c"]
+[ext_resource type="FontFile" uid="uid://lcrbq1y7yp2m" path="res://Assets/Orbitron-VariableFont_wght.ttf" id="3_81ldm"]
+[ext_resource type="Texture2D" uid="uid://lxn7is4qcamv" path="res://Assets/Clock/TheClock-01.png" id="3_nxoro"]
+[ext_resource type="Texture2D" uid="uid://fbqfxi0v0pup" path="res://Assets/Clock/TheClock-14.png" id="4_cksue"]
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_vqpta")
-
-[node name="ProgressBar" type="ProgressBar" parent="."]
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 27.0
-grow_horizontal = 2
-max_value = 60.0
-metadata/_edit_use_anchors_ = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2
@@ -48,11 +43,36 @@ texture = ExtResource("2_q081c")
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -158.0
-offset_top = 46.0
-offset_bottom = 69.0
+offset_left = -177.0
+offset_top = 15.0
+offset_right = -15.0
+offset_bottom = 38.0
 grow_horizontal = 0
+theme_override_fonts/font = ExtResource("3_81ldm")
 text = "Ghosts Remaining:"
+
+[node name="ClockFaceTextureRect" type="TextureRect" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -82.0
+offset_top = 38.24
+offset_right = 82.0
+offset_bottom = 202.24
+grow_horizontal = 2
+texture = ExtResource("3_nxoro")
+expand_mode = 1
+
+[node name="ClockHandTextureRect" type="TextureRect" parent="ClockFaceTextureRect"]
+layout_mode = 1
+offset_left = -61.055
+offset_top = -111.0
+offset_right = 217.945
+offset_bottom = 168.0
+pivot_offset = Vector2(143.06, 192.84)
+texture = ExtResource("4_cksue")
+expand_mode = 1
+flip_v = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="HintTimer" to="." method="_on_hint_timer_timeout"]

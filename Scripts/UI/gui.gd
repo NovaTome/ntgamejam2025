@@ -1,6 +1,10 @@
 extends CanvasLayer
 class_name GUI
-@onready var progress_bar: ProgressBar = $ProgressBar
+
+# Clock textures
+@onready var clock_face: TextureRect = $ClockFaceTextureRect
+@onready var clock_hand: TextureRect = $ClockFaceTextureRect/ClockHandTextureRect
+
 @onready var death_hint: Label = $DeathHint
 @onready var hint_timer: Timer = $HintTimer
 @onready var jump_scare: Sprite2D = $JumpScare
@@ -8,18 +12,35 @@ class_name GUI
 
 signal timerUp()
 
+const CLOCK_MAX: int = 300
+const CLOCK_TICK_COUNT = 12;
+const CLOCK_TICK_INTERVAL: int = CLOCK_MAX / CLOCK_TICK_COUNT;
+
+var clock_progress: int = 0
+
 func _ready():
 	ghost_label.text = "Ghosts Remaining: " + str(GameConstants.STARTING_MAX_GHOSTS)
 
+# Fires every time the Timer node triggers
 func _on_timer_timeout() -> void:
 	if not hint_timer.is_stopped(): return
-	progress_bar.value+=0.2
-	if progress_bar.value == 60:
+	
+	# Advance internal progress and rotate the clock hand
+	clock_progress += 1
+	clock_hand.set_rotation_degrees(360 * (clock_progress / float(CLOCK_MAX)))
+	
+	# If we hit a tick mark on the clock, render the next clock face
+	if clock_progress % CLOCK_TICK_INTERVAL == 0:
+		var clock_face_asset_index = 1 + clock_progress / CLOCK_TICK_INTERVAL
+		clock_face.texture = load("res://Assets/Clock/TheClock-%02d.png" % clock_face_asset_index)
+	
+	# At the end of the clock, time's up
+	if clock_progress == CLOCK_MAX:
 		timerUp.emit()
 		resetProgress()
 
 func resetProgress() -> void:
-	progress_bar.value = 0
+	clock_progress = 0
 
 func startJumpScare() -> void:
 	jump_scare.show()
@@ -30,7 +51,7 @@ func startJumpScare() -> void:
 	tween.tween_callback(jump_scare.hide)
 
 func set_ring_timer() -> void:
-	progress_bar.value = 55;
+	clock_progress = floor(CLOCK_MAX * 0.90);
 
 func _on_hint_timer_timeout() -> void:
 	death_hint.hide()
