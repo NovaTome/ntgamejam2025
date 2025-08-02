@@ -3,7 +3,7 @@ class_name GUI
 @onready var progress_bar: ProgressBar = $ProgressBar
 @onready var death_hint: Label = $DeathHint
 @onready var hint_timer: Timer = $HintTimer
-@onready var jump_scare: Sprite2D = $JumpScare
+@onready var jump_scare: TextureRect = $JumpScare
 @onready var ghost_label: Label = $GhostLabel
 @onready var ringer_label: Label = $RingerLabel
 

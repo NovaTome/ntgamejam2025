@@ -75,19 +75,29 @@ _data = {
 script = ExtResource("1_gih0s")
 
 [node name="BackgroundTextureRect" type="TextureRect" parent="."]
-offset_left = -694.0
-offset_top = -381.5
-offset_right = 1898.0
-offset_bottom = 1076.5
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1296.0
+offset_top = -729.0
+offset_right = 1296.0
+offset_bottom = 729.0
+grow_horizontal = 2
+grow_vertical = 2
 pivot_offset = Vector2(1296, 729)
 texture = ExtResource("1_5wsvm")
 expand_mode = 1
 
 [node name="LogoTextureRect" type="TextureRect" parent="."]
-offset_left = 152.0
-offset_top = 16.0
-offset_right = 1071.0
-offset_bottom = 224.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -459.5
+offset_right = 459.5
+offset_bottom = 208.0
+grow_horizontal = 2
 pivot_offset = Vector2(459.5, 104)
 texture = ExtResource("2_i2xx2")
 expand_mode = 1
