@@ -1,18 +1,17 @@
 [gd_scene load_steps=4 format=3 uid="uid://dvlcs37t47aqg"]
 
 [ext_resource type="Script" uid="uid://cnkvqnk8ihbg8" path="res://Scripts/Entities/Enemies/boss_crystal.gd" id="1_0ple7"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_12m4r"]
-size = Vector2(50, 50)
+[ext_resource type="Texture2D" uid="uid://b8jos07am25x2" path="res://Assets/boss_crystal.png" id="2_12m4r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jw1k5"]
-size = Vector2(50, 50)
+size = Vector2(50, 120)
 
 [node name="BossCrystal" type="StaticBody2D"]
 script = ExtResource("1_0ple7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("PlaceholderTexture2D_12m4r")
+scale = Vector2(0.112963, 0.112963)
+texture = ExtResource("2_12m4r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_jw1k5")

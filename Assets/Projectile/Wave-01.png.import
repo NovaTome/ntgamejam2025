@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://m2cgp284o1fo"
-path="res://.godot/imported/player_4.webp-d18b6bf4163cd189344a0206c770a40e.ctex"
+uid="uid://lorksspxn4ta"
+path="res://.godot/imported/Wave-01.png-3c38b46aa1259043977abb50929f5e23.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Player/player_4.webp"
-dest_files=["res://.godot/imported/player_4.webp-d18b6bf4163cd189344a0206c770a40e.ctex"]
+source_file="res://Assets/Projectile/Wave-01.png"
+dest_files=["res://.godot/imported/Wave-01.png-3c38b46aa1259043977abb50929f5e23.ctex"]
 
 [params]
 

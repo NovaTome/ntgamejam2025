@@ -6,7 +6,7 @@
 size = Vector2(24, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5iamj"]
-size = Vector2(24, 4)
+size = Vector2(12, 4)
 
 [node name="Projectile" type="Area2D"]
 collision_layer = 7

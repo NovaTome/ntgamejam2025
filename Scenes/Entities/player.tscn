@@ -4,32 +4,32 @@
 [ext_resource type="SpriteFrames" uid="uid://c872k3nc7g11i" path="res://Assets/Player/player.tres" id="2_a1rq5"]
 [ext_resource type="PackedScene" uid="uid://btvl2e15nmict" path="res://Scenes/Entities/command_node.tscn" id="3_qbyki"]
 [ext_resource type="PackedScene" uid="uid://dxtlhaoalm7os" path="res://Scenes/Entities/Attacks/bullet_source.tscn" id="4_svftf"]
-[ext_resource type="PackedScene" uid="uid://b3ifmidv1nnnd" path="res://Scenes/Entities/projectile.tscn" id="5_a1rq5"]
+[ext_resource type="PackedScene" uid="uid://708eks8vanh" path="res://Scenes/Entities/Projectiles/player_projectile.tscn" id="5_a1rq5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pq8q7"]
-size = Vector2(70, 128)
+size = Vector2(70, 129)
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 collision_mask = 0
 script = ExtResource("1_cvnsp")
+speed = null
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, 1)
-scale = Vector2(0.103571, 0.103571)
+scale = Vector2(0.07, 0.07)
 sprite_frames = ExtResource("2_a1rq5")
 frame_progress = 0.812568
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-7, 4)
+position = Vector2(-7, 3.5)
 shape = SubResource("RectangleShape2D_pq8q7")
 
 [node name="CommandNode" parent="." node_paths=PackedStringArray("character") instance=ExtResource("3_qbyki")]
 character = NodePath("..")
 
 [node name="BulletSource" parent="." instance=ExtResource("4_svftf")]
-position = Vector2(50, 15)
+position = Vector2(52, 14)
 scale = Vector2(40110.9, -50.7781)
 projectile = ExtResource("5_a1rq5")
 projectile_type = 3
