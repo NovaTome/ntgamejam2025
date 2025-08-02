@@ -17,6 +17,7 @@ func _ready():
 	Managers.self_management = self_management
 	Managers.sound_manager = sound_manager
 	Managers.self_management.player.connect("died",Managers.self_management.boss.reset)
+	Managers.self_management.player.camera_2d.enabled = true
 
 func spawnAd(num:int,type:Projectile.TYPES) -> void:
 	if num == 1:
