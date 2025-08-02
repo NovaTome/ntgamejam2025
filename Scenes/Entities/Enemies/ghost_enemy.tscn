@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dl6xtetw88rhl"]
+[gd_scene load_steps=7 format=3 uid="uid://dl6xtetw88rhl"]
 
 [ext_resource type="PackedScene" uid="uid://ddknmqi5sb88o" path="res://Scenes/Entities/enemy.tscn" id="1_b17yr"]
+[ext_resource type="PackedScene" uid="uid://wucw4thji4u" path="res://Scenes/Entities/Projectiles/spectral_projectile.tscn" id="2_ctxd6"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_owvky"]
 size = Vector2(30, 30)
@@ -29,6 +30,7 @@ shape = SubResource("CircleShape2D_owvky")
 shape = SubResource("RectangleShape2D_efbp4")
 
 [node name="BulletSource" parent="." index="5"]
+projectile = ExtResource("2_ctxd6")
 projectile_type = 1
 
 [connection signal="body_exited" from="AggroRange" to="." method="_on_aggro_range_body_exited"]
