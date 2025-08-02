@@ -36,9 +36,9 @@ func _physics_process(delta):
 	#Cursor rotation
 	look_at(mousePos)
 	if mousePos.x < global_position.x:
-		sprite.flip_v = true
+		flip(true)
 	else:
-		sprite.flip_v = false
+		flip(false)
 
 func _process_actions():
 	
@@ -73,6 +73,14 @@ func die(cause: Enums.DeathType = Enums.DeathType.UNKNOWN) -> void:
 		dead = true
 		Managers.sound_manager.playSound(SoundManager.SOUNDS.DEATH,global_position)
 		died.emit()
+
+func flip(on: bool):
+	sprite.flip_v = on
+	if (on):
+		ak_47_source.position.y = -abs(ak_47_source.position.y)
+	else:
+		ak_47_source.position.y = abs(ak_47_source.position.y)
+	
 
 func ringer_on() -> void:
 	rings -= 1

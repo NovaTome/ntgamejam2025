@@ -66,8 +66,8 @@ func _process(delta: float) -> void:
 		if validRotations.size() != 0:
 			rotation = validRotations.pop_front().rotation
 			if (rotation_degrees < 0 and rotation_degrees < -180) or (rotation_degrees > 90 and rotation_degrees < 180):
-				sprite.flip_v = true
-			else: sprite.flip_v = false
+				flip(true)
+			else: sprite.flip_v = flip(false)
 			
 		
 	else: #If top command is expired, move to next command
@@ -79,6 +79,13 @@ func _process(delta: float) -> void:
 				death_timer.start(clampi(minLifeTime-secondsAlive,0.1,minLifeTime))
 			return
 	currentTicks+=1
+
+func flip(on: bool):
+	sprite.flip_v = on
+	if (on):
+		ak_47_source.position.y = -abs(ak_47_source.position.y)
+	else:
+		ak_47_source.position.y = abs(ak_47_source.position.y)
 
 func reload() -> void:
 	global_position = startingLocation
