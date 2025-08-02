@@ -5,7 +5,7 @@ const radius = 5
 @onready var bullet_source: BulletSource = $BulletSource
 
 @export var projectile_scene:PackedScene = preload("res://Scenes/Entities/Projectiles/square_projectile.tscn")
-@export var bullet_source_scene:PackedScene = preload("res://Scenes/Entities/Attacks/bullet_source.tscn")
+@export var bullet_source_scene:PackedScene = preload("res://Scenes/Entities/Projectiles/Source/bullet_source.tscn")
 
 var timesFired:int = 0
 var target
