@@ -23,6 +23,11 @@ Managers="*res://Scripts/Autoloads/managers.gd"
 SignalBus="*res://Scripts/Autoloads/signal_bus.gd"
 Enums="*res://Scripts/Autoloads/enum.gd"
 
+[display]
+
+window/size/viewport_width=1440
+window/size/viewport_height=900
+
 [input]
 
 up={

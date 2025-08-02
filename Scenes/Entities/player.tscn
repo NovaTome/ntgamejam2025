@@ -41,9 +41,7 @@ one_shot = true
 [node name="Camera2D" type="Camera2D" parent="."]
 enabled = false
 zoom = Vector2(0.75, 0.75)
-limit_left = -1000
-limit_top = -1000
-limit_right = 1152
+limit_left = 0
 limit_bottom = 648
 
 [connection signal="timeout" from="DeathGap" to="." method="_on_death_gap_timeout"]
