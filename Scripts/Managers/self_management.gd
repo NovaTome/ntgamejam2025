@@ -86,7 +86,6 @@ func clearEverything() -> void:
 	bio.clear()
 	currentTicks = 0
 	inputTickStart = 0
-	inputs.clear()
 	rotations.clear()
 
 # Handle player death
@@ -109,7 +108,8 @@ func handlePlayerDeath() -> void:
 		if c is Ghost:
 			c.reload()
 	spawn_ghost()
-	clearEverything()
+	clearEverything()	
+	
 	player.global_position = playerStartingLocation
 	player.death_gap.start()
 
