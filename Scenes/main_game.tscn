@@ -356,7 +356,6 @@ metadata/_edit_lock_ = true
 [node name="SelfManagement" type="Node2D" parent="."]
 process_mode = 4
 script = ExtResource("2_mgc0q")
-STARTING_STATE = 4
 
 [node name="Player" parent="SelfManagement" instance=ExtResource("3_bb2iq")]
 position = Vector2(726, 413)
@@ -367,6 +366,7 @@ visible = false
 
 [node name="BossEnemy" parent="SelfManagement" instance=ExtResource("6_bb2iq")]
 visible = false
+phase = 3
 DEBUG_MODE = false
 
 [node name="BulletManager" type="Node2D" parent="."]

@@ -90,6 +90,7 @@ func fireBoxAttack() -> void:
 func fireFacingLineAttack() -> void:
 	var fLA:FacingLineAttack = facingLineAttack.instantiate()
 	fLA.global_position = global_position
+	fLA.global_rotation_degrees = wrapf(fLA.global_rotation_degrees - 90, -180, 180)
 	get_parent().add_child(fLA)
 
 func spawnCrystal() -> void:
@@ -109,12 +110,13 @@ func spawnEnemy(num:int) -> void:
 		room.spawnAd(num,type)
 
 func stopAllAttacks() -> void:
-	stopTwinAttack(true)
-	stopWaveAttack()
-	stopSwirlAttack(true)
+	stopTwinAttack(false)
+	#stopWaveAttack()
+	stopSwirlAttack(false)
+	#stopBoxAttack()
 	for e:Enemy in Managers.self_management.get_children().filter(func(n): return n is Enemy):
 		e.queue_free()
-	for p:Projectile in Managers.self_management.get_children().filter(func(proj): return proj is Projectile and proj.is_in_group("HomingAttack")):
+	for p:Projectile in Managers.bullet_manager.get_children():
 		p.queue_free()
 
 func stopSwirlAttack(hardStop:bool=false) -> void:
@@ -133,6 +135,10 @@ func stopTwinAttack(hardStop:bool=false) -> void:
 
 func stopWaveAttack() -> void:
 	for p:Projectile in Managers.bullet_manager.get_children().filter(func(a:Projectile): return a.is_in_group("WaveAttack")):
+		p.queue_free()
+
+func stopBoxAttack() -> void:
+	for p:Projectile in Managers.bullet_manager.get_children().filter(func(a:Projectile): return a.is_in_group("BoxAttack")):
 		p.queue_free()
 
 func connectTutorialWave() -> void:

@@ -7,7 +7,7 @@ extends Node2D
 
 @export var speed_curve: Curve 
 
-var speed = .1
+var speed = .2
 var normal_progress = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
