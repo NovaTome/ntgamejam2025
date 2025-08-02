@@ -39,6 +39,7 @@ position = Vector2(54, 0)
 projectile_type = 4
 
 [node name="MuzzleFlash" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(58, 0)
 scale = Vector2(0.09375, 0.09375)
 sprite_frames = ExtResource("5_hjtyh")

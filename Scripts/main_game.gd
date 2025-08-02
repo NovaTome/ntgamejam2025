@@ -24,6 +24,9 @@ func toggleUI(show:bool) -> void:
 func playStageAnimation():
 	map.animation_player.play("stage_"+str(state))
 
+func switchToMainMenu():
+	get_tree().change_scene_to_file("res://Scenes/root.tscn")
+
 func _set_state(s:STATE) -> void:
 	state = s
 	match state:
@@ -34,6 +37,7 @@ func _set_state(s:STATE) -> void:
 		STATE.HOMING_ENEMY:
 			gui.startJumpScare("Her COMMANDOS only target the flesh.")
 		STATE.BOSS:
+			Managers.sound_manager.playSound(SoundManager.SOUNDS.RUMBLING,camera_2d.global_position)
 			animation_player.play("boss")
 	if state != STATE.BOSS:
 		animation_player.play("pause")

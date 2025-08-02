@@ -12,6 +12,8 @@ signal resetting()
 @export var heldLineAttack:PackedScene = preload("res://Scenes/Entities/Attacks/held_line_attack.tscn")
 @export var facingLineAttack:PackedScene = preload("res://Scenes/Entities/Attacks/held_facing_attack.tscn")
 
+@export var endGameDoor:PackedScene = preload("res://Scenes/Entities/World/end_game_door.tscn")
+
 @onready var bullet_source: BulletSource = $BulletSource
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
@@ -38,6 +40,12 @@ func reset() -> void:
 	if DEBUG_MODE and phase == 0:
 		phase = 1
 	animation_player.play("phase_"+str(phase))
+
+func die() -> void:
+	var door:Door = endGameDoor.instantiate()
+	door.global_position = global_position
+	Managers.map_manager.add_child(door)
+	queue_free()
 
 func fireWaveAttack() -> WaveAttack:
 	var wave:WaveAttack = waveAttack.instantiate()
@@ -154,7 +162,9 @@ func crystalDestroyed() -> void:
 	if health==0:
 		phase+=1
 		Managers.self_management.gui.resetProgress()
-		if phase > 3: queue_free() # TODO: Handle boss death
+		if phase > 3:
+			stopAllAttacks()
+			animation_player.play("die")
 		else: reset()
 
 func _phase_changed(_phase:int) -> void:

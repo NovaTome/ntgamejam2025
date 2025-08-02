@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://4courc58uxxn"]
+
+[ext_resource type="Script" uid="uid://cigfpf0ktyg7g" path="res://Scripts/Entities/World/end_game_door.gd" id="1_xiok8"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_3fsxv"]
+size = Vector2(75, 150)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8s54y"]
+size = Vector2(75, 150)
+
+[node name="EndGameDoor" type="Area2D"]
+script = ExtResource("1_xiok8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("PlaceholderTexture2D_3fsxv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_8s54y")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
