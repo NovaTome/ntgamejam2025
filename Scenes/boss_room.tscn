@@ -42,5 +42,5 @@ position = Vector2(887, 561)
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timerUp" from="SelfManagement/GUI" to="SelfManagement" method="_on_gui_timer_up"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
