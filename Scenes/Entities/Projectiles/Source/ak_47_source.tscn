@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bhygnmkhvep4j"]
 
-[ext_resource type="PackedScene" uid="uid://dxtlhaoalm7os" path="res://Scenes/Entities/Attacks/bullet_source.tscn" id="1_gg6jg"]
-[ext_resource type="Script" uid="uid://qhucjrxof2kh" path="res://Scripts/Attacks/ak_47_source.gd" id="2_qlhdn"]
+[ext_resource type="PackedScene" uid="uid://dxtlhaoalm7os" path="res://Scenes/Entities/Projectiles/Source/bullet_source.tscn" id="1_gg6jg"]
+[ext_resource type="Script" uid="uid://qhucjrxof2kh" path="res://Scripts/Projectile/ak_47_source.gd" id="2_qlhdn"]
 [ext_resource type="PackedScene" uid="uid://708eks8vanh" path="res://Scenes/Entities/Projectiles/player_projectile.tscn" id="3_dp55q"]
 
 [node name="AK47Source" instance=ExtResource("1_gg6jg")]
