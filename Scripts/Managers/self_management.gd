@@ -6,9 +6,9 @@ extends Node2D
 @onready var playerStartingLocation:Vector2 = Vector2($Player.global_position)
 @onready var gui:GUI = $GUI
 
-@export var ghost_scene: PackedScene = preload("res://Scenes/Entities/ghost.tscn")
-@export var ringer_ghost: PackedScene = preload("res://Scenes/Entities/ringer_ghost.tscn")
-@export var projectile_scene:PackedScene = preload("res://Scenes/Entities/projectile.tscn")
+@export var ghost_scene: PackedScene = preload("res://Scenes/Entities/Self/ghost.tscn")
+@export var ringer_ghost: PackedScene = preload("res://Scenes/Entities/Self/ringer_ghost.tscn")
+@export var projectile_scene:PackedScene = preload("res://Scenes/Entities/Projectiles/projectile.tscn")
 
 var bio:Array[Command] = []
 

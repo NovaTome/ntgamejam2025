@@ -4,7 +4,7 @@ class_name WaveAttack
 signal finished()
 
 const radius = 5000
-@export var projectile_scene:PackedScene = preload("res://Scenes/Entities/square_projectile.tscn")
+@export var projectile_scene:PackedScene = preload("res://Scenes/Entities/Projectiles/square_projectile.tscn")
 @export var bullet_source_scene:PackedScene = preload("res://Scenes/Entities/Attacks/bullet_source.tscn")
 @export var DEBUG_MODE:bool = true
 var allProjects:Array[Projectile] = []
