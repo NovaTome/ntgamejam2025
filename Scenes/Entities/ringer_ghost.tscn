@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyfgfsdqya8an"]
+
+[ext_resource type="PackedScene" uid="uid://bqvhoyc8hm3u0" path="res://Scenes/Entities/ghost.tscn" id="1_qt0ky"]
+
+[node name="RingerGhost" instance=ExtResource("1_qt0ky")]
+modulate = Color(1, 1, 0, 1)
+ringer_ghost = true

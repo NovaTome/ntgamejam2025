@@ -29,6 +29,9 @@ func startJumpScare() -> void:
 	tween.tween_property(jump_scare,"self_modulate",fullColor,3)
 	tween.tween_callback(jump_scare.hide)
 
+func set_ring_timer() -> void:
+	progress_bar.value = 55;
+
 func _on_hint_timer_timeout() -> void:
 	death_hint.hide()
 	Managers.self_management.spawn_ghost()

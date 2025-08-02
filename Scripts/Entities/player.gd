@@ -3,6 +3,7 @@ class_name Player
 extends CharacterBody2D
 
 signal died()
+signal ring_ability()
 
 var movement_direction: Vector2 = Vector2.ZERO
 @export var speed: int = 250
@@ -14,6 +15,7 @@ var movement_direction: Vector2 = Vector2.ZERO
 
 var deaths:int = 0
 var dead:bool = false
+var ringed: bool = false
 
 func _ready() -> void:
 	command_node.bullet_source = bullet_source
@@ -50,6 +52,9 @@ func _process_actions():
 		command.inputs.append("left")
 	if Input.is_action_pressed("right"):
 		command.inputs.append("right")
+	if Input.is_action_pressed("ring"):
+		ring_ability.emit()
+		ringer_on()
 	
 	# Actions
 	if Input.is_action_just_pressed("fire"):
@@ -58,12 +63,22 @@ func _process_actions():
 		
 	command_node.processCommand(command)
 
-func die() -> void:
+func die(cause: Enums.DeathType = Enums.DeathType.UNKNOWN) -> void:
+	if ringed && cause == Enums.DeathType.ATTACK:
+		return
+		
 	if not dead:
 		dead = true
 		Managers.sound_manager.playSound(SoundManager.SOUNDS.DEATH,global_position)
 		died.emit()
 
+func ringer_on() -> void:
+	ringed = true
+	modulate = Color.YELLOW
+	
+func ringer_off() -> void:
+	ringed = false
+	modulate = Color.WHITE
 
 func _on_death_gap_timeout() -> void:
 	dead = false

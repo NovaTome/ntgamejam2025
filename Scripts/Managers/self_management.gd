@@ -7,6 +7,7 @@ extends Node2D
 @onready var gui:GUI = $GUI
 
 @export var ghost_scene: PackedScene = preload("res://Scenes/Entities/ghost.tscn")
+@export var ringer_ghost: PackedScene = preload("res://Scenes/Entities/ringer_ghost.tscn")
 @export var projectile_scene:PackedScene = preload("res://Scenes/Entities/projectile.tscn")
 
 var bio:Array[Command] = []
@@ -21,9 +22,13 @@ var currentRotation:float = 0:set=_set_current_rotation #Player's current rotati
 var tutorialWaves:int = 0
 var ghostsRemaining:int = GameConstants.STARTING_MAX_GHOSTS:set=_set_ghost_count
 
+var ringer_activated = false
+var ringer_position: Vector2
+
 func _ready() -> void:
 	currentRotation = player.rotation #Probably redundant but eh
 	player.connect("died",handlePlayerDeath)
+	player.connect("ring_ability", handle_ring_ability)
 
 func _process(delta: float) -> void:
 	currentTicks+=1
@@ -77,6 +82,18 @@ func spawn_ghost():
 	new_ghost.connect("died",handleGhostDeath)
 	call_deferred("add_child",new_ghost)
 
+func spawn_ringer_ghost():
+	if bio.is_empty(): return
+	if ghostsRemaining == 0: # If you have more than starting_max_ghosts ghosts, it will remove the oldest one
+		var firstGhost:Ghost = get_children().filter(func(a): return a is Ghost).front()
+		if firstGhost != null: firstGhost.queue_free()
+	else: ghostsRemaining-=1
+	var new_ghost:Ghost = ringer_ghost.instantiate()
+	new_ghost.commands = clone_bio()
+	new_ghost.global_position = ringer_position
+	new_ghost.connect("died",handleGhostDeath)
+	call_deferred("add_child",new_ghost)
+
 func handleGhostDeath() -> void:
 	pass
 
@@ -107,11 +124,15 @@ func handlePlayerDeath() -> void:
 	for c in allGhosts:
 		if c is Ghost:
 			c.reload()
-	spawn_ghost()
+	if player.ringed:
+		spawn_ringer_ghost()
+	else:
+		spawn_ghost()
 	clearEverything()	
 	
 	player.global_position = playerStartingLocation
 	player.death_gap.start()
+	player.ringer_off()
 
 # Only handles the tutorial wave to track if the person kept dying over and over again
 func handleWaveEnd() -> void:
@@ -126,10 +147,15 @@ func handleWaveEnd() -> void:
 		boss.phase = 1
 		get_tree().change_scene_to_file("res://Scenes/boss_room.tscn")
 
+func handle_ring_ability() -> void:
+	clearEverything() 
+	gui.set_ring_timer()
+	ringer_position = player.global_position
+
 # Debug method for creating ghosts
 func _unhandled_input(event):
 	if event.is_action_pressed("spawn"):
-		player.die()
+		player.die(Enums.DeathType.DEBUG)
 
 # Logs any change in rotation to the rotation log
 func _set_current_rotation(_rotation:float) -> void:
@@ -143,4 +169,4 @@ func _set_ghost_count(_ghostsRemaining:int) -> void:
 	gui.ghost_label.text = "Ghosts Remaining: " + str(ghostsRemaining)
 
 func _on_gui_timer_up() -> void:
-	player.die()
+	player.die(Enums.DeathType.TIME)
