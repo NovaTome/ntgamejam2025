@@ -24,15 +24,15 @@ func _process(delta: float) -> void:
 	if type == TYPES.PLAYER:
 		if target == null and shooter != null:
 			target = shooter.target
-		direction = global_position.direction_to(target.global_position).normalized()
+		if target != null:
+			direction = global_position.direction_to(target.global_position).normalized()
+			look_at(target.global_position)
 	velocity = direction * speed
 	global_position += velocity
 
 func set_direction(dir: Vector2) -> void:
 	direction = dir
 	rotation += dir.angle()
-	if type == TYPES.PLAYER: #TODO: Make it so that homing missles actually rotate towards the person instead of using square projectiles
-		global_rotation = global_position.angle_to(shooter.target.global_position)
 
 func canHitBody(body:Node2D) -> bool:
 	match type:
