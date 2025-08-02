@@ -25,5 +25,6 @@ one_shot = true
 position = Vector2(64, 0)
 projectile = ExtResource("4_4cflg")
 
+[connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
 [connection signal="body_entered" from="AggroRange" to="." method="_on_aggro_range_body_entered"]
 [connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]

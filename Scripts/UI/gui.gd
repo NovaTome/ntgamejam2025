@@ -8,8 +8,9 @@ class_name GUI
 @onready var death_hint: Label = $DeathHint
 @onready var hint_timer: Timer = $HintTimer
 @onready var jump_scare: TextureRect = $JumpScare
-@onready var ghost_label: Label = $GhostLabel
-@onready var ringer_label: Label = $RingerLabel
+@onready var ghost_label: Label = $LabelBox/GhostLabel
+@onready var ringer_label: Label = $LabelBox/RingerLabel
+@onready var enemy_label: Label = $LabelBox/EnemyLabel
 @onready var ringer_clock:AnimatedSprite2D = $RingerClock
 
 signal timerUp()
@@ -88,6 +89,10 @@ func startJumpScare(str:String) -> void:
 	tween.tween_property(jump_scare,"self_modulate",fullColor,3)
 	tween.tween_callback(jump_scare.hide)
 	tween.tween_callback(death_hint.hide)
+
+func updateEnemyLabel() -> void:
+	var enemySize:int = Managers.self_management.get_children().filter(func(a): return a is Enemy).size()
+	enemy_label.text = "Enemies remaining: " + str(enemySize)
 
 func set_ring_timer() -> void:
 	clock_progress = floor(CLOCK_MAX * 0.90);

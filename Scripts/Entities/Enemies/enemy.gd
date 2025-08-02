@@ -12,6 +12,10 @@ var movement_direction: Vector2 = Vector2.ZERO
 @export var speed: int = 125
 @export var projectileType:Projectile.TYPES = Projectile.TYPES.REGULAR
 
+func _ready() -> void:
+	Managers.self_management.gui.updateEnemyLabel()
+
+
 func _process(delta: float) -> void:
 	movement_direction = Vector2.ZERO
 	if target != null and not attack_range.get_overlapping_bodies().has(target):
@@ -37,3 +41,7 @@ func _on_aggro_range_body_entered(body: Node2D) -> void:
 func _on_attack_range_body_entered(body: Node2D) -> void:
 	if canTargetBody(body) and target == body:
 		pass
+
+
+func _on_tree_exited() -> void:
+	Managers.self_management.gui.updateEnemyLabel()

@@ -37,7 +37,7 @@ func _set_state(s:STATE) -> void:
 		STATE.HOMING_ENEMY:
 			gui.startJumpScare("Her COMMANDOS only target the flesh.")
 		STATE.BOSS:
-			Managers.sound_manager.playSound(SoundManager.SOUNDS.RUMBLING,camera_2d.global_position)
+			Managers.sound_manager.playSound(SoundManager.SOUNDS.RUMBLING,Managers.self_management.boss.global_position)
 			animation_player.play("boss")
 	if state != STATE.BOSS:
 		animation_player.play("pause")

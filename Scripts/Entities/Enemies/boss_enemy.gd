@@ -113,7 +113,7 @@ func spawnEnemy(num:int) -> void:
 	var type:Enums.EnemyType= Enums.EnemyType.NORMAL
 	if phase == 2 and randf() > 0.5: type = Enums.EnemyType.GHOST
 	if room is MainGame:
-		room.map.spawnAd(num,type,MainMap.DIRECTION.TOP_RIGHT)
+		room.map.spawnAd(num,type,MainMap.DIRECTION.values().pick_random())
 	elif room is BossRoom:
 		room.spawnAd(num,type)
 
