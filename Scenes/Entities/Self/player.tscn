@@ -36,8 +36,9 @@ animations = [{
 "speed": 7.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pq8q7"]
-size = Vector2(77, 122.22)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bfam3"]
+radius = 16.0012
+height = 58.0043
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
@@ -61,8 +62,8 @@ frame_progress = 0.812568
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-9, -10)
-shape = SubResource("RectangleShape2D_pq8q7")
+position = Vector2(-8, 0)
+shape = SubResource("CapsuleShape2D_bfam3")
 
 [node name="CommandNode" parent="." node_paths=PackedStringArray("character") instance=ExtResource("3_xeqxv")]
 character = NodePath("..")
