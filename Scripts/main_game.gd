@@ -21,10 +21,19 @@ func toggleUI(show:bool) -> void:
 	if show: gui.showAll()
 	else: gui.hideAll()
 
+func playStageAnimation():
+	map.animation_player.play("stage_"+str(state))
+
 func _set_state(s:STATE) -> void:
 	state = s
 	match state:
+		STATE.REG_ENEMY:
+			gui.startJumpScare("She sends her disciples to stop you. Show no mercy.")
+		STATE.GHOST_ENEMY:
+			gui.startJumpScare("She learned how to avoid the past.")
+		STATE.HOMING_ENEMY:
+			gui.startJumpScare("Her COMMANDOS only target the flesh.")
 		STATE.BOSS:
 			animation_player.play("boss")
-		_:
-			map.animation_player.play("stage_"+str(state))
+	if state != STATE.BOSS:
+		animation_player.play("pause")

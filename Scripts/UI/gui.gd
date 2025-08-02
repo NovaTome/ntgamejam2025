@@ -77,13 +77,17 @@ func _on_timer_timeout() -> void:
 func resetProgress() -> void:
 	clock_progress = 0
 
-func startJumpScare() -> void:
+func startJumpScare(str:String) -> void:
+	jump_scare.self_modulate.a = 0.5
 	jump_scare.show()
+	death_hint.text = str
+	death_hint.show()
 	var tween = get_tree().create_tween()
 	var fullColor:Color = jump_scare.self_modulate
 	fullColor.a = 1
 	tween.tween_property(jump_scare,"self_modulate",fullColor,3)
 	tween.tween_callback(jump_scare.hide)
+	tween.tween_callback(death_hint.hide)
 
 func set_ring_timer() -> void:
 	clock_progress = floor(CLOCK_MAX * 0.90);

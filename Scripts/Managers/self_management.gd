@@ -113,7 +113,7 @@ func handlePlayerDeath() -> void:
 	logCommand()
 	if player.deaths == 0 and get_parent() is not BossRoom: # If it is their first death, give the tutorial
 		gui.resetProgress()
-		gui.startJumpScare()
+		gui.startJumpScare("Death is not the end for you... your past selves lend a helping hand.")
 		gui.death_hint.show()
 		gui.hint_timer.start(3)
 		player.hide()
@@ -149,7 +149,7 @@ func handleWaveEnd() -> void:
 	elif tutorialWaves != 1:
 		boss.phase = 1
 		player.connect("died",Managers.map_manager.resetEnemies)
-		getGameHandler().state = MainGame.STATE.TUTORIAL
+		getGameHandler().state = MainGame.STATE.REG_ENEMY
 		if get_parent() is MainGame and get_parent().DEBUG_MODE: get_tree().change_scene_to_file("res://Scenes/boss_room.tscn")
 
 func handle_ring_ability() -> void:
