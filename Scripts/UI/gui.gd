@@ -10,6 +10,7 @@ class_name GUI
 @onready var jump_scare: TextureRect = $JumpScare
 @onready var ghost_label: Label = $GhostLabel
 @onready var ringer_label: Label = $RingerLabel
+@onready var ringer_clock:AnimatedSprite2D = $RingerClock
 
 signal timerUp()
 signal ringer_unlocked()
@@ -31,8 +32,9 @@ func hideAll() -> void:
 		if n is Control: n.hide()
 
 func showAll() -> void:
+	var hiddenElements:Array = [death_hint,jump_scare,ringer_clock]
 	for n in get_children():
-		if n is Control and n != jump_scare and n != death_hint: n.show()
+		if n is Control and not hiddenElements.has(n): n.show()
 
 # Fires every time the Timer node triggers
 func _on_timer_timeout() -> void:
@@ -80,3 +82,8 @@ func _on_hint_timer_timeout() -> void:
 	Managers.self_management.player.set_process(true)
 	if Managers.self_management.boss != null: Managers.self_management.boss.reset()
 	
+
+
+func _on_ringer_clock_animation_finished() -> void:
+	ringer_clock.hide()
+	clock_face.show()

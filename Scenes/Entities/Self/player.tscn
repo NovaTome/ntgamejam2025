@@ -1,17 +1,56 @@
-[gd_scene load_steps=6 format=3 uid="uid://cqcub1i5w633w"]
+[gd_scene load_steps=12 format=3 uid="uid://cqcub1i5w633w"]
 
 [ext_resource type="Script" uid="uid://bar4gwgrfy1qu" path="res://Scripts/Entities/Self/player.gd" id="1_4yaow"]
+[ext_resource type="Texture2D" uid="uid://udduy0nvebyd" path="res://Assets/Player/KILLYOURSELFNOW-01.png" id="2_bfam3"]
 [ext_resource type="SpriteFrames" uid="uid://c872k3nc7g11i" path="res://Assets/Player/player.tres" id="2_pw7cj"]
+[ext_resource type="Texture2D" uid="uid://bl4tdfdtgb4cs" path="res://Assets/Player/KILLYOURSELFNOW-02.png" id="3_sq6ki"]
 [ext_resource type="PackedScene" uid="uid://btvl2e15nmict" path="res://Scenes/Entities/Self/command_node.tscn" id="3_xeqxv"]
 [ext_resource type="PackedScene" uid="uid://bhygnmkhvep4j" path="res://Scenes/Entities/Projectiles/Source/ak_47_source.tscn" id="4_8lt4w"]
+[ext_resource type="Texture2D" uid="uid://d7jxkfp85pfy" path="res://Assets/Player/KILLYOURSELFNOW-03.png" id="4_drok3"]
+[ext_resource type="Texture2D" uid="uid://b5usni336heu4" path="res://Assets/Player/KILLYOURSELFNOW-04.png" id="5_bensr"]
+[ext_resource type="Texture2D" uid="uid://8np00pc1fwdq" path="res://Assets/Player/KILLYOURSELFNOW-05.png" id="6_78xri"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x2upw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bfam3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_sq6ki")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_drok3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_bensr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_78xri")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_78xri")
+}],
+"loop": false,
+"name": &"default",
+"speed": 7.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pq8q7"]
-size = Vector2(70, 129)
+size = Vector2(77, 122.22)
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 collision_mask = 8
 script = ExtResource("1_4yaow")
+
+[node name="HellCircle" type="AnimatedSprite2D" parent="."]
+process_mode = 3
+visible = false
+scale = Vector2(0.212963, 0.212963)
+sprite_frames = SubResource("SpriteFrames_x2upw")
+frame = 5
+frame_progress = 1.0
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.07, 0.07)
@@ -20,7 +59,6 @@ frame_progress = 0.812568
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-7, 3.5)
 shape = SubResource("RectangleShape2D_pq8q7")
 
 [node name="CommandNode" parent="." node_paths=PackedStringArray("character") instance=ExtResource("3_xeqxv")]
@@ -40,4 +78,5 @@ limit_top = -1028
 limit_right = 2568
 limit_bottom = 1028
 
+[connection signal="animation_finished" from="HellCircle" to="." method="_on_hell_circle_animation_finished"]
 [connection signal="timeout" from="DeathGap" to="." method="_on_death_gap_timeout"]

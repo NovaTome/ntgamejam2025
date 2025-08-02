@@ -1,10 +1,38 @@
-[gd_scene load_steps=6 format=3 uid="uid://ciq371u7ni228"]
+[gd_scene load_steps=12 format=3 uid="uid://ciq371u7ni228"]
 
 [ext_resource type="Script" uid="uid://dblvl5rd8204o" path="res://Scripts/UI/gui.gd" id="1_vqpta"]
 [ext_resource type="Texture2D" uid="uid://bieclbc2u0d4p" path="res://Assets/face.png" id="2_q081c"]
 [ext_resource type="FontFile" uid="uid://lcrbq1y7yp2m" path="res://Assets/Orbitron-VariableFont_wght.ttf" id="3_81ldm"]
 [ext_resource type="Texture2D" uid="uid://lxn7is4qcamv" path="res://Assets/Clock/TheClock-01.png" id="3_nxoro"]
 [ext_resource type="Texture2D" uid="uid://fbqfxi0v0pup" path="res://Assets/Clock/TheClock-14.png" id="4_cksue"]
+[ext_resource type="Texture2D" uid="uid://udduy0nvebyd" path="res://Assets/Player/KILLYOURSELFNOW-01.png" id="6_e2ke0"]
+[ext_resource type="Texture2D" uid="uid://bl4tdfdtgb4cs" path="res://Assets/Player/KILLYOURSELFNOW-02.png" id="7_o4x3o"]
+[ext_resource type="Texture2D" uid="uid://d7jxkfp85pfy" path="res://Assets/Player/KILLYOURSELFNOW-03.png" id="8_xd00d"]
+[ext_resource type="Texture2D" uid="uid://b5usni336heu4" path="res://Assets/Player/KILLYOURSELFNOW-04.png" id="9_u7pkn"]
+[ext_resource type="Texture2D" uid="uid://8np00pc1fwdq" path="res://Assets/Player/KILLYOURSELFNOW-05.png" id="10_cp45s"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7mry4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_e2ke0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_o4x3o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_xd00d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_u7pkn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_cp45s")
+}],
+"loop": false,
+"name": &"default",
+"speed": 0.8
+}]
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_vqpta")
@@ -96,5 +124,12 @@ texture = ExtResource("4_cksue")
 expand_mode = 1
 flip_v = true
 
+[node name="RingerClock" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(719, 122)
+scale = Vector2(0.144445, 0.144445)
+sprite_frames = SubResource("SpriteFrames_7mry4")
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="HintTimer" to="." method="_on_hint_timer_timeout"]
+[connection signal="animation_finished" from="RingerClock" to="." method="_on_ringer_clock_animation_finished"]

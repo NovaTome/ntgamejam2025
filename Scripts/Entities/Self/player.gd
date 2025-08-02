@@ -12,6 +12,7 @@ var movement_direction: Vector2 = Vector2.ZERO
 @onready var death_gap: Timer = $DeathGap
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var sprite:AnimatedSprite2D = $Sprite2D
+@onready var hell_sprite:AnimatedSprite2D = $HellCircle
 
 var deaths:int = 0
 var dead:bool = false
@@ -65,10 +66,17 @@ func _process_actions():
 		
 	command_node.processCommand(command)
 
+func killSelf() -> void:
+	Managers.self_management.process_mode = Node.PROCESS_MODE_DISABLED
+	hell_sprite.show()
+	hell_sprite.play("default")
+
 func die(cause: Enums.DeathType = Enums.DeathType.UNKNOWN) -> void:
 	if ringed && cause == Enums.DeathType.ATTACK:
 		return
-		
+	elif ringed and cause == Enums.DeathType.TIME:
+		killSelf()
+		return
 	if not dead:
 		dead = true
 		Managers.sound_manager.playSound(SoundManager.SOUNDS.DEATH,global_position)
@@ -85,3 +93,9 @@ func ringer_off() -> void:
 
 func _on_death_gap_timeout() -> void:
 	dead = false
+
+
+func _on_hell_circle_animation_finished() -> void:
+	Managers.self_management.process_mode = Node.PROCESS_MODE_INHERIT
+	hell_sprite.hide()
+	die(Enums.DeathType.UNKNOWN)

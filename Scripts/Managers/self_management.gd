@@ -117,6 +117,7 @@ func handlePlayerDeath() -> void:
 		gui.death_hint.show()
 		gui.hint_timer.start(3)
 		player.hide()
+		player.movement_direction = Vector2.ZERO
 		player.set_process(false)
 		player.deaths+=1
 		return
@@ -152,7 +153,10 @@ func handleWaveEnd() -> void:
 		if get_parent() is MainGame and get_parent().DEBUG_MODE: get_tree().change_scene_to_file("res://Scenes/boss_room.tscn")
 
 func handle_ring_ability() -> void:
-	clearEverything() 
+	clearEverything()
+	gui.clock_face.hide()
+	gui.ringer_clock.show()
+	gui.ringer_clock.play("default")
 	gui.set_ring_timer()
 	gui.ringer_label.text = "Ringer Remaining " + str(player.rings)
 	ringer_position = player.global_position
@@ -167,7 +171,7 @@ func getGameHandler() -> MainGame:
 # Debug method for creating ghosts
 func _unhandled_input(event):
 	if event.is_action_pressed("spawn"):
-		player.die(Enums.DeathType.DEBUG)
+		player.killSelf()
 
 # Logs any change in rotation to the rotation log
 func _set_current_rotation(_rotation:float) -> void:
