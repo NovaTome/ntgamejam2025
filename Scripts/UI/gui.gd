@@ -12,6 +12,8 @@ class_name GUI
 @onready var ringer_label: Label = $LabelBox/RingerLabel
 @onready var enemy_label: Label = $LabelBox/EnemyLabel
 @onready var ringer_clock:AnimatedSprite2D = $RingerClock
+@onready var ringer_hint = $RingerHint
+@onready var crystal_hint = $CrystalHint
 
 signal timerUp()
 signal ringer_unlocked()
@@ -23,7 +25,16 @@ const CLOCK_TICK_INTERVAL: int = CLOCK_MAX / CLOCK_TICK_COUNT;
 const PHASE_ONE_RINGER_UNLOCK: float = CLOCK_MAX / 4
 const PHASE_TWO_RINGER_UNLOCK: float = CLOCK_MAX / 2
 const PHASE_THREE_RINGER_UNLOCK:float = CLOCK_MAX * (3/4)
-var ringer_unlock: Array[float] = []
+var ringer_unlock: Array[float] = [CLOCK_TICK_INTERVAL, PHASE_ONE_RINGER_UNLOCK]
+
+const DEADRINGER_HINT_1: String = "Press 'R' to embrace The Deadringer"
+const DEADRINGER_HINT_2: String = "You have five seconds to create an eternal loop."
+
+var player_rings: int = 0:
+	set(value):
+		player_rings = value	
+		ringer_label.text = "Ringer Remaining " + str(value)
+		update_ringer_hint()
 
 var clock_progress: int = 0
 var ringer_clock_on: bool = false:
@@ -37,6 +48,7 @@ var ringer_clock_on: bool = false:
 			ringer_clock.hide()
 			clock_face.show()
 		ringer_clock_on = value
+		update_ringer_hint()
 
 func _ready():
 	SignalBus.phase_change.connect(_handle_phase_change)
@@ -47,7 +59,7 @@ func hideAll() -> void:
 		if n is Control: n.hide()
 
 func showAll() -> void:
-	var hiddenElements:Array = [death_hint,jump_scare,ringer_clock]
+	var hiddenElements:Array = [death_hint,jump_scare,ringer_clock, ringer_hint, crystal_hint]
 	for n in get_children():
 		if n is Control and not hiddenElements.has(n): n.show()
 
@@ -118,3 +130,16 @@ func _handle_phase_change(phase: int):
 		ringer_unlock.append(PHASE_TWO_RINGER_UNLOCK)
 	if phase == 3:
 		ringer_unlock.append(PHASE_THREE_RINGER_UNLOCK)
+
+func update_ringer_hint():
+	if ringer_clock_on:
+		ringer_hint.text = DEADRINGER_HINT_2
+		ringer_hint.show()
+		return
+	
+	if player_rings > 0:
+		ringer_hint.text = DEADRINGER_HINT_1
+		ringer_hint.show()
+		return
+	
+	ringer_hint.hide()

@@ -157,7 +157,7 @@ func handleWaveEnd() -> void:
 func handle_ring_ability() -> void:
 	clearEverything()
 	gui.ringer_clock_on = true
-	gui.ringer_label.text = "Ringer Remaining " + str(player.rings)
+	gui.player_rings = player.rings
 	ringer_position = player.global_position
 
 func getGameHandler() -> MainGame:
@@ -188,4 +188,4 @@ func _on_gui_timer_up() -> void:
 
 func _on_gui_ringer_unlocked():
 	player.rings += 1
-	gui.ringer_label.text = "Ringer Remaining " + str(player.rings)
+	gui.player_rings = player.rings

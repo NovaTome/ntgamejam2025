@@ -130,6 +130,38 @@ position = Vector2(719, 122)
 scale = Vector2(0.144445, 0.144445)
 sprite_frames = SubResource("SpriteFrames_7mry4")
 
+[node name="RingerHint" type="Label" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -168.5
+offset_top = -202.0
+offset_right = 168.5
+offset_bottom = -179.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "Press \"R\" to embrace The Deadringer"
+horizontal_alignment = 1
+
+[node name="CrystalHint" type="Label" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -168.5
+offset_top = -176.0
+offset_right = 168.5
+offset_bottom = -153.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Time Crystals keep you bound. Destroy them."
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="HintTimer" to="." method="_on_hint_timer_timeout"]
 [connection signal="animation_finished" from="RingerClock" to="." method="_on_ringer_clock_animation_finished"]
