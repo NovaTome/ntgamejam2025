@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://wucw4thji4u"]
+[gd_scene load_steps=4 format=3 uid="uid://wucw4thji4u"]
 
 [ext_resource type="PackedScene" uid="uid://b3ifmidv1nnnd" path="res://Scenes/Entities/Projectiles/projectile.tscn" id="1_cvosu"]
 [ext_resource type="Texture2D" uid="uid://c0ej8we4j7ate" path="res://Assets/Projectile/SpectralProjectile.png" id="2_7bglh"]
+[ext_resource type="Texture2D" uid="uid://co0rw6s7xhsph" path="res://Assets/Projectile/SpectralExplosion.png" id="3_7bglh"]
 
 [node name="Projectile" instance=ExtResource("1_cvosu")]
 type = 1
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_7bglh")
+
+[node name="Explosion" parent="." index="4"]
+texture = ExtResource("3_7bglh")

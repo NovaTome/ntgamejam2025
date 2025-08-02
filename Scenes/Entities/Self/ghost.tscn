@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bqvhoyc8hm3u0"]
+[gd_scene load_steps=7 format=3 uid="uid://bqvhoyc8hm3u0"]
 
 [ext_resource type="Script" uid="uid://dxiilpwi3l5r5" path="res://Scripts/Entities/Self/ghost.gd" id="1_n0igq"]
 [ext_resource type="SpriteFrames" uid="uid://xccyeoay8wel" path="res://Assets/Player/ghost.tres" id="2_hjtyh"]
 [ext_resource type="PackedScene" uid="uid://btvl2e15nmict" path="res://Scenes/Entities/Self/command_node.tscn" id="3_t80u2"]
 [ext_resource type="PackedScene" uid="uid://bhygnmkhvep4j" path="res://Scenes/Entities/Projectiles/Source/ak_47_source.tscn" id="4_537r6"]
+[ext_resource type="SpriteFrames" uid="uid://bj2sv15rxvmri" path="res://Assets/Player/muzzle.tres" id="5_hjtyh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n2t0o"]
 size = Vector2(73, 130)
@@ -22,8 +23,9 @@ sprite_frames = ExtResource("2_hjtyh")
 position = Vector2(-6, -10)
 shape = SubResource("RectangleShape2D_n2t0o")
 
-[node name="CommandNode" parent="." node_paths=PackedStringArray("character") instance=ExtResource("3_t80u2")]
+[node name="CommandNode" parent="." node_paths=PackedStringArray("character", "muzzleSprite") instance=ExtResource("3_t80u2")]
 character = NodePath("..")
+muzzleSprite = NodePath("../MuzzleFlash")
 
 [node name="DeathTimer" type="Timer" parent="."]
 wait_time = 3.0
@@ -35,6 +37,11 @@ autostart = true
 [node name="AK47Source" parent="." instance=ExtResource("4_537r6")]
 position = Vector2(54, 0)
 projectile_type = 4
+
+[node name="MuzzleFlash" type="AnimatedSprite2D" parent="."]
+position = Vector2(58, 0)
+scale = Vector2(0.09375, 0.09375)
+sprite_frames = ExtResource("5_hjtyh")
 
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
 [connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]

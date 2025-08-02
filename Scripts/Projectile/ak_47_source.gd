@@ -19,8 +19,6 @@ func fire():
 		inner_fire()
 		burst.start()
 		cooldown.start()
-	else:
-		print(cooldown.time_left)
 
 func inner_fire():
 	# randomly move the direaction for spread

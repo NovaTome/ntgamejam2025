@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cqcub1i5w633w"]
+[gd_scene load_steps=13 format=3 uid="uid://cqcub1i5w633w"]
 
 [ext_resource type="Script" uid="uid://bar4gwgrfy1qu" path="res://Scripts/Entities/Self/player.gd" id="1_4yaow"]
 [ext_resource type="Texture2D" uid="uid://udduy0nvebyd" path="res://Assets/Player/KILLYOURSELFNOW-01.png" id="2_bfam3"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://d7jxkfp85pfy" path="res://Assets/Player/KILLYOURSELFNOW-03.png" id="4_drok3"]
 [ext_resource type="Texture2D" uid="uid://b5usni336heu4" path="res://Assets/Player/KILLYOURSELFNOW-04.png" id="5_bensr"]
 [ext_resource type="Texture2D" uid="uid://8np00pc1fwdq" path="res://Assets/Player/KILLYOURSELFNOW-05.png" id="6_78xri"]
+[ext_resource type="SpriteFrames" uid="uid://bj2sv15rxvmri" path="res://Assets/Player/muzzle.tres" id="10_sq6ki"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_x2upw"]
 animations = [{
@@ -45,6 +46,7 @@ z_index = 1
 scale = Vector2(0.999925, 0.999925)
 collision_mask = 8
 script = ExtResource("1_4yaow")
+speed = null
 
 [node name="HellCircle" type="AnimatedSprite2D" parent="."]
 process_mode = 3
@@ -65,8 +67,9 @@ metadata/_edit_lock_ = true
 position = Vector2(-8, 0)
 shape = SubResource("CapsuleShape2D_bfam3")
 
-[node name="CommandNode" parent="." node_paths=PackedStringArray("character") instance=ExtResource("3_xeqxv")]
+[node name="CommandNode" parent="." node_paths=PackedStringArray("character", "muzzleSprite") instance=ExtResource("3_xeqxv")]
 character = NodePath("..")
+muzzleSprite = NodePath("../MuzzleFlash")
 
 [node name="AK47Source" parent="." instance=ExtResource("4_8lt4w")]
 position = Vector2(54, 0)
@@ -82,6 +85,13 @@ limit_left = -128
 limit_top = -1028
 limit_right = 2568
 limit_bottom = 1028
+
+[node name="MuzzleFlash" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(60.0045, -1.00007)
+scale = Vector2(0.117178, 0.117178)
+sprite_frames = ExtResource("10_sq6ki")
+frame_progress = 0.191806
 
 [connection signal="animation_finished" from="HellCircle" to="." method="_on_hell_circle_animation_finished"]
 [connection signal="timeout" from="DeathGap" to="." method="_on_death_gap_timeout"]

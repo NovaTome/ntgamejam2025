@@ -14,6 +14,7 @@ var movement_direction: Vector2 = Vector2.ZERO
 @onready var sprite:AnimatedSprite2D = $Sprite2D
 @onready var hell_sprite:AnimatedSprite2D = $HellCircle
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var muzzleFlash:AnimatedSprite2D = $MuzzleFlash
 
 var deaths:int = 0
 var dead:bool = false

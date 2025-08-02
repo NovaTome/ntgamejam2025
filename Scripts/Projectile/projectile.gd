@@ -11,6 +11,7 @@ enum TYPES {
 
 signal hit(target)
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var animation_player:AnimationPlayer = $AnimationPlayer
 
 var direction:Vector2 = Vector2.ZERO
 var shooter:Node2D
@@ -19,8 +20,10 @@ var target:Node2D
 @export var speed:float = 4.0
 @export var type:TYPES = TYPES.REGULAR
 var velocity
+var disabled:bool = false
 
 func _process(delta: float) -> void:
+	if disabled: return
 	if type == TYPES.PLAYER:
 		if target == null and shooter != null:
 			target = shooter.target
@@ -47,7 +50,12 @@ func canHitBody(body:Node2D) -> bool:
 		_:
 			return false
 
+func destroy() -> void:
+	disabled = true
+	animation_player.play("destroy")
+
 func _on_body_entered(body: Node2D) -> void:
+	if disabled: return
 	if body != shooter and canHitBody(body):
 		hit.emit(body)
 		if body is Player:
@@ -56,7 +64,7 @@ func _on_body_entered(body: Node2D) -> void:
 		elif body is Enemy: body.queue_free()
 		elif body is BossEnemy: body.hitByProjectile(self)
 		elif body is BossCrystal: body.gotHit(self)
-		queue_free()
+		destroy()
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()

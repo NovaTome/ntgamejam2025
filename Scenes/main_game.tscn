@@ -360,6 +360,7 @@ script = ExtResource("2_mgc0q")
 [node name="Player" parent="SelfManagement" instance=ExtResource("3_bb2iq")]
 position = Vector2(726, 413)
 scale = Vector2(1, 1)
+speed = null
 
 [node name="GUI" parent="SelfManagement" instance=ExtResource("4_18r40")]
 visible = false
