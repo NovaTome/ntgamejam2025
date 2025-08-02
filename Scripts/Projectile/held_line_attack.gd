@@ -28,4 +28,5 @@ func release_bullet(bullet: HeldProjectile):
 	bullet.release()
 
 func _on_fire_timer_timeout():
-	held_bullets.append(bullet_source.fire())
+	if attack_progress < 1:
+		held_bullets.append(bullet_source.fire())
