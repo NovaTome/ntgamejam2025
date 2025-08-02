@@ -34,8 +34,8 @@ func _process(delta: float) -> void:
 	currentTicks+=1
 	currentRotation = player.rotation
 
-func enablePlayerCamera() -> void:
-	player.camera_2d.enabled = true
+func enablePlayerCamera(enabled:bool = true) -> void:
+	player.camera_2d.enabled = enabled
 
 #On input, log what is happening to "bio"
 func _input(event: InputEvent) -> void:
@@ -149,7 +149,7 @@ func handleWaveEnd() -> void:
 	elif tutorialWaves != 1:
 		boss.phase = 1
 		player.connect("died",Managers.map_manager.resetEnemies)
-		getGameHandler().state = MainGame.STATE.REG_ENEMY
+		getGameHandler().state = MainGame.STATE.TUTORIAL
 		if get_parent() is MainGame and get_parent().DEBUG_MODE: get_tree().change_scene_to_file("res://Scenes/boss_room.tscn")
 
 func handle_ring_ability() -> void:

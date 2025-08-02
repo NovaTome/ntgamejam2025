@@ -26,10 +26,11 @@ func _ready() -> void:
 	animation_player.play("phase_"+str(phase))
 
 func reset() -> void:
-	if phase > 0 and Managers.self_management.get_parent() is not BossRoom:
-		return
 	resetting.emit()
+	health = 3
 	animation_player.play("RESET")
+	for c:BossCrystal in Managers.self_management.get_children().filter(func(a): return a is BossCrystal):
+		c.queue_free()
 	stopAllAttacks()
 	show()
 	if DEBUG_MODE and phase == 0:
@@ -78,10 +79,13 @@ func spawnCrystal() -> void:
 	Managers.self_management.add_child(crystal)
 
 func spawnEnemy(num:int) -> void:
-	var room:BossRoom = Managers.self_management.get_parent()
+	var room = Managers.self_management.get_parent()
 	var type:Enums.EnemyType= Enums.EnemyType.NORMAL
 	if phase == 2 and randf() > 0.5: type = Enums.EnemyType.GHOST
-	room.spawnAd(num,type)
+	if room is MainGame:
+		room.map.spawnAd(num,type,MainMap.DIRECTION.TOP_RIGHT)
+	elif room is BossRoom:
+		room.spawnAd(num,type)
 
 func stopAllAttacks() -> void:
 	stopTwinAttack(true)

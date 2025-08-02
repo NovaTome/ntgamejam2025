@@ -11,7 +11,7 @@ point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_3aetu"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -500, 0, 0, 0, 0, 0, 500, 0)
+"points": PackedVector2Array(0, 0, 0, 0, -1220, 0, 0, 0, 0, 0, 1220, 0)
 }
 point_count = 2
 
@@ -24,7 +24,7 @@ position = Vector2(0, -1)
 curve = SubResource("Curve2D_3aetu")
 
 [node name="MovingBulletPattern" type="PathFollow2D" parent="Path2D"]
-position = Vector2(500, 0)
+position = Vector2(-220, 0)
 progress = 1000.0
 rotates = false
 script = ExtResource("2_cq3fe")
@@ -39,7 +39,7 @@ wait_time = 0.05
 autostart = true
 
 [node name="MovingBulletPattern2" type="PathFollow2D" parent="Path2D"]
-position = Vector2(-500, 0)
+position = Vector2(-1220, 0)
 rotates = false
 script = ExtResource("2_cq3fe")
 

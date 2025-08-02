@@ -18,6 +18,8 @@ enum DIRECTION {
 @onready var enemy_spawners: Node2D = $EnemySpawners
 @onready var timer:Timer = $SpawnTimer
 @onready var animation_player:AnimationPlayer = $AnimationPlayer
+@onready var boss_marker:Marker2D = $BossMarker
+@onready var player_marker:Marker2D = $PlayerBossMarker
 
 var rng:RandomNumberGenerator = RandomNumberGenerator.new()
 
@@ -40,6 +42,17 @@ func resetEnemies() -> void:
 		p.queue_free()
 	
 	animation_player.play("stage_"+str(get_parent().state))
+
+func setUpBossPhase() -> void:
+	Managers.self_management.player.global_position = player_marker.global_position
+	Managers.self_management.playerStartingLocation = player_marker.global_position
+	Managers.self_management.boss.global_position = boss_marker.global_position
+	Managers.self_management.player.connect("died",Managers.self_management.boss.reset)
+	for n:Node2D in Managers.self_management.get_children().filter(func(a): return a is Enemy or a is Ghost):
+		n.queue_free()
+	for p:Projectile in Managers.bullet_manager.get_children():
+		p.queue_free()
+	Managers.self_management.boss.reset()
 
 func spawn_enemy(spawnPoint:Marker2D, type: Enums.EnemyType = Enums.EnemyType.NORMAL):
 	var enemy:Enemy

@@ -24,5 +24,7 @@ func toggleUI(show:bool) -> void:
 func _set_state(s:STATE) -> void:
 	state = s
 	match state:
+		STATE.BOSS:
+			animation_player.play("boss")
 		_:
 			map.animation_player.play("stage_"+str(state))

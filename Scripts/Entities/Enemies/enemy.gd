@@ -1,9 +1,6 @@
 extends CharacterBody2D
 class_name Enemy
 
-@export var canTargetPlayer:bool = true
-@export var canTargetGhosts:bool = true
-
 @onready var aggro_range: Area2D = $AggroRange
 @onready var attack_range: Area2D = $AttackRange
 @onready var attack_timer: Timer = $AttackTimer
@@ -29,7 +26,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func canTargetBody(body: Node2D) -> bool:
-	return (body is Ghost and canTargetGhosts) or (body is Player and canTargetPlayer)
+	return body is Player
 
 func _on_aggro_range_body_entered(body: Node2D) -> void:
 	if canTargetBody(body):

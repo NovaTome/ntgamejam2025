@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://bbreouasuqc05"]
+[gd_scene load_steps=15 format=4 uid="uid://bbreouasuqc05"]
 
 [ext_resource type="TileSet" uid="uid://x0c70pbhvyyx" path="res://Assets/TileMap/floor_tile.tres" id="1_k5tye"]
 [ext_resource type="Script" uid="uid://bjcl74n8neyvq" path="res://Scripts/main_map.gd" id="1_tvgjd"]
@@ -121,11 +121,63 @@ tracks/1/keys = {
 "values": [false, true]
 }
 
+[sub_resource type="Animation" id="Animation_a15nj"]
+resource_name = "stage_3"
+length = 10.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.5, 2, 3, 6.06667, 8.5, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [5, 2, 0],
+"method": &"spawnAd"
+}, {
+"args": [5, 2, 0],
+"method": &"spawnAd"
+}, {
+"args": [10, 0, 0],
+"method": &"spawnAd"
+}, {
+"args": [5, 2, 0],
+"method": &"spawnAd"
+}, {
+"args": [5, 2, 0],
+"method": &"spawnAd"
+}, {
+"args": [10, 0, 3],
+"method": &"spawnAd"
+}, {
+"args": [5, 2, 0],
+"method": &"spawnAd"
+}, {
+"args": [20, 0, 1],
+"method": &"spawnAd"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:canProgress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o0jjj"]
 _data = {
 &"RESET": SubResource("Animation_o0jjj"),
 &"stage_1": SubResource("Animation_f4xrl"),
-&"stage_2": SubResource("Animation_uxcei")
+&"stage_2": SubResource("Animation_uxcei"),
+&"stage_3": SubResource("Animation_a15nj")
 }
 
 [node name="MainMap" type="Node2D"]
@@ -197,5 +249,11 @@ group = "MapAttack"
 libraries = {
 &"": SubResource("AnimationLibrary_o0jjj")
 }
+
+[node name="BossMarker" type="Marker2D" parent="."]
+position = Vector2(2040, 0)
+
+[node name="PlayerBossMarker" type="Marker2D" parent="."]
+position = Vector2(1440, 0)
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cncvb3yqekqle"]
+[gd_scene load_steps=8 format=3 uid="uid://cncvb3yqekqle"]
 
 [ext_resource type="PackedScene" uid="uid://ddknmqi5sb88o" path="res://Scenes/Entities/Enemies/enemy.tscn" id="1_hdvlt"]
+[ext_resource type="Script" uid="uid://4w0evjau153x" path="res://Scripts/Entities/Enemies/homing_enemy.gd" id="2_bdv5r"]
 [ext_resource type="PackedScene" uid="uid://bf75m7yulj6gn" path="res://Scenes/Entities/Projectiles/homing_projectile.tscn" id="2_k01ho"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_owvky"]
@@ -10,12 +11,13 @@ size = Vector2(30, 30)
 radius = 371.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_owvky"]
-radius = 194.139
+radius = 441.192
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_efbp4"]
 size = Vector2(30, 30)
 
-[node name="RegularEnemy" instance=ExtResource("1_hdvlt")]
+[node name="HomingEnemy" instance=ExtResource("1_hdvlt")]
+script = ExtResource("2_bdv5r")
 projectileType = 2
 
 [node name="Sprite2D" parent="." index="0"]
@@ -30,8 +32,13 @@ shape = SubResource("CircleShape2D_owvky")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
 shape = SubResource("RectangleShape2D_efbp4")
 
+[node name="AttackTimer" parent="." index="4"]
+one_shot = false
+autostart = true
+
 [node name="BulletSource" parent="." index="5"]
 projectile = ExtResource("2_k01ho")
 projectile_type = 2
 
 [connection signal="body_exited" from="AggroRange" to="." method="_on_aggro_range_body_exited"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
