@@ -14,11 +14,12 @@ collision_mask = 0
 script = ExtResource("1_n0igq")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -14.16)
 scale = Vector2(0.0698046, 0.0698046)
 sprite_frames = ExtResource("2_hjtyh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-5.5, 3)
+position = Vector2(-6, -10)
 shape = SubResource("RectangleShape2D_n2t0o")
 
 [node name="CommandNode" parent="." node_paths=PackedStringArray("character") instance=ExtResource("3_t80u2")]
@@ -32,7 +33,7 @@ one_shot = true
 autostart = true
 
 [node name="AK47Source" parent="." instance=ExtResource("4_537r6")]
-position = Vector2(54, 14)
+position = Vector2(54, 0)
 projectile_type = 4
 
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

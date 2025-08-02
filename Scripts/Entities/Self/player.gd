@@ -13,6 +13,7 @@ var movement_direction: Vector2 = Vector2.ZERO
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var sprite:AnimatedSprite2D = $Sprite2D
 @onready var hell_sprite:AnimatedSprite2D = $HellCircle
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 var deaths:int = 0
 var dead:bool = false
@@ -85,9 +86,11 @@ func die(cause: Enums.DeathType = Enums.DeathType.UNKNOWN) -> void:
 func flip(on: bool):
 	sprite.flip_v = on
 	if (on):
-		ak_47_source.position.y = -abs(ak_47_source.position.y)
+		sprite.position.y = abs(sprite.position.y)
+		collision_shape_2d.position.y = abs(collision_shape_2d.position.y)
 	else:
-		ak_47_source.position.y = abs(ak_47_source.position.y)
+		sprite.position.y = -abs(sprite.position.y)
+		collision_shape_2d.position.y = -abs(collision_shape_2d.position.y)
 	
 
 func ringer_on() -> void:

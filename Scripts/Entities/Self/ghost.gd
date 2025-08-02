@@ -65,7 +65,7 @@ func _process(delta: float) -> void:
 		var validRotations:Array[Dictionary] = currentCommand.rotations.filter(func(a): return a.tick == currentTicks)
 		if validRotations.size() != 0:
 			rotation = validRotations.pop_front().rotation
-			if (rotation_degrees < 0 and rotation_degrees < -180) or (rotation_degrees > 90 and rotation_degrees < 180):
+			if (rotation_degrees < -90 and rotation_degrees > -270) or (rotation_degrees > 90 and rotation_degrees < 270):
 				flip(true)
 			else: flip(false)
 			
@@ -83,9 +83,11 @@ func _process(delta: float) -> void:
 func flip(on: bool):
 	sprite.flip_v = on
 	if (on):
-		ak_47_source.position.y = -abs(ak_47_source.position.y)
+		sprite.position.y = abs(sprite.position.y)
+		collision_shape_2d.position.y = abs(collision_shape_2d.position.y)
 	else:
-		ak_47_source.position.y = abs(ak_47_source.position.y)
+		sprite.position.y = -abs(sprite.position.y)
+		collision_shape_2d.position.y = -abs(collision_shape_2d.position.y)
 
 func reload() -> void:
 	global_position = startingLocation
