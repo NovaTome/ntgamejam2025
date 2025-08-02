@@ -18,10 +18,10 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Enums="*res://Scripts/Autoloads/enum.gd"
 GameConstants="*res://Scripts/Autoloads/game_constants.gd"
 Managers="*res://Scripts/Autoloads/managers.gd"
 SignalBus="*res://Scripts/Autoloads/signal_bus.gd"
+Enums="*res://Scripts/Autoloads/enum.gd"
 
 [input]
 

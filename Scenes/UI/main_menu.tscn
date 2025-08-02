@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://c2o60mlp1vp2" path="res://Scripts/UI/main_menu.gd" id="1_gih0s"]
 [ext_resource type="Texture2D" uid="uid://7uh5hxl4frqg" path="res://Assets/DEADRINGER.png" id="2_i2xx2"]
 [ext_resource type="Script" uid="uid://0oq8bfuxjrfu" path="res://Scripts/Animations/animation_player.gd" id="3_o14dv"]
-[ext_resource type="Texture2D" uid="uid://bbua21511rhx5" path="res://Assets/StraightProjectiles-01.png" id="4_u7lva"]
-[ext_resource type="Texture2D" uid="uid://c0ej8we4j7ate" path="res://Assets/StraightProjectiles-02.png" id="5_mrfpk"]
+[ext_resource type="Texture2D" uid="uid://bbua21511rhx5" path="res://Assets/Projectile/RegularProjectile.png" id="4_u7lva"]
+[ext_resource type="Texture2D" uid="uid://c0ej8we4j7ate" path="res://Assets/Projectile/SpectralProjectile.png" id="5_mrfpk"]
 [ext_resource type="FontFile" uid="uid://lcrbq1y7yp2m" path="res://Assets/Orbitron-VariableFont_wght.ttf" id="6_4pqbp"]
 
 [sub_resource type="Animation" id="Animation_i2xx2"]

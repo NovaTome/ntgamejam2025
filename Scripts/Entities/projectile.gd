@@ -1,9 +1,6 @@
 extends Area2D
 class_name Projectile
 
-@export var playerBullet:Texture = preload("res://Assets/Projectile/PlayerBullet-01.png")
-
-
 enum TYPES {
 	REGULAR, #No homing, ghosts can block
 	GHOST, # No homing, ghosts can't block

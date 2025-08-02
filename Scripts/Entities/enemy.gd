@@ -33,11 +33,10 @@ func canTargetBody(body: Node2D) -> bool:
 
 func _on_aggro_range_body_entered(body: Node2D) -> void:
 	if canTargetBody(body):
-		print("Bastard is in my sights")
 		if target == null:
 			target = body
 
 
 func _on_attack_range_body_entered(body: Node2D) -> void:
 	if canTargetBody(body) and target == body:
-		print("Chat shoot this guy")
+		pass

@@ -28,7 +28,4 @@ shape = SubResource("CircleShape2D_owvky")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
 shape = SubResource("RectangleShape2D_efbp4")
 
-[node name="BulletSource" parent="." index="5"]
-projectile_type = 0
-
 [connection signal="body_exited" from="AggroRange" to="." method="_on_aggro_range_body_exited"]
