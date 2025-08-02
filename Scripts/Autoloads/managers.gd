@@ -4,3 +4,4 @@ extends Node
 var self_management: SelfManagement
 var bullet_manager: BulletManager
 var sound_manager:SoundManager
+var map_manager:MainMap

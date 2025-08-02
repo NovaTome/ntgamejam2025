@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cncvb3yqekqle"]
+[gd_scene load_steps=7 format=3 uid="uid://cncvb3yqekqle"]
 
 [ext_resource type="PackedScene" uid="uid://ddknmqi5sb88o" path="res://Scenes/Entities/Enemies/enemy.tscn" id="1_hdvlt"]
+[ext_resource type="PackedScene" uid="uid://bf75m7yulj6gn" path="res://Scenes/Entities/Projectiles/homing_projectile.tscn" id="2_k01ho"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_owvky"]
 size = Vector2(30, 30)
@@ -15,6 +16,7 @@ radius = 194.139
 size = Vector2(30, 30)
 
 [node name="RegularEnemy" instance=ExtResource("1_hdvlt")]
+projectileType = 2
 
 [node name="Sprite2D" parent="." index="0"]
 texture = SubResource("PlaceholderTexture2D_owvky")
@@ -29,6 +31,7 @@ shape = SubResource("CircleShape2D_owvky")
 shape = SubResource("RectangleShape2D_efbp4")
 
 [node name="BulletSource" parent="." index="5"]
+projectile = ExtResource("2_k01ho")
 projectile_type = 2
 
 [connection signal="body_exited" from="AggroRange" to="." method="_on_aggro_range_body_exited"]

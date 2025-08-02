@@ -11,6 +11,7 @@ func _ready():
 	Managers.bullet_manager = bullet_manager
 	Managers.self_management = self_management
 	Managers.sound_manager = sound_manager
+	Managers.map_manager = main_game.map
 
 func _on_main_menu_game_started() -> void:
 	main_menu.queue_free()

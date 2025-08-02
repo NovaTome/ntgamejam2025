@@ -147,6 +147,8 @@ func handleWaveEnd() -> void:
 		tutorialWaves = player.deaths
 	elif tutorialWaves != 1:
 		boss.phase = 1
+		player.connect("died",Managers.map_manager.resetEnemies)
+		getGameHandler().state = MainGame.STATE.REG_ENEMY
 		if get_parent() is MainGame and get_parent().DEBUG_MODE: get_tree().change_scene_to_file("res://Scenes/boss_room.tscn")
 
 func handle_ring_ability() -> void:
@@ -154,6 +156,13 @@ func handle_ring_ability() -> void:
 	gui.set_ring_timer()
 	gui.ringer_label.text = "Ringer Remaining " + str(player.rings)
 	ringer_position = player.global_position
+
+func getGameHandler() -> MainGame:
+	if get_parent() is MainGame:
+		return get_parent()
+	else:
+		printerr("Tried to get game handler while manager is running outside of the main game!")
+		return null
 
 # Debug method for creating ghosts
 func _unhandled_input(event):

@@ -20,10 +20,6 @@ var target:Node2D
 @export var type:TYPES = TYPES.REGULAR
 var velocity
 
-func _ready() -> void:
-	if type == TYPES.PLAYER:
-		speed/=2
-
 func _process(delta: float) -> void:
 	if type == TYPES.PLAYER:
 		if target == null and shooter != null:

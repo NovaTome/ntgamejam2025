@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bf75m7yulj6gn"]
+
+[ext_resource type="PackedScene" uid="uid://b3ifmidv1nnnd" path="res://Scenes/Entities/Projectiles/projectile.tscn" id="1_y4d4g"]
+[ext_resource type="Texture2D" uid="uid://dgwfmsoigr3ls" path="res://Assets/Projectile/HomingProjectile.png" id="2_v52j5"]
+
+[node name="Projectile" instance=ExtResource("1_y4d4g")]
+speed = 2.0
+type = 2
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, -1.19209e-07)
+scale = Vector2(0.0138889, 0.00685185)
+texture = ExtResource("2_v52j5")
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="2"]
+position = Vector2(0, -1.19209e-07)
+scale = Vector2(0.8, 0.3)

@@ -134,6 +134,7 @@ _data = {
 [node name="MainGame" type="CanvasLayer"]
 follow_viewport_enabled = true
 script = ExtResource("1_18r40")
+DEBUG_MODE = false
 
 [node name="MainMap" parent="." instance=ExtResource("2_18r40")]
 metadata/_edit_lock_ = true
