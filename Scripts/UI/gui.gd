@@ -26,6 +26,14 @@ var clock_progress: int = 0
 func _ready():
 	ghost_label.text = "Ghosts Remaining: " + str(GameConstants.STARTING_MAX_GHOSTS)
 
+func hideAll() -> void:
+	for n in get_children():
+		if n is Control: n.hide()
+
+func showAll() -> void:
+	for n in get_children():
+		if n is Control and n != jump_scare and n != death_hint: n.show()
+
 # Fires every time the Timer node triggers
 func _on_timer_timeout() -> void:
 	if not hint_timer.is_stopped(): return

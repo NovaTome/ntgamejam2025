@@ -15,7 +15,8 @@ radius = 194.139
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_efbp4"]
 size = Vector2(30, 30)
 
-[node name="RegularEnemy" instance=ExtResource("1_b17yr")]
+[node name="RegularEnemy" groups=["GhostEnemy"] instance=ExtResource("1_b17yr")]
+modulate = Color(1, 1, 1, 0.52549)
 
 [node name="Sprite2D" parent="." index="0"]
 texture = SubResource("PlaceholderTexture2D_owvky")

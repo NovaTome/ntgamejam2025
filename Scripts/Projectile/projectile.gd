@@ -41,9 +41,9 @@ func canHitBody(body:Node2D) -> bool:
 		TYPES.GHOST:
 			return body is Player
 		TYPES.ENEMY:
-			return body is Enemy or body is BossEnemy or body is BossCrystal
+			return (body is Enemy and not body.is_in_group("GhostEnemy")) or body is BossEnemy or body is BossCrystal
 		TYPES.ENEMY_GHOST:
-			return body is Enemy or body is BossEnemy
+			return (body is Enemy and not body.is_in_group("HomingEnemy")) or body is BossEnemy
 		_:
 			return false
 

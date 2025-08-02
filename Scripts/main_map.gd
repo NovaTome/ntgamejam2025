@@ -25,6 +25,12 @@ func _ready() -> void:
 	if get_parent() is not MainGame:
 		printerr("Main map needs to be a child of a MainGame node!")
 
+func _process(delta: float) -> void:
+	if canProgress:
+		if Managers.self_management.get_children().filter(func(a): return a is Enemy).is_empty():
+			get_parent().state+=1
+			canProgress = false
+
 func resetEnemies() -> void:
 	if get_parent().state == MainGame.STATE.BOSS: return
 	animation_player.stop()
