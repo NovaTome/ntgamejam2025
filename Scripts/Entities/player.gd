@@ -23,10 +23,7 @@ var _unrecorded_fire: bool = false
 
 func _process(delta: float) -> void:
 	_process_actions()
-	if movement_direction == Vector2.ZERO and sprite.animation == "walk":
-		sprite.play("default")
-	elif movement_direction != Vector2.ZERO and sprite.animation != "walk":
-		sprite.play("walk")
+
 
 func _physics_process(delta):
 	self.velocity = movement_direction * speed

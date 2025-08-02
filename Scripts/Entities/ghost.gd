@@ -4,7 +4,7 @@ extends CharacterBody2D
 signal died()
 
 var movement_direction: Vector2 = Vector2.ZERO
-@onready var sprite_2d: AnimatedSprite2D = $Sprite2D
+@onready var sprite: AnimatedSprite2D = $Sprite2D
 @export var speed: int = 250
 @export var minLifeTime:int = 3
 @onready var command_node: CommandNode = $CommandNode
@@ -39,7 +39,7 @@ func _ready() -> void:
 	active = true
 	startingLocation = global_position
 	command_node.bullet_source = bullet_source
-	sprite_2d.self_modulate.a = 0.5 #Make ghost transparent :3
+	sprite.self_modulate.a = 0.5 #Make ghost transparent :3
 	if commands.size() == 0:
 		printerr("Ghost has no commands!")
 		queue_free()
@@ -64,8 +64,8 @@ func _process(delta: float) -> void:
 		if validRotations.size() != 0:
 			rotation = validRotations.pop_front().rotation
 			if (rotation_degrees < 0 and rotation_degrees < -180) or (rotation_degrees > 90 and rotation_degrees < 180):
-				sprite_2d.flip_v = true
-			else: sprite_2d.flip_v = false
+				sprite.flip_v = true
+			else: sprite.flip_v = false
 			
 		
 	else: #If top command is expired, move to next command

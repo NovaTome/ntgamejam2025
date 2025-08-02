@@ -31,7 +31,7 @@ func handleProjectileReady(proj:BulletSource, rotate:float) -> void:
 
 func _process(delta: float) -> void:
 	for p:Projectile in Managers.bullet_manager.get_children().filter(func(a:Node2D): return a.is_in_group("WaveAttack")):
-		if p.get_overlapping_areas().size() == 0:
+		if p.get_overlapping_areas().filter(func(a): return a.is_in_group("WaveAttack")).size() == 0:
 			p.scale = Vector2(p.scale.x,p.scale.y+0.05)
 	var allValidProjectiles:Array = allProjects.filter(func(a): return a != null)
 	if DEBUG_MODE and allValidProjectiles.size() == 0:
