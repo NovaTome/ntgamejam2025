@@ -76,3 +76,4 @@ ring={
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Ghosts"
 2d_physics/layer_3="Enemies"
+2d_physics/layer_4="World"

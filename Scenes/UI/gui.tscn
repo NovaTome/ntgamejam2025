@@ -37,11 +37,21 @@ text = "Your ghosts can help you block projectiles..."
 wait_time = 2.0
 one_shot = true
 
-[node name="JumpScare" type="Sprite2D" parent="."]
+[node name="JumpScare" type="TextureRect" parent="."]
 visible = false
 self_modulate = Color(1, 1, 1, 0.0862745)
 z_index = -1
-position = Vector2(578, 294)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -378.0
+offset_top = -375.5
+offset_right = 378.0
+offset_bottom = 375.5
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_q081c")
 
 [node name="GhostLabel" type="Label" parent="."]
