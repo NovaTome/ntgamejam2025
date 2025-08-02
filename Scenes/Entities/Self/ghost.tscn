@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://bqvhoyc8hm3u0"]
 
-[ext_resource type="Script" uid="uid://dxiilpwi3l5r5" path="res://Scripts/Entities/ghost.gd" id="1_e3r4w"]
-[ext_resource type="SpriteFrames" uid="uid://xccyeoay8wel" path="res://Assets/Player/ghost.tres" id="2_tepbg"]
-[ext_resource type="PackedScene" uid="uid://btvl2e15nmict" path="res://Scenes/Entities/command_node.tscn" id="3_nm3md"]
-[ext_resource type="PackedScene" uid="uid://bhygnmkhvep4j" path="res://Scenes/Entities/Attacks/ak_47_source.tscn" id="4_aqrip"]
+[ext_resource type="Script" uid="uid://dxiilpwi3l5r5" path="res://Scripts/Entities/Self/ghost.gd" id="1_n0igq"]
+[ext_resource type="SpriteFrames" uid="uid://xccyeoay8wel" path="res://Assets/Player/ghost.tres" id="2_hjtyh"]
+[ext_resource type="PackedScene" uid="uid://btvl2e15nmict" path="res://Scenes/Entities/Self/command_node.tscn" id="3_t80u2"]
+[ext_resource type="PackedScene" uid="uid://bhygnmkhvep4j" path="res://Scenes/Entities/Attacks/ak_47_source.tscn" id="4_537r6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n2t0o"]
 size = Vector2(73, 130)
@@ -11,17 +11,17 @@ size = Vector2(73, 130)
 [node name="Ghost" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 0
-script = ExtResource("1_e3r4w")
+script = ExtResource("1_n0igq")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.0698046, 0.0698046)
-sprite_frames = ExtResource("2_tepbg")
+sprite_frames = ExtResource("2_hjtyh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-5.5, 3)
 shape = SubResource("RectangleShape2D_n2t0o")
 
-[node name="CommandNode" parent="." node_paths=PackedStringArray("character") instance=ExtResource("3_nm3md")]
+[node name="CommandNode" parent="." node_paths=PackedStringArray("character") instance=ExtResource("3_t80u2")]
 character = NodePath("..")
 
 [node name="DeathTimer" type="Timer" parent="."]
@@ -31,7 +31,7 @@ one_shot = true
 [node name="LifeTimer" type="Timer" parent="."]
 autostart = true
 
-[node name="AK47Source" parent="." instance=ExtResource("4_aqrip")]
+[node name="AK47Source" parent="." instance=ExtResource("4_537r6")]
 projectile_type = 4
 
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

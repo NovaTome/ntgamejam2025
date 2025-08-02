@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://vb6igl0gyj4p"]
 
-[ext_resource type="PackedScene" uid="uid://b3ifmidv1nnnd" path="res://Scenes/Entities/projectile.tscn" id="1_mhhm8"]
+[ext_resource type="PackedScene" uid="uid://b3ifmidv1nnnd" path="res://Scenes/Entities/Projectiles/projectile.tscn" id="1_mhhm8"]
 [ext_resource type="Texture2D" uid="uid://lorksspxn4ta" path="res://Assets/Projectile/Wave-01.png" id="2_vdcd4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6tkoc"]

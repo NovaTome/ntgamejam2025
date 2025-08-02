@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dxtlhaoalm7os" path="res://Scenes/Entities/Attacks/bullet_source.tscn" id="1_eow5e"]
 [ext_resource type="Script" uid="uid://cybbyw5gkg1di" path="res://Scripts/Attacks/swirl_attack.gd" id="1_gum0f"]
-[ext_resource type="PackedScene" uid="uid://b3ifmidv1nnnd" path="res://Scenes/Entities/projectile.tscn" id="2_gum0f"]
+[ext_resource type="PackedScene" uid="uid://b3ifmidv1nnnd" path="res://Scenes/Entities/Projectiles/projectile.tscn" id="2_gum0f"]
 [ext_resource type="PackedScene" uid="uid://wucw4thji4u" path="res://Scenes/Entities/Projectiles/spectral_projectile.tscn" id="3_gum0f"]
 
 [node name="SwirlAttack" type="Node2D"]

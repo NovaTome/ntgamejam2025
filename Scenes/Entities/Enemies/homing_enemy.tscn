@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cncvb3yqekqle"]
 
-[ext_resource type="PackedScene" uid="uid://ddknmqi5sb88o" path="res://Scenes/Entities/enemy.tscn" id="1_hdvlt"]
+[ext_resource type="PackedScene" uid="uid://ddknmqi5sb88o" path="res://Scenes/Entities/Enemies/enemy.tscn" id="1_hdvlt"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_owvky"]
 size = Vector2(30, 30)

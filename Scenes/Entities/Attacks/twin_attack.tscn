@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://drajhdo55m2k6" path="res://Scripts/Attacks/twin_attack.gd" id="1_ihjqb"]
 [ext_resource type="Script" uid="uid://lmj71ifk8n0y" path="res://Scripts/Attacks/moving_bullet_pattern.gd" id="2_cq3fe"]
 [ext_resource type="PackedScene" uid="uid://dxtlhaoalm7os" path="res://Scenes/Entities/Attacks/bullet_source.tscn" id="3_yb0mj"]
-[ext_resource type="PackedScene" uid="uid://b3ifmidv1nnnd" path="res://Scenes/Entities/projectile.tscn" id="4_cq3fe"]
+[ext_resource type="PackedScene" uid="uid://b3ifmidv1nnnd" path="res://Scenes/Entities/Projectiles/projectile.tscn" id="4_cq3fe"]
 
 [sub_resource type="Curve" id="Curve_yb0mj"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]

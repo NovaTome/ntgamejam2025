@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bjqdn7rjmr6h5" path="res://Scripts/main_game.gd" id="1_18r40"]
 [ext_resource type="PackedScene" uid="uid://bbreouasuqc05" path="res://Scenes/main_map.tscn" id="2_18r40"]
 [ext_resource type="Script" uid="uid://4lcqyy5f7tj2" path="res://Scripts/Managers/self_management.gd" id="2_mgc0q"]
-[ext_resource type="PackedScene" uid="uid://cqcub1i5w633w" path="res://Scenes/Entities/player.tscn" id="3_bb2iq"]
+[ext_resource type="PackedScene" uid="uid://cqcub1i5w633w" path="res://Scenes/Entities/Self/player.tscn" id="3_bb2iq"]
 [ext_resource type="PackedScene" uid="uid://ciq371u7ni228" path="res://Scenes/UI/gui.tscn" id="4_18r40"]
 [ext_resource type="Script" uid="uid://dm305gi7va2nd" path="res://Scripts/Managers/bullet_manager.gd" id="5_6y7pd"]
 [ext_resource type="PackedScene" uid="uid://by48x72g25wal" path="res://Scenes/Entities/Enemies/boss_enemy.tscn" id="6_bb2iq"]

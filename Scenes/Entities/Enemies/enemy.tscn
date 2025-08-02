@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddknmqi5sb88o"]
+
+[ext_resource type="Script" uid="uid://bktap66c1hvla" path="res://Scripts/Entities/Enemies/enemy.gd" id="1_748yg"]
+[ext_resource type="Texture2D" uid="uid://yup846x5e2qf" path="res://icon.svg" id="2_w4jud"]
+[ext_resource type="PackedScene" uid="uid://dxtlhaoalm7os" path="res://Scenes/Entities/Attacks/bullet_source.tscn" id="3_5ncfx"]
+[ext_resource type="PackedScene" uid="uid://b3ifmidv1nnnd" path="res://Scenes/Entities/Projectiles/projectile.tscn" id="4_4cflg"]
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_748yg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+texture = ExtResource("2_w4jud")
+
+[node name="AggroRange" type="Area2D" parent="."]
+
+[node name="AttackRange" type="Area2D" parent="."]
+
+[node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="BulletSource" parent="." instance=ExtResource("3_5ncfx")]
+position = Vector2(64, 0)
+projectile = ExtResource("4_4cflg")
+
+[connection signal="body_entered" from="AggroRange" to="." method="_on_aggro_range_body_entered"]
+[connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]

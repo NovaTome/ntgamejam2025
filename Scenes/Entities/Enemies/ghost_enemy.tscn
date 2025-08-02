@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dl6xtetw88rhl"]
 
-[ext_resource type="PackedScene" uid="uid://ddknmqi5sb88o" path="res://Scenes/Entities/enemy.tscn" id="1_b17yr"]
+[ext_resource type="PackedScene" uid="uid://ddknmqi5sb88o" path="res://Scenes/Entities/Enemies/enemy.tscn" id="1_b17yr"]
 [ext_resource type="PackedScene" uid="uid://wucw4thji4u" path="res://Scenes/Entities/Projectiles/spectral_projectile.tscn" id="2_ctxd6"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_owvky"]
