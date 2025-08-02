@@ -56,8 +56,8 @@ func _process_actions():
 		command.inputs.append("right")
 	if Input.is_action_pressed("ring"):
 		if rings > 0:
-			ring_ability.emit()
 			ringer_on()
+			ring_ability.emit()
 	
 	# Actions
 	if Input.is_action_just_pressed("fire"):

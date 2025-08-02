@@ -154,10 +154,7 @@ func handleWaveEnd() -> void:
 
 func handle_ring_ability() -> void:
 	clearEverything()
-	gui.clock_face.hide()
-	gui.ringer_clock.show()
-	gui.ringer_clock.play("default")
-	gui.set_ring_timer()
+	gui.ringer_clock_on = true
 	gui.ringer_label.text = "Ringer Remaining " + str(player.rings)
 	ringer_position = player.global_position
 

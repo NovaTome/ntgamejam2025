@@ -32,6 +32,7 @@ one_shot = true
 autostart = true
 
 [node name="AK47Source" parent="." instance=ExtResource("4_537r6")]
+position = Vector2(54, 14)
 projectile_type = 4
 
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
