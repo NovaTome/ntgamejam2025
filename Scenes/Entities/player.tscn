@@ -11,7 +11,7 @@ size = Vector2(70, 129)
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
-collision_mask = 0
+collision_mask = 8
 script = ExtResource("1_cvnsp")
 speed = null
 
@@ -40,10 +40,9 @@ one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 enabled = false
-zoom = Vector2(0.75, 0.75)
-limit_left = -1000
-limit_top = -1000
-limit_right = 1152
-limit_bottom = 648
+limit_left = -128
+limit_top = -1028
+limit_right = 2568
+limit_bottom = 1028
 
 [connection signal="timeout" from="DeathGap" to="." method="_on_death_gap_timeout"]

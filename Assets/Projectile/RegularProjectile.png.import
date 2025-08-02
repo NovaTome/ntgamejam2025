@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0ej8we4j7ate"
-path="res://.godot/imported/StraightProjectiles-02.png-a01125c8e0a3c39d1994157fec55e374.ctex"
+uid="uid://bbua21511rhx5"
+path="res://.godot/imported/RegularProjectile.png-3e5fd63e506c7cc6e15263e60e147e17.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/StraightProjectiles-02.png"
-dest_files=["res://.godot/imported/StraightProjectiles-02.png-a01125c8e0a3c39d1994157fec55e374.ctex"]
+source_file="res://Assets/Projectile/RegularProjectile.png"
+dest_files=["res://.godot/imported/RegularProjectile.png-3e5fd63e506c7cc6e15263e60e147e17.ctex"]
 
 [params]
 

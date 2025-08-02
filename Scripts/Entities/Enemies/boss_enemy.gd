@@ -6,7 +6,9 @@ signal resetting()
 @export var waveAttack:PackedScene = preload("res://Scenes/Entities/Attacks/wave_attack.tscn")
 @export var twinAttack:PackedScene = preload("res://Scenes/Entities/Attacks/twin_attack.tscn")
 @export var explosionAttack:PackedScene = preload("res://Scenes/Entities/Attacks/ground_explosion.tscn")
+@export var swirlAttack:PackedScene = preload("res://Scenes/Entities/Attacks/swirl_attack.tscn")
 @export var crystalScene:PackedScene = preload("res://Scenes/Entities/Enemies/boss_crystal.tscn")
+@export var homingAttack:PackedScene = preload("res://Scenes/Entities/Attacks/homing_attack.tscn")
 
 @onready var bullet_source: BulletSource = $BulletSource
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -18,6 +20,7 @@ signal resetting()
 var target:Player:get=_get_target
 
 var currentTwinAttack:Node2D
+var currentSwirlAttack:SwirlAttack
 
 func _ready() -> void:
 	animation_player.play("phase_"+str(phase))
@@ -39,6 +42,13 @@ func fireWaveAttack() -> WaveAttack:
 	get_parent().add_child(wave)
 	return wave
 
+func fireSwirlAttack() -> SwirlAttack:
+	var swirl:SwirlAttack = swirlAttack.instantiate()
+	swirl.global_position = bullet_source.origin.global_position
+	get_parent().add_child(swirl)
+	currentSwirlAttack = swirl
+	return swirl
+
 func fireTwinAttack() -> Node2D:
 	var twin:Node2D = twinAttack.instantiate()
 	twin.global_position = bullet_source.origin.global_position
@@ -54,6 +64,12 @@ func fireGroundAttack() -> GroundExplosion:
 	get_parent().add_child(groundAttack)
 	return groundAttack
 
+func fireHomingAttack() -> HomingAttack:
+	var homing:HomingAttack = homingAttack.instantiate()
+	homing.global_position = bullet_source.origin.global_position
+	get_parent().add_child(homing)
+	return homing
+
 func spawnCrystal() -> void:
 	var crystal:BossCrystal = crystalScene.instantiate()
 	var randomLocation:Vector2 = Vector2(global_position.x-randf_range(200,300),global_position.y+randf_range(-200,200))
@@ -63,14 +79,25 @@ func spawnCrystal() -> void:
 
 func spawnEnemy(num:int) -> void:
 	var room:BossRoom = Managers.self_management.get_parent()
-	room.spawnAd(num,Projectile.TYPES.REGULAR)
+	var type:Enums.EnemyType= Enums.EnemyType.NORMAL
+	if phase == 2 and randf() > 0.5: type = Enums.EnemyType.GHOST
+	room.spawnAd(num,type)
 
 func stopAllAttacks() -> void:
 	stopTwinAttack(true)
 	stopWaveAttack()
+	stopSwirlAttack(true)
 	for e:Enemy in Managers.self_management.get_children().filter(func(n): return n is Enemy):
 		e.queue_free()
-	
+	for p:Projectile in Managers.self_management.get_children().filter(func(proj): return proj is Projectile and proj.is_in_group("HomingAttack")):
+		p.queue_free()
+
+func stopSwirlAttack(hardStop:bool=false) -> void:
+	if hardStop: 
+		for p:Projectile in Managers.bullet_manager.get_children().filter(func(a:Projectile): return a.is_in_group("SwirlAttack")):
+			p.queue_free()
+	if currentSwirlAttack != null:
+		currentSwirlAttack.queue_free()
 
 func stopTwinAttack(hardStop:bool=false) -> void:
 	if hardStop: 

@@ -34,6 +34,9 @@ func _process(delta: float) -> void:
 	currentTicks+=1
 	currentRotation = player.rotation
 
+func enablePlayerCamera() -> void:
+	player.camera_2d.enabled = true
+
 #On input, log what is happening to "bio"
 func _input(event: InputEvent) -> void:
 	if not gui.hint_timer.is_stopped(): return
@@ -143,13 +146,13 @@ func handleWaveEnd() -> void:
 		boss.reset()
 		tutorialWaves = player.deaths
 	elif tutorialWaves != 1:
-		player.camera_2d.enabled = true
 		boss.phase = 1
-		get_tree().change_scene_to_file("res://Scenes/boss_room.tscn")
+		if get_parent() is MainGame and get_parent().DEBUG_MODE: get_tree().change_scene_to_file("res://Scenes/boss_room.tscn")
 
 func handle_ring_ability() -> void:
 	clearEverything() 
 	gui.set_ring_timer()
+	gui.ringer_label.text = "Ringer Remaining " + str(player.rings)
 	ringer_position = player.global_position
 
 # Debug method for creating ghosts
@@ -170,3 +173,7 @@ func _set_ghost_count(_ghostsRemaining:int) -> void:
 
 func _on_gui_timer_up() -> void:
 	player.die(Enums.DeathType.TIME)
+
+func _on_gui_ringer_unlocked():
+	player.rings += 1
+	gui.ringer_label.text = "Ringer Remaining " + str(player.rings)

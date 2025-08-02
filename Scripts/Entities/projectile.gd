@@ -1,9 +1,6 @@
 extends Area2D
 class_name Projectile
 
-@export var playerBullet:Texture = preload("res://Assets/Projectile/PlayerBullet-01.png")
-
-
 enum TYPES {
 	REGULAR, #No homing, ghosts can block
 	GHOST, # No homing, ghosts can't block
@@ -25,7 +22,7 @@ var velocity
 
 func _ready() -> void:
 	if type == TYPES.PLAYER:
-		speed/=4
+		speed/=2
 
 func _process(delta: float) -> void:
 	if type == TYPES.PLAYER:

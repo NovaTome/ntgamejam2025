@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://c2o60mlp1vp2" path="res://Scripts/UI/main_menu.gd" id="1_gih0s"]
 [ext_resource type="Texture2D" uid="uid://7uh5hxl4frqg" path="res://Assets/DEADRINGER.png" id="2_i2xx2"]
 [ext_resource type="Script" uid="uid://0oq8bfuxjrfu" path="res://Scripts/Animations/animation_player.gd" id="3_o14dv"]
-[ext_resource type="Texture2D" uid="uid://bbua21511rhx5" path="res://Assets/StraightProjectiles-01.png" id="4_u7lva"]
-[ext_resource type="Texture2D" uid="uid://c0ej8we4j7ate" path="res://Assets/StraightProjectiles-02.png" id="5_mrfpk"]
+[ext_resource type="Texture2D" uid="uid://bbua21511rhx5" path="res://Assets/Projectile/RegularProjectile.png" id="4_u7lva"]
+[ext_resource type="Texture2D" uid="uid://c0ej8we4j7ate" path="res://Assets/Projectile/SpectralProjectile.png" id="5_mrfpk"]
 [ext_resource type="FontFile" uid="uid://lcrbq1y7yp2m" path="res://Assets/Orbitron-VariableFont_wght.ttf" id="6_4pqbp"]
 [ext_resource type="Texture2D" uid="uid://7mcbfvs0ljrx" path="res://Assets/Player/ghost_1.png" id="8_k33u3"]
 
@@ -76,28 +76,39 @@ _data = {
 script = ExtResource("1_gih0s")
 
 [node name="BackgroundTextureRect" type="TextureRect" parent="."]
-offset_left = -694.0
-offset_top = -381.5
-offset_right = 1898.0
-offset_bottom = 1076.5
-pivot_offset = Vector2(1296, 729)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1489.0
+offset_top = -837.5
+offset_right = 1489.0
+offset_bottom = 837.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(1489, 837.5)
 texture = ExtResource("1_5wsvm")
 expand_mode = 1
 
 [node name="LogoTextureRect" type="TextureRect" parent="."]
-offset_left = 152.0
-offset_top = 16.0
-offset_right = 1071.0
-offset_bottom = 224.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -459.5
+offset_top = 50.0
+offset_right = 459.5
+offset_bottom = 258.0
+grow_horizontal = 2
 pivot_offset = Vector2(459.5, 104)
 texture = ExtResource("2_i2xx2")
 expand_mode = 1
 
 [node name="StartButton" type="TextureButton" parent="."]
-offset_left = 128.0
-offset_top = 304.0
-offset_right = 736.0
-offset_bottom = 360.0
+offset_left = 256.0
+offset_top = 392.0
+offset_right = 864.0
+offset_bottom = 448.0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("4_u7lva")
 texture_pressed = ExtResource("5_mrfpk")
@@ -120,10 +131,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="SettingsButton" type="TextureButton" parent="."]
-offset_left = 128.0
-offset_top = 400.0
-offset_right = 736.0
-offset_bottom = 456.0
+offset_left = 256.0
+offset_top = 488.0
+offset_right = 864.0
+offset_bottom = 544.0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("4_u7lva")
 texture_pressed = ExtResource("5_mrfpk")
@@ -146,10 +157,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="QuitButton" type="TextureButton" parent="."]
-offset_left = 128.0
-offset_top = 496.0
-offset_right = 736.0
-offset_bottom = 552.0
+offset_left = 256.0
+offset_top = 584.0
+offset_right = 864.0
+offset_bottom = 640.0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("4_u7lva")
 texture_pressed = ExtResource("5_mrfpk")
@@ -179,9 +190,9 @@ script = ExtResource("3_o14dv")
 
 [node name="Ghost1" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.392157)
-position = Vector2(984, 552)
+position = Vector2(1280, 784)
 rotation = 0.127409
-scale = Vector2(0.150838, 0.150838)
+scale = Vector2(0.189951, 0.189951)
 texture = ExtResource("8_k33u3")
 flip_h = true
 

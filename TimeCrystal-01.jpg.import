@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbua21511rhx5"
-path="res://.godot/imported/StraightProjectiles-01.png-8a8200997d038caaa456f5a50e4fe06e.ctex"
+uid="uid://bds36g56qp88g"
+path="res://.godot/imported/TimeCrystal-01.jpg-acf439c8c3f70b60b6e806bfd30115b7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/StraightProjectiles-01.png"
-dest_files=["res://.godot/imported/StraightProjectiles-01.png-8a8200997d038caaa456f5a50e4fe06e.ctex"]
+source_file="res://TimeCrystal-01.jpg"
+dest_files=["res://.godot/imported/TimeCrystal-01.jpg-acf439c8c3f70b60b6e806bfd30115b7.ctex"]
 
 [params]
 

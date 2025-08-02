@@ -7,3 +7,9 @@ enum DeathType {
 	TIME,
 	DEBUG
 }
+
+enum EnemyType {
+	NORMAL,
+	GHOST,
+	HOMING
+}

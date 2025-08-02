@@ -1,12 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://b3ifmidv1nnnd"]
 
 [ext_resource type="Script" uid="uid://bjiyjwr67sve4" path="res://Scripts/Entities/projectile.gd" id="1_apwt2"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_5cjvl"]
-size = Vector2(24, 4)
+[ext_resource type="Texture2D" uid="uid://bbua21511rhx5" path="res://Assets/Projectile/RegularProjectile.png" id="2_5cjvl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5iamj"]
-size = Vector2(12, 4)
+size = Vector2(22, 4)
 
 [node name="Projectile" type="Area2D"]
 collision_layer = 7
@@ -14,14 +12,15 @@ collision_mask = 7
 script = ExtResource("1_apwt2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("PlaceholderTexture2D_5cjvl")
+scale = Vector2(0.00338409, 0.01)
+texture = ExtResource("2_5cjvl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_5iamj")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(-1.19209e-07, 4.76837e-07)
-scale = Vector2(1.2, 0.2)
+position = Vector2(-1.19209e-07, -1.19209e-07)
+scale = Vector2(1.2, 0.3)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

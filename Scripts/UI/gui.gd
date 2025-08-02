@@ -7,14 +7,19 @@ class_name GUI
 
 @onready var death_hint: Label = $DeathHint
 @onready var hint_timer: Timer = $HintTimer
-@onready var jump_scare: Sprite2D = $JumpScare
+@onready var jump_scare: TextureRect = $JumpScare
 @onready var ghost_label: Label = $GhostLabel
+@onready var ringer_label: Label = $RingerLabel
 
 signal timerUp()
+signal ringer_unlocked()
 
 const CLOCK_MAX: int = 300
 const CLOCK_TICK_COUNT = 12;
 const CLOCK_TICK_INTERVAL: int = CLOCK_MAX / CLOCK_TICK_COUNT;
+
+const default_ringer_unlock = [CLOCK_TICK_INTERVAL, CLOCK_MAX / 2, CLOCK_MAX]
+var ringer_unlock = default_ringer_unlock.duplicate()
 
 var clock_progress: int = 0
 
@@ -33,6 +38,10 @@ func _on_timer_timeout() -> void:
 	if clock_progress % CLOCK_TICK_INTERVAL == 0:
 		var clock_face_asset_index = 1 + clock_progress / CLOCK_TICK_INTERVAL
 		clock_face.texture = load("res://Assets/Clock/TheClock-%02d.png" % clock_face_asset_index)
+	
+	if !ringer_unlock.is_empty() && clock_progress >= ringer_unlock.front():
+		ringer_unlock.pop_front()
+		ringer_unlocked.emit()
 	
 	# At the end of the clock, time's up
 	if clock_progress == CLOCK_MAX:

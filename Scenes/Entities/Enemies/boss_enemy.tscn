@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://by48x72g25wal"]
+[gd_scene load_steps=12 format=3 uid="uid://by48x72g25wal"]
 
 [ext_resource type="Script" uid="uid://cmnxtp5mk7kd" path="res://Scripts/Entities/Enemies/boss_enemy.gd" id="1_4tvdv"]
 [ext_resource type="Texture2D" uid="uid://yup846x5e2qf" path="res://icon.svg" id="1_7cs6j"]
@@ -208,10 +208,10 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.25, 0.5, 20.1667, 20.4167, 20.6667, 21.5333, 21.7833, 22.0333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(1056, 324), Vector2(1056, -300), Vector2(1056, 324)]
+"values": [Vector2(1056, 324), Vector2(1056, -300), Vector2(1056, 324), Vector2(1056, 324), Vector2(1056, -300), Vector2(1056, 324), Vector2(1056, 324), Vector2(1056, -300), Vector2(1056, 324)]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -220,8 +220,8 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.5, 1.5, 2.5),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0.5, 1.5, 2.5, 4.5, 5, 5.5, 6, 6.5, 7, 8, 20.3667, 20.6667, 21.2667, 22.0333, 23.5667, 30.1, 37.9333, 40.3, 45.1333, 46.1333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "values": [{
 "args": [],
 "method": &"fireWaveAttack"
@@ -231,6 +231,114 @@ tracks/1/keys = {
 }, {
 "args": [],
 "method": &"fireWaveAttack"
+}, {
+"args": [],
+"method": &"fireSwirlAttack"
+}, {
+"args": [],
+"method": &"fireGroundAttack"
+}, {
+"args": [],
+"method": &"fireGroundAttack"
+}, {
+"args": [],
+"method": &"fireGroundAttack"
+}, {
+"args": [],
+"method": &"fireGroundAttack"
+}, {
+"args": [],
+"method": &"fireGroundAttack"
+}, {
+"args": [false],
+"method": &"stopSwirlAttack"
+}, {
+"args": [],
+"method": &"fireGroundAttack"
+}, {
+"args": [],
+"method": &"fireWaveAttack"
+}, {
+"args": [],
+"method": &"fireGroundAttack"
+}, {
+"args": [],
+"method": &"fireWaveAttack"
+}, {
+"args": [],
+"method": &"fireGroundAttack"
+}, {
+"args": [],
+"method": &"spawnCrystal"
+}, {
+"args": [],
+"method": &"fireTwinAttack"
+}, {
+"args": [false],
+"method": &"stopTwinAttack"
+}, {
+"args": [],
+"method": &"spawnCrystal"
+}, {
+"args": [],
+"method": &"spawnCrystal"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_fj6eq"]
+resource_name = "phase_3"
+length = 60.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1056, 324)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2, 2.5, 2.73333, 3.03333, 3.56667, 3.8, 4.03333, 6.16667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"fireHomingAttack"
+}, {
+"args": [],
+"method": &"fireHomingAttack"
+}, {
+"args": [],
+"method": &"fireHomingAttack"
+}, {
+"args": [],
+"method": &"fireSwirlAttack"
+}, {
+"args": [],
+"method": &"fireGroundAttack"
+}, {
+"args": [],
+"method": &"fireHomingAttack"
+}, {
+"args": [],
+"method": &"fireHomingAttack"
+}, {
+"args": [],
+"method": &"fireGroundAttack"
+}, {
+"args": [],
+"method": &"fireHomingAttack"
+}, {
+"args": [false],
+"method": &"stopSwirlAttack"
 }]
 }
 
@@ -239,7 +347,8 @@ _data = {
 &"RESET": SubResource("Animation_xgipe"),
 &"phase_0": SubResource("Animation_8bvao"),
 &"phase_1": SubResource("Animation_4tvdv"),
-&"phase_2": SubResource("Animation_wmgoi")
+&"phase_2": SubResource("Animation_wmgoi"),
+&"phase_3": SubResource("Animation_fj6eq")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vvxoj"]
