@@ -1,4 +1,5 @@
 extends HeldLineAttack
+class_name FacingLineAttack
 
 func release_bullet(bullet: HeldProjectile):
 	target = Managers.self_management.player

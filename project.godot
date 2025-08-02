@@ -27,6 +27,7 @@ Enums="*res://Scripts/Autoloads/enum.gd"
 
 window/size/viewport_width=1440
 window/size/viewport_height=900
+window/size/resizable=false
 
 [input]
 

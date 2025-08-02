@@ -30,5 +30,6 @@ rotates = false
 position = Vector2(0.00012207, 0)
 rotation = 1.5708
 projectile = ExtResource("3_ktlcx")
+group = "BoxAttack"
 
 [connection signal="timeout" from="Path2D/FireTimer" to="." method="_on_fire_timer_timeout"]

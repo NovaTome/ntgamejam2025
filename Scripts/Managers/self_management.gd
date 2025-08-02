@@ -10,6 +10,8 @@ extends Node2D
 @export var ringer_ghost: PackedScene = preload("res://Scenes/Entities/Self/ringer_ghost.tscn")
 @export var projectile_scene:PackedScene = preload("res://Scenes/Entities/Projectiles/projectile.tscn")
 
+@export var STARTING_STATE:MainGame.STATE = MainGame.STATE.REG_ENEMY
+
 var bio:Array[Command] = []
 
 var currentTicks:int = 0 #Current tick from start of the program
@@ -149,7 +151,7 @@ func handleWaveEnd() -> void:
 	elif tutorialWaves != 1:
 		boss.phase = 1
 		player.connect("died",Managers.map_manager.resetEnemies)
-		getGameHandler().state = MainGame.STATE.REG_ENEMY
+		getGameHandler().state = STARTING_STATE
 		if get_parent() is MainGame and get_parent().DEBUG_MODE: get_tree().change_scene_to_file("res://Scenes/boss_room.tscn")
 
 func handle_ring_ability() -> void:

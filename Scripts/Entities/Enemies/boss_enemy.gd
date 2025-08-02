@@ -9,6 +9,8 @@ signal resetting()
 @export var swirlAttack:PackedScene = preload("res://Scenes/Entities/Attacks/swirl_attack.tscn")
 @export var crystalScene:PackedScene = preload("res://Scenes/Entities/Enemies/boss_crystal.tscn")
 @export var homingAttack:PackedScene = preload("res://Scenes/Entities/Attacks/homing_attack.tscn")
+@export var heldLineAttack:PackedScene = preload("res://Scenes/Entities/Attacks/held_line_attack.tscn")
+@export var facingLineAttack:PackedScene = preload("res://Scenes/Entities/Attacks/held_facing_attack.tscn")
 
 @onready var bullet_source: BulletSource = $BulletSource
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -70,6 +72,25 @@ func fireHomingAttack() -> HomingAttack:
 	homing.global_position = bullet_source.origin.global_position
 	get_parent().add_child(homing)
 	return homing
+
+func fireBoxAttack() -> void:
+	var up:Vector2 = Vector2(target.global_position.x,target.global_position.y-500)
+	var down:Vector2 = Vector2(target.global_position.x,target.global_position.y+500)
+	var left:Vector2 = Vector2(target.global_position.x-500,target.global_position.y)
+	var right:Vector2 = Vector2(target.global_position.x+500,target.global_position.y)
+	var vectors:Array[Vector2] = [up,right,down,left]
+	var rot:float = 0
+	for v:Vector2 in vectors:
+		var lineAttack:HeldLineAttack = heldLineAttack.instantiate()
+		lineAttack.global_position = v
+		lineAttack.global_rotation_degrees = rot
+		rot = wrapf(rot + 90, -180, 180)
+		get_parent().call_deferred("add_child",lineAttack)
+
+func fireFacingLineAttack() -> void:
+	var fLA:FacingLineAttack = facingLineAttack.instantiate()
+	fLA.global_position = global_position
+	get_parent().add_child(fLA)
 
 func spawnCrystal() -> void:
 	var crystal:BossCrystal = crystalScene.instantiate()
