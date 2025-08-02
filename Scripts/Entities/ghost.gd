@@ -4,7 +4,7 @@ extends CharacterBody2D
 signal died()
 
 var movement_direction: Vector2 = Vector2.ZERO
-@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var sprite_2d: AnimatedSprite2D = $Sprite2D
 @export var speed: int = 250
 @export var minLifeTime:int = 3
 @onready var command_node: CommandNode = $CommandNode

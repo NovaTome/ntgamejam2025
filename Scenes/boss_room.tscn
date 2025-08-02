@@ -20,7 +20,7 @@ position = Vector2(110, 383)
 [node name="GUI" parent="SelfManagement" instance=ExtResource("4_b2mui")]
 
 [node name="BossEnemy" parent="SelfManagement" instance=ExtResource("5_l7on7")]
-phase = 2
+phase = 1
 
 [node name="BulletManager" type="Node2D" parent="."]
 script = ExtResource("5_q04ek")

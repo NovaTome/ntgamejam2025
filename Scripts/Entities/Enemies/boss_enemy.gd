@@ -68,6 +68,8 @@ func spawnEnemy(num:int) -> void:
 func stopAllAttacks() -> void:
 	stopTwinAttack(true)
 	stopWaveAttack()
+	for e:Enemy in Managers.self_management.get_children().filter(func(n): return n is Enemy):
+		e.queue_free()
 	
 
 func stopTwinAttack(hardStop:bool=false) -> void:

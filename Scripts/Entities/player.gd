@@ -10,6 +10,7 @@ var movement_direction: Vector2 = Vector2.ZERO
 @onready var bullet_source = $BulletSource
 @onready var death_gap: Timer = $DeathGap
 @onready var camera_2d: Camera2D = $Camera2D
+@onready var sprite:AnimatedSprite2D = $Sprite2D
 
 var deaths:int = 0
 var dead:bool = false
@@ -22,6 +23,10 @@ var _unrecorded_fire: bool = false
 
 func _process(delta: float) -> void:
 	_process_actions()
+	if movement_direction == Vector2.ZERO and sprite.animation == "walk":
+		sprite.play("default")
+	elif movement_direction != Vector2.ZERO and sprite.animation != "walk":
+		sprite.play("walk")
 
 func _physics_process(delta):
 	self.velocity = movement_direction * speed
