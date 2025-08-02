@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cwy3gwf38qtt8"]
 
 [ext_resource type="Script" uid="uid://bjtyqhweb0fba" path="res://Scripts/Attacks/homing_attack.gd" id="1_wvqro"]
-[ext_resource type="PackedScene" uid="uid://dxtlhaoalm7os" path="res://Scenes/Entities/Attacks/bullet_source.tscn" id="2_m5ty4"]
+[ext_resource type="PackedScene" uid="uid://dxtlhaoalm7os" path="res://Scenes/Entities/Projectiles/Source/bullet_source.tscn" id="2_m5ty4"]
 [ext_resource type="PackedScene" uid="uid://vb6igl0gyj4p" path="res://Scenes/Entities/Projectiles/square_projectile.tscn" id="3_8383i"]
 
 [sub_resource type="Animation" id="Animation_8383i"]

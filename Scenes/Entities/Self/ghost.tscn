@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dxiilpwi3l5r5" path="res://Scripts/Entities/Self/ghost.gd" id="1_n0igq"]
 [ext_resource type="SpriteFrames" uid="uid://xccyeoay8wel" path="res://Assets/Player/ghost.tres" id="2_hjtyh"]
 [ext_resource type="PackedScene" uid="uid://btvl2e15nmict" path="res://Scenes/Entities/Self/command_node.tscn" id="3_t80u2"]
-[ext_resource type="PackedScene" uid="uid://bhygnmkhvep4j" path="res://Scenes/Entities/Attacks/ak_47_source.tscn" id="4_537r6"]
+[ext_resource type="PackedScene" uid="uid://bhygnmkhvep4j" path="res://Scenes/Entities/Projectiles/Source/ak_47_source.tscn" id="4_537r6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n2t0o"]
 size = Vector2(73, 130)
