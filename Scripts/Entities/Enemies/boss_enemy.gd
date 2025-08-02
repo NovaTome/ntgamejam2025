@@ -72,8 +72,8 @@ func spawnCrystal() -> void:
 
 func spawnEnemy(num:int) -> void:
 	var room:BossRoom = Managers.self_management.get_parent()
-	var type:Projectile.TYPES = Projectile.TYPES.REGULAR
-	if phase == 2 and randf() > 0.5: type = Projectile.TYPES.GHOST
+	var type:Enums.EnemyType= Enums.EnemyType.NORMAL
+	if phase == 2 and randf() > 0.5: type = Enums.EnemyType.GHOST
 	room.spawnAd(num,type)
 
 func stopAllAttacks() -> void:

@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://cncvb3yqekqle"]
+
+[ext_resource type="PackedScene" uid="uid://ddknmqi5sb88o" path="res://Scenes/Entities/enemy.tscn" id="1_hdvlt"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_owvky"]
+size = Vector2(30, 30)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_efbp4"]
+radius = 371.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_owvky"]
+radius = 194.139
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_efbp4"]
+size = Vector2(30, 30)
+
+[node name="RegularEnemy" instance=ExtResource("1_hdvlt")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = SubResource("PlaceholderTexture2D_owvky")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRange" index="0"]
+shape = SubResource("CircleShape2D_efbp4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange" index="0"]
+shape = SubResource("CircleShape2D_owvky")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
+shape = SubResource("RectangleShape2D_efbp4")
+
+[node name="BulletSource" parent="." index="5"]
+projectile_type = 2
+
+[connection signal="body_exited" from="AggroRange" to="." method="_on_aggro_range_body_exited"]
