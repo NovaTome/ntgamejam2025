@@ -14,7 +14,8 @@ var movement_direction: Vector2 = Vector2.ZERO
 @onready var ak_47_source = $AK47Source
 
 var startingLocation:Vector2
-
+const GHOST_MODULATE = .5
+var fade_tween: Tween
 
 var manager:SelfManagement
 
@@ -41,7 +42,7 @@ func _ready() -> void:
 	active = true
 	startingLocation = global_position
 	command_node.bullet_source = ak_47_source
-	sprite.self_modulate.a = 0.5 #Make ghost transparent :3
+	sprite.self_modulate.a = GHOST_MODULATE #Make ghost transparent :3
 	if commands.size() == 0:
 		printerr("Ghost has no commands!")
 		queue_free()
@@ -77,6 +78,8 @@ func _process(delta: float) -> void:
 				_on_death_timer_timeout() #ringer ghosts just auto start
 			else:
 				death_timer.start(clampi(minLifeTime-secondsAlive,0.1,minLifeTime))
+				fade_tween = get_tree().create_tween()
+				fade_tween.tween_property(sprite, "self_modulate:a", 0, death_timer.wait_time)
 			return
 	currentTicks+=1
 
@@ -90,6 +93,7 @@ func flip(on: bool):
 		collision_shape_2d.position.y = -abs(collision_shape_2d.position.y)
 
 func reload() -> void:
+	if fade_tween != null: fade_tween.kill()
 	global_position = startingLocation
 	commands.append_array(oldCommands.duplicate(false))
 	commands.sort_custom(func(a,b): return b.startTick > a.startTick)
@@ -97,6 +101,7 @@ func reload() -> void:
 	currentTicks = 0
 	secondsAlive = 0
 	active = true
+	sprite.self_modulate.a = GHOST_MODULATE
 	for c:Command in commands.filter(func(a:Command): return a.singleUse):
 		c.singleUse = false
 
