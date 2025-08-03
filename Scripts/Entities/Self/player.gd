@@ -7,6 +7,9 @@ signal ring_ability()
 
 var movement_direction: Vector2 = Vector2.ZERO
 @export var speed: int = 250
+@export var normal_sprite: SpriteFrames
+@export var ringer_sprite: SpriteFrames
+
 @onready var command_node: CommandNode = $CommandNode
 @onready var ak_47_source: BulletSource = $AK47Source
 @onready var death_gap: Timer = $DeathGap
@@ -97,11 +100,11 @@ func flip(on: bool):
 func ringer_on() -> void:
 	rings -= 1
 	ringed = true
-	modulate = Color.YELLOW
+	change_sprite_frame(ringer_sprite)
 	
 func ringer_off() -> void:
 	ringed = false
-	modulate = Color.WHITE
+	change_sprite_frame(normal_sprite)
 
 func _on_death_gap_timeout() -> void:
 	dead = false
@@ -111,3 +114,11 @@ func _on_hell_circle_animation_finished() -> void:
 	Managers.self_management.process_mode = Node.PROCESS_MODE_INHERIT
 	hell_sprite.hide()
 	die(Enums.DeathType.UNKNOWN)
+	
+func change_sprite_frame(new_frame: SpriteFrames):
+	var previous_animation = sprite.animation
+	var previous_frame = sprite.frame
+	sprite.sprite_frames = new_frame
+	sprite.play(previous_animation)
+	sprite.frame = previous_frame
+	

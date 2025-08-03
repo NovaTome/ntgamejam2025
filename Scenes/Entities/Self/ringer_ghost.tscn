@@ -1,7 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cyfgfsdqya8an"]
+[gd_scene load_steps=3 format=3 uid="uid://cyfgfsdqya8an"]
 
 [ext_resource type="PackedScene" uid="uid://bqvhoyc8hm3u0" path="res://Scenes/Entities/Self/ghost.tscn" id="1_qt0ky"]
+[ext_resource type="SpriteFrames" uid="uid://d34k6fqxaf1ti" path="res://Assets/Player/ringer.tres" id="2_7rx5f"]
 
 [node name="RingerGhost" instance=ExtResource("1_qt0ky")]
-modulate = Color(1, 1, 0, 1)
 ringer_ghost = true
+
+[node name="Sprite2D" parent="." index="0"]
+sprite_frames = ExtResource("2_7rx5f")
