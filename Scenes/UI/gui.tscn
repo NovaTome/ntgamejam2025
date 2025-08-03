@@ -69,6 +69,13 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_81ldm")
 text = "Enemies Remaining: 0"
 
+[node name="ObjectiveLabel" type="Label" parent="LabelBox"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_81ldm")
+text = "Time bounds you
+Await the crystals..."
+
 [node name="TopHints" type="VBoxContainer" parent="."]
 anchors_preset = 5
 anchor_left = 0.5

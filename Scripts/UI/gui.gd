@@ -13,6 +13,7 @@ class_name GUI
 @onready var ringer_clock:AnimatedSprite2D = $RingerClock
 @onready var ringer_hint: Label = $TopHints/RingerHint
 @onready var crystal_hint: Label = $TopHints/CrystalHint
+@onready var objective_label = $LabelBox/ObjectiveLabel
 
 var clockTickingSound:AudioStreamPlayer2D
 
@@ -38,6 +39,8 @@ const RINGER_THREE_UNLOCK:float = CLOCK_MAX * 3/4
 var ring_1_unlocks = 0
 var ring_3_unlocks = 0
 
+const OBJECTIVE_TEXT_1: String = "Time bounds you\nAwait the crystals..."
+const OBJECTIVE_TEXT_2: String = "Pillage the crystals"
 
 const DEADRINGER_HINT_1: String = "Press 'R' to embrace The Deadringer"
 const DEADRINGER_HINT_2: String = "You have five seconds to create an eternal loop."
@@ -81,13 +84,14 @@ var ringer_clock_on: bool = false:
 func _ready():
 	SignalBus.phase_change.connect(_handle_phase_change)
 	ghost_label.text = "Ghosts Remaining: " + str(GameConstants.STARTING_MAX_GHOSTS)
+	objective_label.text = OBJECTIVE_TEXT_1
 
 func hideAll() -> void:
 	for n in get_children():
 		if n is Control: n.hide()
 
 func showAll() -> void:
-	var hiddenElements:Array = [death_hint,jump_scare,ringer_clock, ringer_hint, crystal_hint]
+	var hiddenElements:Array = [death_hint,jump_scare,ringer_clock, ringer_hint, crystal_hint, objective_label]
 	for n in get_children():
 		if n is Control and not hiddenElements.has(n): n.show()
 
@@ -123,6 +127,7 @@ func _on_timer_timeout() -> void:
 
 func resetProgress() -> void:
 	clock_progress = 0
+	objective_label.text = OBJECTIVE_TEXT_1
 	crystal_hint.hide()
 	clock_face.texture = load("res://Assets/Clock/TheClock-01.png")
 
@@ -178,6 +183,7 @@ func update_ringer_hint():
 	ringer_hint.hide()
 
 func handle_crystal_spawned():
+	objective_label.text = OBJECTIVE_TEXT_2
 	if not time_crystal_acknowledged:
 		crystal_hint.show()
 
@@ -197,6 +203,7 @@ func _set_clock_progress(i:int) -> void:
 		clockTickingSound.queue_free()
 
 func setup_clock_for_boss():
+	objective_label.show()
 	unlock_1.show()
 	unlock_3.show()
 	ring_1_unlocks = 1
