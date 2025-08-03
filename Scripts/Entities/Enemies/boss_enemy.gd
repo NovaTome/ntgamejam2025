@@ -30,6 +30,12 @@ var currentSwirlAttack:SwirlAttack
 func _ready() -> void:
 	animation_player.play("phase_"+str(phase))
 
+func playRumbling() -> void:
+	Managers.sound_manager.playSound(SoundManager.SOUNDS.RUMBLING,global_position)
+
+func playDeathExplosion() -> void:
+	Managers.sound_manager.playSound(SoundManager.SOUNDS.EXPLOSION,global_position)
+
 func reset() -> void:
 	resetting.emit()
 	health = 3
@@ -166,7 +172,8 @@ func connectTutorialWave() -> void:
 	fireWaveAttack().connect("finished",Managers.self_management.handleWaveEnd)
 
 func hitByProjectile(p:Projectile) -> void:
-	pass
+	if DEBUG_MODE:
+		crystalDestroyed()
 
 func crystalDestroyed() -> void:
 	health-=1
@@ -176,8 +183,12 @@ func crystalDestroyed() -> void:
 		Managers.self_management.gui.resetProgress()
 		if phase > 3:
 			stopAllAttacks()
+			Managers.sound_manager.playMusic(SoundManager.MUSIC.END)
 			animation_player.play("die")
-		else: reset()
+		else:
+			roar()
+			Managers.sound_manager.playSound(SoundManager.SOUNDS.EXPLOSION,global_position)
+			reset()
 
 func _phase_changed(_phase:int) -> void:
 	phase = _phase

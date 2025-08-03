@@ -22,25 +22,13 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(1220, -856)]
 }
-tracks/1/type = "value"
+tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -48,34 +36,46 @@ tracks/2/keys = {
 "method": &"stopAllAttacks"
 }]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:health")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath(".:health")
+tracks/3/path = NodePath("Explosion:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [3]
+"values": [false]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Explosion:visible")
+tracks/4/path = NodePath(".:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite2D:visible")
+tracks/5/path = NodePath(".:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -87,19 +87,19 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath(".:scale")
+tracks/6/path = NodePath("Head:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
+"update": 1,
+"values": [true]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath(".:modulate")
+tracks/7/path = NodePath("Head:modulate")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -111,7 +111,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath(".:visible")
+tracks/8/path = NodePath("Sprite2D:visible")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -119,6 +119,18 @@ tracks/8/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Sprite2D:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_rdnf5"]
@@ -131,10 +143,10 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1, 1.05, 1.1, 1.15, 1.2, 1.25, 1.3, 1.35, 1.4, 1.45, 1.5, 1.55, 1.6, 1.65, 1.7, 1.75, 1.8, 1.85, 1.9, 1.95, 2, 2.05, 2.1, 2.15, 2.2, 2.25, 2.3, 2.35, 2.4, 2.45, 2.5, 2.55, 2.6, 2.65, 2.7, 2.75, 2.8, 2.85, 2.9, 2.95, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(1220, -856)]
+"values": [Vector2(1220, -856), Vector2(1225, -856), Vector2(1220, -856), Vector2(1215, -856), Vector2(1220, -856), Vector2(1225, -856), Vector2(1220, -856), Vector2(1215, -856), Vector2(1220, -856), Vector2(1225, -856), Vector2(1220, -856), Vector2(1215, -856), Vector2(1220, -856), Vector2(1225, -856), Vector2(1220, -856), Vector2(1215, -856), Vector2(1220, -856), Vector2(1225, -856), Vector2(1220, -856), Vector2(1215, -856), Vector2(1220, -856), Vector2(1225, -856), Vector2(1220, -856), Vector2(1215, -856), Vector2(1220, -856), Vector2(1225, -856), Vector2(1220, -856), Vector2(1215, -856), Vector2(1220, -856), Vector2(1225, -856), Vector2(1220, -856), Vector2(1215, -856), Vector2(1220, -856), Vector2(1225, -856), Vector2(1220, -856), Vector2(1215, -856), Vector2(1220, -856), Vector2(1225, -856), Vector2(1220, -856), Vector2(1215, -856), Vector2(1220, -856), Vector2(1225, -856), Vector2(1220, -856), Vector2(1215, -856), Vector2(1220, -856), Vector2(1225, -856), Vector2(1220, -856), Vector2(1215, -856), Vector2(1220, -856), Vector2(1225, -856), Vector2(1220, -856), Vector2(1215, -856), Vector2(1220, -856), Vector2(1225, -856), Vector2(1220, -856), Vector2(1215, -856), Vector2(1220, -856), Vector2(1225, -856), Vector2(1220, -856), Vector2(1215, -856), Vector2(1220, -856)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -155,9 +167,15 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(3),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 2.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
+"args": [],
+"method": &"playRumbling"
+}, {
+"args": [],
+"method": &"playDeathExplosion"
+}, {
 "args": [],
 "method": &"die"
 }]
@@ -165,38 +183,62 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2D:visible")
+tracks/3/path = NodePath("Head:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.0333333, 2.5),
+"times": PackedFloat32Array(0, 2.5),
 "transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.652076, 0, 0.0129886, 1)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Sprite2D:modulate")
+tracks/4/path = NodePath("Head:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0, 2.5),
 "transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0.407843, 0, 0, 1), Color(0.999928, 0.502361, 0.43558, 1)]
+"update": 1,
+"values": [true, false]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath(".:scale")
+tracks/5/path = NodePath("Sprite2D:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0, 2.5),
 "transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sprite2D:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(3, 3)]
+"values": [Color(1, 1, 1, 1), Color(0.652076, 0, 0.0129886, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_8bvao"]
@@ -712,6 +754,7 @@ height = 476.0
 [node name="BossEnemy" type="CharacterBody2D"]
 position = Vector2(1220, -856)
 script = ExtResource("1_4tvdv")
+DEBUG_MODE = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -719,6 +762,7 @@ libraries = {
 }
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-3.4386, 0)
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_fj6eq")
 metadata/_edit_lock_ = true
@@ -739,6 +783,7 @@ projectile = ExtResource("4_fj6eq")
 
 [node name="Explosion" type="Sprite2D" parent="."]
 visible = false
+scale = Vector2(3.6875, 3.6875)
 texture = ExtResource("5_wmgoi")
 
 [connection signal="animation_finished" from="Head" to="." method="_on_head_animation_finished"]

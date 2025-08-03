@@ -48,6 +48,7 @@ frame_progress = 0.13855
 [node name="AttackRange" type="Area2D" parent="."]
 
 [node name="AttackTimer" type="Timer" parent="."]
+wait_time = 2.0
 one_shot = true
 
 [node name="BulletSource" parent="." instance=ExtResource("3_5ncfx")]

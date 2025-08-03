@@ -18,7 +18,8 @@ enum SOUNDS {
 
 enum MUSIC {
 	MAIN,
-	BOSS
+	BOSS,
+	END
 }
 
 const RUMBLING = preload("res://Assets/Sounds/rumbling.ogg")
@@ -87,6 +88,8 @@ func getMusic(m:MUSIC) -> AudioStream:
 			return load("res://Assets/Sounds/menu_song.wav")
 		MUSIC.BOSS:
 			return load("res://Assets/Sounds/battle_song.wav")
+		MUSIC.END:
+			return load("res://Assets/Sounds/end music.ogg")
 	return null
 
 func finishSound(instance:AudioStreamPlayer2D) -> void:
