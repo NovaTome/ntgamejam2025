@@ -110,9 +110,11 @@ func fireFacingLineAttack() -> void:
 func spawnCrystal() -> void:
 	var crystal:BossCrystal = crystalScene.instantiate()
 	var randomLocation:Vector2 = Vector2(global_position.x-randf_range(200,300),global_position.y+randf_range(0,200))
+	
 	crystal.global_position = randomLocation
 	crystal.destroyed.connect(crystalDestroyed)
 	Managers.self_management.add_child(crystal)
+	Managers.self_management.gui.handle_crystal_spawned()
 
 func spawnEnemy(num:int) -> void:
 	var room = Managers.self_management.get_parent()
@@ -167,6 +169,7 @@ func crystalDestroyed() -> void:
 	health-=1
 	if health==0:
 		phase+=1
+		Managers.self_management.gui.hide_crystal_hint()
 		Managers.self_management.gui.resetProgress()
 		if phase > 3:
 			stopAllAttacks()
