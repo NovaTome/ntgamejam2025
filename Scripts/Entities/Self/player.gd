@@ -110,10 +110,20 @@ func _on_death_gap_timeout() -> void:
 	dead = false
 
 func _on_hell_circle_animation_finished() -> void:
-	Managers.self_management.process_mode = Node.PROCESS_MODE_INHERIT
 	hell_sprite.hide()
+	if sprite.animation == "gold": 
+		sprite.play("ringer")
+		return
+	Managers.self_management.process_mode = Node.PROCESS_MODE_INHERIT
 	die(Enums.DeathType.UNKNOWN)
 
 func _handle_phase_change(phase: int):
 	if ringed:
 		ringer_off()
+
+
+func _on_sprite_2d_animation_finished() -> void:
+	if sprite.animation == "ringer":
+		Managers.self_management.process_mode = Node.PROCESS_MODE_INHERIT
+		sprite.play("default")
+		die(Enums.DeathType.UNKNOWN)
