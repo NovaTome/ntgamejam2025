@@ -110,7 +110,6 @@ grow_vertical = 2
 text = "Your ghosts can help you block projectiles..."
 
 [node name="JumpScare" type="TextureRect" parent="."]
-visible = false
 self_modulate = Color(1, 1, 1, 0.0862745)
 z_index = -1
 anchors_preset = 8
@@ -125,6 +124,25 @@ offset_bottom = 600.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_q081c")
+
+[node name="ColorRect3" type="ColorRect" parent="JumpScare"]
+z_index = -1
+texture_filter = 1
+offset_left = -199.5
+offset_top = -309.0
+offset_right = 1.5
+offset_bottom = 1404.0
+color = Color(1, 0, 0, 0.196078)
+
+[node name="ColorRect2" type="ColorRect" parent="JumpScare"]
+z_index = -1
+texture_filter = 1
+layout_mode = 0
+offset_left = 1199.5
+offset_top = -308.0
+offset_right = 1400.5
+offset_bottom = 1405.0
+color = Color(1, 0, 0, 0.196078)
 
 [node name="Rings" type="Control" parent="."]
 layout_mode = 3

@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y4d4g"]
 size = Vector2(15.3333, 6)
 
-[node name="Projectile" instance=ExtResource("1_y4d4g")]
+[node name="Projectile2" instance=ExtResource("1_y4d4g")]
 speed = 2.0
 type = 2
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c3s13cnlrktl0"]
 
 [ext_resource type="PackedScene" uid="uid://ddknmqi5sb88o" path="res://Scenes/Entities/Enemies/enemy.tscn" id="1_efbp4"]
-[ext_resource type="Shape2D" uid="uid://dkm3u0rt6oxa7" path="res://Scenes/Entities/Enemies/enemy_collison.tres" id="2_owvky"]
+[ext_resource type="Shape2D" path="res://Scenes/Entities/Enemies/enemy_collison.tres" id="2_owvky"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_efbp4"]
 radius = 371.0
