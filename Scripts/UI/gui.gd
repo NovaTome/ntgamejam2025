@@ -117,6 +117,7 @@ func _on_hint_timer_timeout() -> void:
 	Managers.self_management.player.global_position = Managers.self_management.playerStartingLocation
 	Managers.self_management.player.show()
 	Managers.self_management.player.set_process(true)
+	Managers.self_management.check_for_held_actions()
 	if Managers.self_management.boss != null: Managers.self_management.boss.reset()
 	
 

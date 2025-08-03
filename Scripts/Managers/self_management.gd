@@ -38,6 +38,7 @@ func _process(delta: float) -> void:
 
 func enablePlayerCamera(enabled:bool = true) -> void:
 	player.camera_2d.enabled = enabled
+	check_for_held_actions()
 
 #On input, log what is happening to "bio"
 func _input(event: InputEvent) -> void:
@@ -190,3 +191,10 @@ func _on_gui_timer_up() -> void:
 func _on_gui_ringer_unlocked():
 	player.rings += 1
 	gui.player_rings = player.rings
+	
+func check_for_held_actions():
+	var actions = InputMap.get_actions()
+	var held_actions: Array
+	for action in actions:
+		if Input.is_action_pressed(action):
+			addToInputArray(action)
