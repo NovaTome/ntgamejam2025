@@ -56,10 +56,12 @@ frame = 5
 frame_progress = 1.0
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+process_mode = 3
 position = Vector2(4.0003, 6.00045)
 rotation = -1.6812
 scale = Vector2(0.07, 0.07)
 sprite_frames = ExtResource("2_pw7cj")
+animation = &"ringer"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-5.00037, 10.0007)
@@ -94,4 +96,5 @@ sprite_frames = ExtResource("10_sq6ki")
 frame_progress = 0.191806
 
 [connection signal="animation_finished" from="HellCircle" to="." method="_on_hell_circle_animation_finished"]
+[connection signal="animation_finished" from="Sprite2D" to="." method="_on_sprite_2d_animation_finished"]
 [connection signal="timeout" from="DeathGap" to="." method="_on_death_gap_timeout"]
