@@ -38,7 +38,7 @@ rotation = 1.5708
 scale = Vector2(0.065, 0.065)
 sprite_frames = SubResource("SpriteFrames_hrb7o")
 autoplay = "default"
-frame_progress = 0.220601
+frame_progress = 0.13855
 
 [node name="AggroRange" type="Area2D" parent="."]
 
