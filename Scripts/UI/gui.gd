@@ -62,7 +62,7 @@ var player_rings: int = 0:
 			
 		update_ringer_hint()
 
-var clock_progress: int = 0
+var clock_progress: int = 0:set=_set_clock_progress
 var ringer_clock_on: bool = false:
 	set(value):
 		if (value):
@@ -190,3 +190,14 @@ func hide_crystal_hint():
 	if crystal_hint.visible:
 		crystal_hint.hide()
 	time_crystal_acknowledged = true
+
+func _set_clock_progress(i:int) -> void:
+	clock_progress = i
+	var currentSecs:int = roundi(clock_progress/5)
+	var secsRemaining:int = 60 - currentSecs
+	print(secsRemaining)
+	if secsRemaining <= 5 and secsRemaining > 0 and clockTickingSound == null:
+		clockTickingSound = Managers.sound_manager.playSound(SoundManager.SOUNDS.CLOCK,Managers.self_management.player.global_position)
+	elif secsRemaining > 5 and clockTickingSound != null:
+		clockTickingSound.stop()
+		clockTickingSound.queue_free()

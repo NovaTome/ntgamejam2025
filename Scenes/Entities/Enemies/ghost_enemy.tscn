@@ -1,10 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dl6xtetw88rhl"]
+[gd_scene load_steps=6 format=3 uid="uid://dl6xtetw88rhl"]
 
 [ext_resource type="PackedScene" uid="uid://ddknmqi5sb88o" path="res://Scenes/Entities/Enemies/enemy.tscn" id="1_b17yr"]
 [ext_resource type="PackedScene" uid="uid://wucw4thji4u" path="res://Scenes/Entities/Projectiles/spectral_projectile.tscn" id="2_ctxd6"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_owvky"]
-size = Vector2(30, 30)
+[ext_resource type="Shape2D" uid="uid://dkm3u0rt6oxa7" path="res://Scenes/Entities/Enemies/enemy_collison.tres" id="2_g7rga"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_efbp4"]
 radius = 371.0
@@ -12,14 +10,12 @@ radius = 371.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_owvky"]
 radius = 501.1
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_efbp4"]
-size = Vector2(30, 30)
-
 [node name="RegularEnemy" groups=["GhostEnemy"] instance=ExtResource("1_b17yr")]
 modulate = Color(1, 1, 1, 0.52549)
+projectileType = 1
 
 [node name="Sprite2D" parent="." index="0"]
-texture = SubResource("PlaceholderTexture2D_owvky")
+modulate = Color(1, 1, 1, 0.584314)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRange" index="0"]
 shape = SubResource("CircleShape2D_efbp4")
@@ -28,7 +24,8 @@ shape = SubResource("CircleShape2D_efbp4")
 shape = SubResource("CircleShape2D_owvky")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
-shape = SubResource("RectangleShape2D_efbp4")
+position = Vector2(-7, 0)
+shape = ExtResource("2_g7rga")
 
 [node name="BulletSource" parent="." index="5"]
 projectile = ExtResource("2_ctxd6")

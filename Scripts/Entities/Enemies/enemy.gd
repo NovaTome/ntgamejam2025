@@ -5,6 +5,7 @@ class_name Enemy
 @onready var attack_range: Area2D = $AttackRange
 @onready var attack_timer: Timer = $AttackTimer
 @onready var bullet_source = $BulletSource
+@onready var sprite:AnimatedSprite2D = $Sprite2D
 
 var target:CharacterBody2D
 
@@ -25,6 +26,10 @@ func _process(delta: float) -> void:
 		Managers.sound_manager.playSound(SoundManager.SOUNDS.FIRE,global_position)
 		bullet_source.fire()
 		attack_timer.start()
+	if movement_direction != Vector2.ZERO and sprite.animation != "walk":
+		sprite.play("walk")
+	elif movement_direction == Vector2.ZERO and sprite.animation == "walk":
+		sprite.play("default")
 	
 func _physics_process(delta: float) -> void:
 	self.velocity = movement_direction * speed

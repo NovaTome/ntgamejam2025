@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://708eks8vanh"]
+[gd_scene load_steps=4 format=3 uid="uid://708eks8vanh"]
 
 [ext_resource type="PackedScene" uid="uid://b3ifmidv1nnnd" path="res://Scenes/Entities/Projectiles/projectile.tscn" id="1_qx7xc"]
 [ext_resource type="Texture2D" uid="uid://d2ifnu2rshtjl" path="res://Assets/Projectile/PlayerBullet-02.png" id="2_qx7xc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qx7xc"]
+size = Vector2(9.33333, 3.66667)
 
 [node name="Projectile" instance=ExtResource("1_qx7xc")]
 speed = 8.0
@@ -12,9 +15,13 @@ position = Vector2(0.333333, 2.98023e-08)
 scale = Vector2(0.004, 0.004)
 texture = ExtResource("2_qx7xc")
 
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0.333333, 0.166667)
+shape = SubResource("RectangleShape2D_qx7xc")
+
 [node name="VisibleOnScreenNotifier2D" parent="." index="2"]
-position = Vector2(-2.38419e-07, 4.76837e-07)
-scale = Vector2(0.6, 0.2)
+position = Vector2(0.333333, 0.166667)
+scale = Vector2(0.466667, 0.183333)
 
 [node name="Explosion" parent="." index="4"]
 position = Vector2(5.99966, 0)

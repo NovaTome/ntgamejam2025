@@ -1,9 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://c3s13cnlrktl0"]
+[gd_scene load_steps=5 format=3 uid="uid://c3s13cnlrktl0"]
 
 [ext_resource type="PackedScene" uid="uid://ddknmqi5sb88o" path="res://Scenes/Entities/Enemies/enemy.tscn" id="1_efbp4"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_owvky"]
-size = Vector2(30, 30)
+[ext_resource type="Shape2D" uid="uid://dkm3u0rt6oxa7" path="res://Scenes/Entities/Enemies/enemy_collison.tres" id="2_owvky"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_efbp4"]
 radius = 371.0
@@ -11,13 +9,7 @@ radius = 371.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_owvky"]
 radius = 546.937
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_efbp4"]
-size = Vector2(30, 30)
-
 [node name="RegularEnemy" instance=ExtResource("1_efbp4")]
-
-[node name="Sprite2D" parent="." index="0"]
-texture = SubResource("PlaceholderTexture2D_owvky")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRange" index="0"]
 shape = SubResource("CircleShape2D_efbp4")
@@ -26,6 +18,7 @@ shape = SubResource("CircleShape2D_efbp4")
 shape = SubResource("CircleShape2D_owvky")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
-shape = SubResource("RectangleShape2D_efbp4")
+position = Vector2(-7, 0)
+shape = ExtResource("2_owvky")
 
 [connection signal="body_exited" from="AggroRange" to="." method="_on_aggro_range_body_exited"]
