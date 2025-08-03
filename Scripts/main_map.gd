@@ -7,6 +7,7 @@ class_name MainMap
 
 var enemyQueue:Array[Dictionary] = []
 @export var canProgress:bool = false
+@export var bitchMode:bool = false
 
 enum DIRECTION {
 	TOP_LEFT,

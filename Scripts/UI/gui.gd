@@ -195,7 +195,6 @@ func _set_clock_progress(i:int) -> void:
 	clock_progress = i
 	var currentSecs:int = roundi(clock_progress/5)
 	var secsRemaining:int = 60 - currentSecs
-	print(secsRemaining)
 	if secsRemaining <= 5 and secsRemaining > 0 and clockTickingSound == null:
 		clockTickingSound = Managers.sound_manager.playSound(SoundManager.SOUNDS.CLOCK,Managers.self_management.player.global_position)
 	elif secsRemaining > 5 and clockTickingSound != null:
