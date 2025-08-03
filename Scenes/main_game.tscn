@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bjpx0ph4aja6"]
+[gd_scene load_steps=18 format=3 uid="uid://bjpx0ph4aja6"]
 
 [ext_resource type="Script" uid="uid://bjqdn7rjmr6h5" path="res://Scripts/main_game.gd" id="1_18r40"]
 [ext_resource type="PackedScene" uid="uid://bbreouasuqc05" path="res://Scenes/main_map.tscn" id="2_18r40"]
@@ -443,11 +443,82 @@ tracks/4/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_c78sm"]
+resource_name = "game_over"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SelfManagement:process_mode")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FadeToWhite:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 0, 0, 1)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"switchToMainMenu"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SelfManagement")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"hide"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SelfManagement/GUI")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"hideAll"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_18r40"]
 _data = {
 &"RESET": SubResource("Animation_18r40"),
 &"boss": SubResource("Animation_r0mdn"),
 &"end": SubResource("Animation_tpqse"),
+&"game_over": SubResource("Animation_c78sm"),
 &"pause": SubResource("Animation_0xqxu"),
 &"tutorial": SubResource("Animation_bb2iq")
 }

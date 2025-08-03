@@ -78,9 +78,13 @@ func clone_bio() -> Array[Command]:
 # Spawns a ghost with clone biography
 func spawn_ghost():
 	if bio.is_empty(): return
-	if ghostsRemaining == 0: # If you have more than starting_max_ghosts ghosts, it will remove the oldest one
-		var firstGhost:Ghost = get_children().filter(func(a): return a is Ghost).front()
-		if firstGhost != null: firstGhost.queue_free()
+	if ghostsRemaining == 0: 
+		# Old Behavior If you have more than starting_max_ghosts ghosts, it will remove the oldest one
+		#var firstGhost:Ghost = get_children().filter(func(a): return a is Ghost).front()
+		#if firstGhost != null: firstGhost.queue_free()
+		var mainGame:MainGame = Managers.map_manager.get_parent()
+		mainGame.animation_player.play("game_over")
+		gui.startJumpScare("YOU HAVE EXPIRED")
 	else: ghostsRemaining-=1
 	var new_ghost:Ghost = ghost_scene.instantiate()
 	new_ghost.commands = clone_bio()
