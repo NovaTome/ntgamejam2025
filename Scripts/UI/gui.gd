@@ -135,7 +135,7 @@ func startJumpScare(str:String) -> void:
 	var tween = get_tree().create_tween()
 	var fullColor:Color = jump_scare.self_modulate
 	fullColor.a = 1
-	tween.tween_property(jump_scare,"self_modulate",fullColor,3)
+	tween.tween_property(jump_scare,"modulate",fullColor,3)
 	tween.tween_callback(jump_scare.hide)
 	tween.tween_callback(death_hint.hide)
 
