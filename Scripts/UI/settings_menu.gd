@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-signal toggle_arachnophobia_mode
+signal arachnophobia_mode_toggled
 signal music_volume_changed
 
 @onready var volume_slider = $VolumeHBoxContainer/HSlider
@@ -18,4 +18,4 @@ func _on_spin_box_value_changed(value):
 
 func _on_check_button_toggled(toggled_on):
 	check_button_status_label.text = "ON" if toggled_on else "OFF"
-	toggle_arachnophobia_mode.emit(toggled_on)
+	arachnophobia_mode_toggled.emit(toggled_on)
