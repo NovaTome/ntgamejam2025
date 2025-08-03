@@ -6,6 +6,19 @@ signal game_started()
 @onready var main_menu = $MainMenuVBoxContainer
 @onready var settings_menu = $SettingsMenuVBoxContainer
 
+@onready var ghost_1 = $Ghost1
+@onready var winner_ghost = $WinnerGhost
+@onready var winner_text = $WinnerText
+
+const WINNER_TEXT = "You won with %d ghosts!\nLet us know how you did in the comments"
+
+func _ready():
+	if Managers.game_won:
+		ghost_1.hide()
+		winner_ghost.show()
+		winner_text.text = WINNER_TEXT % Managers.game_won_ghosts
+		winner_text.show()
+
 func _on_start_button_pressed():
 	game_started.emit()
 
