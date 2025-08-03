@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bprfexjtdl7pq"]
+[gd_scene load_steps=13 format=3 uid="uid://bprfexjtdl7pq"]
 
 [ext_resource type="Texture2D" uid="uid://c1gvisew0ga4f" path="res://Assets/Background-grainy.jpg" id="1_5wsvm"]
 [ext_resource type="Script" uid="uid://c2o60mlp1vp2" path="res://Scripts/UI/main_menu.gd" id="1_gih0s"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bbua21511rhx5" path="res://Assets/Projectile/RegularProjectile.png" id="4_u7lva"]
 [ext_resource type="Texture2D" uid="uid://c0ej8we4j7ate" path="res://Assets/Projectile/SpectralProjectile.png" id="5_mrfpk"]
 [ext_resource type="FontFile" uid="uid://lcrbq1y7yp2m" path="res://Assets/Orbitron-VariableFont_wght.ttf" id="6_4pqbp"]
+[ext_resource type="Script" uid="uid://2ydot0eiikjv" path="res://Scripts/UI/settings_menu.gd" id="6_lrjdf"]
 [ext_resource type="Texture2D" uid="uid://7mcbfvs0ljrx" path="res://Assets/Player/ghost_1.png" id="8_k33u3"]
 
 [sub_resource type="Animation" id="Animation_i2xx2"]
@@ -81,13 +82,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -1489.0
-offset_top = -837.5
-offset_right = 1489.0
-offset_bottom = 837.5
+offset_left = -1578.5
+offset_top = -888.0
+offset_right = 1578.5
+offset_bottom = 888.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(1489, 837.5)
+pivot_offset = Vector2(1578, 888)
 texture = ExtResource("1_5wsvm")
 expand_mode = 1
 
@@ -104,84 +105,6 @@ pivot_offset = Vector2(459.5, 104)
 texture = ExtResource("2_i2xx2")
 expand_mode = 1
 
-[node name="StartButton" type="TextureButton" parent="."]
-offset_left = 256.0
-offset_top = 392.0
-offset_right = 864.0
-offset_bottom = 448.0
-mouse_default_cursor_shape = 2
-texture_normal = ExtResource("4_u7lva")
-texture_pressed = ExtResource("5_mrfpk")
-texture_hover = ExtResource("5_mrfpk")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="RichTextLabel" type="RichTextLabel" parent="StartButton"]
-layout_mode = 0
-offset_left = 180.0
-offset_top = 12.0
-offset_right = 260.0
-offset_bottom = 44.0
-mouse_filter = 1
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("6_4pqbp")
-theme_override_font_sizes/normal_font_size = 20
-text = "Start"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="SettingsButton" type="TextureButton" parent="."]
-offset_left = 256.0
-offset_top = 488.0
-offset_right = 864.0
-offset_bottom = 544.0
-mouse_default_cursor_shape = 2
-texture_normal = ExtResource("4_u7lva")
-texture_pressed = ExtResource("5_mrfpk")
-texture_hover = ExtResource("5_mrfpk")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="RichTextLabel" type="RichTextLabel" parent="SettingsButton"]
-layout_mode = 0
-offset_left = 168.0
-offset_top = 12.0
-offset_right = 272.0
-offset_bottom = 44.0
-mouse_filter = 1
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("6_4pqbp")
-theme_override_font_sizes/normal_font_size = 20
-text = "Settings"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="QuitButton" type="TextureButton" parent="."]
-offset_left = 256.0
-offset_top = 584.0
-offset_right = 864.0
-offset_bottom = 640.0
-mouse_default_cursor_shape = 2
-texture_normal = ExtResource("4_u7lva")
-texture_pressed = ExtResource("5_mrfpk")
-texture_hover = ExtResource("5_mrfpk")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="RichTextLabel" type="RichTextLabel" parent="QuitButton"]
-layout_mode = 0
-offset_left = 191.0
-offset_top = 12.0
-offset_right = 247.0
-offset_bottom = 44.0
-mouse_filter = 1
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("6_4pqbp")
-theme_override_font_sizes/normal_font_size = 20
-text = "Quit"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_u7lva")
@@ -196,5 +119,169 @@ scale = Vector2(0.189951, 0.189951)
 texture = ExtResource("8_k33u3")
 flip_h = true
 
-[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
+[node name="SettingsMenuVBoxContainer" type="VBoxContainer" parent="."]
+visible = false
+offset_left = 256.0
+offset_top = 320.0
+offset_right = 904.0
+offset_bottom = 640.0
+theme_override_constants/separation = 45
+script = ExtResource("6_lrjdf")
+
+[node name="VolumeHBoxContainer" type="HBoxContainer" parent="SettingsMenuVBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="SettingsMenuVBoxContainer/VolumeHBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_4pqbp")
+theme_override_font_sizes/font_size = 20
+text = "Music Volume"
+
+[node name="HSlider" type="HSlider" parent="SettingsMenuVBoxContainer/VolumeHBoxContainer"]
+custom_minimum_size = Vector2(300, 31)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+value = 100.0
+ticks_on_borders = true
+
+[node name="SpinBox" type="SpinBox" parent="SettingsMenuVBoxContainer/VolumeHBoxContainer"]
+layout_mode = 2
+value = 100.0
+suffix = "%"
+
+[node name="ArachnophobiaModeHBoxContainer" type="HBoxContainer" parent="SettingsMenuVBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="SettingsMenuVBoxContainer/ArachnophobiaModeHBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_4pqbp")
+theme_override_font_sizes/font_size = 20
+text = "Arachnophobia Mode is"
+
+[node name="CheckButton" type="CheckButton" parent="SettingsMenuVBoxContainer/ArachnophobiaModeHBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+
+[node name="CheckButtonStatusLabel" type="Label" parent="SettingsMenuVBoxContainer/ArachnophobiaModeHBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_4pqbp")
+theme_override_font_sizes/font_size = 20
+text = "OFF"
+
+[node name="ReturnButton" type="TextureButton" parent="SettingsMenuVBoxContainer"]
+custom_minimum_size = Vector2(63.865, 60)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("4_u7lva")
+texture_pressed = ExtResource("5_mrfpk")
+texture_hover = ExtResource("5_mrfpk")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="SettingsMenuVBoxContainer/ReturnButton"]
+layout_mode = 0
+offset_left = 194.0
+offset_top = 13.0
+offset_right = 274.0
+offset_bottom = 45.0
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_4pqbp")
+theme_override_font_sizes/font_size = 20
+text = "Back"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainMenuVBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -464.0
+offset_top = 320.0
+offset_right = 184.0
+offset_bottom = 640.0
+grow_horizontal = 2
+theme_override_constants/separation = 45
+alignment = 1
+
+[node name="StartButton" type="TextureButton" parent="MainMenuVBoxContainer"]
+custom_minimum_size = Vector2(63.865, 60)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("4_u7lva")
+texture_pressed = ExtResource("5_mrfpk")
+texture_hover = ExtResource("5_mrfpk")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MainMenuVBoxContainer/StartButton"]
+layout_mode = 0
+offset_left = 194.0
+offset_top = 13.0
+offset_right = 274.0
+offset_bottom = 45.0
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_4pqbp")
+theme_override_font_sizes/font_size = 20
+text = "Start"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SettingsButton" type="TextureButton" parent="MainMenuVBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("4_u7lva")
+texture_pressed = ExtResource("5_mrfpk")
+texture_hover = ExtResource("5_mrfpk")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MainMenuVBoxContainer/SettingsButton"]
+layout_mode = 0
+offset_left = 182.0
+offset_top = 14.0
+offset_right = 286.0
+offset_bottom = 46.0
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_4pqbp")
+theme_override_font_sizes/font_size = 20
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitButton" type="TextureButton" parent="MainMenuVBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("4_u7lva")
+texture_pressed = ExtResource("5_mrfpk")
+texture_hover = ExtResource("5_mrfpk")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MainMenuVBoxContainer/QuitButton"]
+layout_mode = 0
+offset_left = 205.0
+offset_top = 14.0
+offset_right = 261.0
+offset_bottom = 46.0
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_4pqbp")
+theme_override_font_sizes/font_size = 20
+text = "Quit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="value_changed" from="SettingsMenuVBoxContainer/VolumeHBoxContainer/HSlider" to="SettingsMenuVBoxContainer" method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="SettingsMenuVBoxContainer/VolumeHBoxContainer/SpinBox" to="SettingsMenuVBoxContainer" method="_on_spin_box_value_changed"]
+[connection signal="toggled" from="SettingsMenuVBoxContainer/ArachnophobiaModeHBoxContainer/CheckButton" to="SettingsMenuVBoxContainer" method="_on_check_button_toggled"]
+[connection signal="pressed" from="SettingsMenuVBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="MainMenuVBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MainMenuVBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MainMenuVBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

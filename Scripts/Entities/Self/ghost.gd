@@ -66,9 +66,9 @@ func _process(delta: float) -> void:
 		var validRotations:Array[Dictionary] = currentCommand.rotations.filter(func(a): return a.tick == currentTicks)
 		if validRotations.size() != 0:
 			rotation = validRotations.pop_front().rotation
-			if (rotation_degrees < -90 and rotation_degrees > -270) or (rotation_degrees > 90 and rotation_degrees < 270):
-				flip(true)
-			else: flip(false)
+			#if (rotation_degrees < -90 and rotation_degrees > -270) or (rotation_degrees > 90 and rotation_degrees < 270):
+				#flip(true)
+			#else: flip(false)
 			
 		
 	else: #If top command is expired, move to next command

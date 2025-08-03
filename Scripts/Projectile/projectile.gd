@@ -22,6 +22,10 @@ var target:Node2D
 var velocity
 var disabled:bool = false
 
+func _ready():
+	if shooter is Ghost:
+		sprite_2d.self_modulate.a = .75
+
 func _process(delta: float) -> void:
 	if disabled: return
 	if type == TYPES.PLAYER:

@@ -1,4 +1,4 @@
 # Defines Global Constants
 extends Node
 
-const STARTING_MAX_GHOSTS = 100
+const STARTING_MAX_GHOSTS = 60

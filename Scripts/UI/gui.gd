@@ -9,13 +9,22 @@ class_name GUI
 @onready var hint_timer: Timer = $HintTimer
 @onready var jump_scare: TextureRect = $JumpScare
 @onready var ghost_label: Label = $LabelBox/GhostLabel
-@onready var ringer_label: Label = $LabelBox/RingerLabel
 @onready var enemy_label: Label = $LabelBox/EnemyLabel
 @onready var ringer_clock:AnimatedSprite2D = $RingerClock
 @onready var ringer_hint: Label = $TopHints/RingerHint
 @onready var crystal_hint: Label = $TopHints/CrystalHint
 
 var clockTickingSound:AudioStreamPlayer2D
+
+@onready var ring_1 = $Rings/Ring1
+@onready var ring_2 = $Rings/Ring2
+@onready var ring_3 = $Rings/Ring3
+@onready var ring_4 = $Rings/Ring4
+@onready var rings = $Rings
+@onready var unlock_1 = $ClockFaceTextureRect/Unlock1
+@onready var unlock_2 = $ClockFaceTextureRect/Unlock2
+@onready var unlock_3 = $ClockFaceTextureRect/Unlock3
+
 
 signal timerUp()
 signal ringer_unlocked()
@@ -24,10 +33,11 @@ const CLOCK_MAX: int = 300
 const CLOCK_TICK_COUNT = 12;
 const CLOCK_TICK_INTERVAL: int = CLOCK_MAX / CLOCK_TICK_COUNT;
 
-const PHASE_ONE_RINGER_UNLOCK: float = CLOCK_MAX / 4
-const PHASE_TWO_RINGER_UNLOCK: float = CLOCK_MAX / 2
-const PHASE_THREE_RINGER_UNLOCK:float = CLOCK_MAX * (3/4)
-var ringer_unlock: Array[float] = [CLOCK_TICK_INTERVAL, PHASE_ONE_RINGER_UNLOCK]
+const RINGER_ONE_UNLOCK: float = CLOCK_MAX / 4
+const RINGER_THREE_UNLOCK:float = CLOCK_MAX * 3/4
+var ring_1_unlocks = 0
+var ring_3_unlocks = 0
+
 
 const DEADRINGER_HINT_1: String = "Press 'R' to embrace The Deadringer"
 const DEADRINGER_HINT_2: String = "You have five seconds to create an eternal loop."
@@ -36,8 +46,20 @@ var time_crystal_acknowledged:bool = false
 
 var player_rings: int = 0:
 	set(value):
-		player_rings = value	
-		ringer_label.text = "Ringer Remaining " + str(value)
+		player_rings = value
+		ring_1.hide()
+		ring_2.hide()
+		ring_3.hide()
+		ring_4.hide()
+		if value >= 1:
+			ring_1.show()
+		if value >= 2:
+			ring_2.show()
+		if value >= 3:
+			ring_3.show()
+		if value >= 4:
+			ring_4.show()
+			
 		update_ringer_hint()
 
 var clock_progress: int = 0
@@ -46,11 +68,13 @@ var ringer_clock_on: bool = false:
 		if (value):
 			ringer_clock.show()
 			clock_face.hide()
+			rings.hide()
 			ringer_clock.play("default")
 			set_ring_timer()
 		else:
 			ringer_clock.hide()
 			clock_face.show()
+			rings.show()
 		ringer_clock_on = value
 		update_ringer_hint()
 
@@ -80,12 +104,18 @@ func _on_timer_timeout() -> void:
 		var clock_face_asset_index = 1 + clock_progress / CLOCK_TICK_INTERVAL
 		clock_face.texture = load("res://Assets/Clock/TheClock-%02d.png" % clock_face_asset_index)
 	
-	if !ringer_unlock.is_empty() \
- 		&& ringer_clock_on == false \
-		&& clock_progress >= ringer_unlock.front():
-			ringer_unlock.pop_front()
+	if ringer_clock_on == false:
+		if ring_1_unlocks >= 1 && clock_progress >= RINGER_ONE_UNLOCK:
+			ring_1_unlocks -= 1
 			ringer_unlocked.emit()
-	
+			if ring_1_unlocks <= 0:
+				unlock_1.hide()
+		if ring_3_unlocks >= 1 && clock_progress >= RINGER_THREE_UNLOCK:
+			ring_3_unlocks -= 1
+			ringer_unlocked.emit()
+			if ring_3_unlocks <= 0:
+				unlock_3.hide()
+
 	# At the end of the clock, time's up
 	if clock_progress == CLOCK_MAX:
 		timerUp.emit()
@@ -93,6 +123,8 @@ func _on_timer_timeout() -> void:
 
 func resetProgress() -> void:
 	clock_progress = 0
+	crystal_hint.hide()
+	clock_face.texture = load("res://Assets/Clock/TheClock-01.png")
 
 func startJumpScare(str:String) -> void:
 	Managers.sound_manager.playSound(SoundManager.SOUNDS.JUMPSCARE,Managers.self_management.player.global_position)
@@ -130,12 +162,12 @@ func _on_ringer_clock_animation_finished() -> void:
 	ringer_clock_on = false
 
 func _handle_phase_change(phase: int):
-	if phase == 1:
-		ringer_unlock.append(PHASE_ONE_RINGER_UNLOCK)
-	if phase == 2:
-		ringer_unlock.append(PHASE_TWO_RINGER_UNLOCK)
-	if phase == 3:
-		ringer_unlock.append(PHASE_THREE_RINGER_UNLOCK)
+	if phase == 0:
+		return
+	unlock_1.show()
+	unlock_3.show()
+	ring_1_unlocks += 1
+	ring_3_unlocks += 1
 
 func update_ringer_hint():
 	if ringer_clock_on:

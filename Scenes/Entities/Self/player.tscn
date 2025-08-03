@@ -1,9 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://cqcub1i5w633w"]
+[gd_scene load_steps=13 format=3 uid="uid://cqcub1i5w633w"]
 
 [ext_resource type="Script" uid="uid://bar4gwgrfy1qu" path="res://Scripts/Entities/Self/player.gd" id="1_4yaow"]
 [ext_resource type="Texture2D" uid="uid://udduy0nvebyd" path="res://Assets/Player/KILLYOURSELFNOW-01.png" id="2_bfam3"]
 [ext_resource type="SpriteFrames" uid="uid://c872k3nc7g11i" path="res://Assets/Player/player.tres" id="2_pw7cj"]
-[ext_resource type="SpriteFrames" uid="uid://d34k6fqxaf1ti" path="res://Assets/Player/ringer.tres" id="3_drok3"]
 [ext_resource type="Texture2D" uid="uid://bl4tdfdtgb4cs" path="res://Assets/Player/KILLYOURSELFNOW-02.png" id="3_sq6ki"]
 [ext_resource type="PackedScene" uid="uid://btvl2e15nmict" path="res://Scenes/Entities/Self/command_node.tscn" id="3_xeqxv"]
 [ext_resource type="PackedScene" uid="uid://bhygnmkhvep4j" path="res://Scenes/Entities/Projectiles/Source/ak_47_source.tscn" id="4_8lt4w"]
@@ -40,15 +39,13 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bfam3"]
 radius = 16.0012
-height = 58.0043
+height = 54.1408
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 scale = Vector2(0.999925, 0.999925)
 collision_mask = 8
 script = ExtResource("1_4yaow")
-normal_sprite = ExtResource("2_pw7cj")
-ringer_sprite = ExtResource("3_drok3")
 
 [node name="HellCircle" type="AnimatedSprite2D" parent="."]
 process_mode = 3
@@ -59,13 +56,14 @@ frame = 5
 frame_progress = 1.0
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -14.16)
+position = Vector2(4.0003, 6.00045)
+rotation = -1.6812
 scale = Vector2(0.07, 0.07)
 sprite_frames = ExtResource("2_pw7cj")
-metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-8, 0)
+position = Vector2(-5.00037, 10.0007)
+rotation = -0.0942478
 shape = SubResource("CapsuleShape2D_bfam3")
 
 [node name="CommandNode" parent="." node_paths=PackedStringArray("character", "muzzleSprite") instance=ExtResource("3_xeqxv")]
@@ -73,7 +71,7 @@ character = NodePath("..")
 muzzleSprite = NodePath("../MuzzleFlash")
 
 [node name="AK47Source" parent="." instance=ExtResource("4_8lt4w")]
-position = Vector2(54, 0)
+position = Vector2(50.0037, 0)
 
 [node name="DeathGap" type="Timer" parent="."]
 wait_time = 0.5
@@ -90,7 +88,7 @@ limit_bottom = 1028
 
 [node name="MuzzleFlash" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2(60.0045, -1.00007)
+position = Vector2(58.0043, 0)
 scale = Vector2(0.117178, 0.117178)
 sprite_frames = ExtResource("10_sq6ki")
 frame_progress = 0.191806

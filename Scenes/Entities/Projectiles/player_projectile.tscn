@@ -1,15 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://708eks8vanh"]
 
 [ext_resource type="PackedScene" uid="uid://b3ifmidv1nnnd" path="res://Scenes/Entities/Projectiles/projectile.tscn" id="1_qx7xc"]
-[ext_resource type="Texture2D" uid="uid://cbtglpxb0kn4j" path="res://Assets/Projectile/PlayerBullet-01.png" id="2_2dlm4"]
+[ext_resource type="Texture2D" uid="uid://d2ifnu2rshtjl" path="res://Assets/Projectile/PlayerBullet-02.png" id="2_qx7xc"]
 
 [node name="Projectile" instance=ExtResource("1_qx7xc")]
 speed = 8.0
 type = 3
 
 [node name="Sprite2D" parent="." index="0"]
-scale = Vector2(0.01, 0.01)
-texture = ExtResource("2_2dlm4")
+position = Vector2(0.333333, 2.98023e-08)
+scale = Vector2(0.004, 0.004)
+texture = ExtResource("2_qx7xc")
 
 [node name="VisibleOnScreenNotifier2D" parent="." index="2"]
 position = Vector2(-2.38419e-07, 4.76837e-07)

@@ -7,8 +7,6 @@ signal ring_ability()
 
 var movement_direction: Vector2 = Vector2.ZERO
 @export var speed: int = 250
-@export var normal_sprite: SpriteFrames
-@export var ringer_sprite: SpriteFrames
 
 @onready var command_node: CommandNode = $CommandNode
 @onready var ak_47_source: BulletSource = $AK47Source
@@ -25,6 +23,7 @@ var ringed: bool = false
 var rings: int = 0
 
 func _ready() -> void:
+	SignalBus.phase_change.connect(_handle_phase_change)
 	command_node.bullet_source = ak_47_source
 
 # used to determine if next life tick should record fire
@@ -41,10 +40,10 @@ func _physics_process(delta):
 	var mousePos:Vector2 = get_global_mouse_position()
 	#Cursor rotation
 	look_at(mousePos)
-	if mousePos.x < global_position.x:
-		flip(true)
-	else:
-		flip(false)
+	#if mousePos.x < global_position.x:
+		#flip(true)
+	#else:
+		#flip(false)
 
 func _process_actions():
 	
@@ -100,25 +99,20 @@ func flip(on: bool):
 func ringer_on() -> void:
 	rings -= 1
 	ringed = true
-	change_sprite_frame(ringer_sprite)
+	sprite.play("gold")
 	
 func ringer_off() -> void:
 	ringed = false
-	change_sprite_frame(normal_sprite)
+	sprite.play("default")
 
 func _on_death_gap_timeout() -> void:
 	dead = false
-
 
 func _on_hell_circle_animation_finished() -> void:
 	Managers.self_management.process_mode = Node.PROCESS_MODE_INHERIT
 	hell_sprite.hide()
 	die(Enums.DeathType.UNKNOWN)
-	
-func change_sprite_frame(new_frame: SpriteFrames):
-	var previous_animation = sprite.animation
-	var previous_frame = sprite.frame
-	sprite.sprite_frames = new_frame
-	sprite.play(previous_animation)
-	sprite.frame = previous_frame
-	
+
+func _handle_phase_change(phase: int):
+	if ringed:
+		ringer_off()

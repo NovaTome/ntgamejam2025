@@ -6,8 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://bhygnmkhvep4j" path="res://Scenes/Entities/Projectiles/Source/ak_47_source.tscn" id="4_537r6"]
 [ext_resource type="SpriteFrames" uid="uid://bj2sv15rxvmri" path="res://Assets/Player/muzzle.tres" id="5_hjtyh"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_n2t0o"]
-size = Vector2(73, 130)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hjtyh"]
+radius = 31.9603
+height = 77.6297
 
 [node name="Ghost" type="CharacterBody2D"]
 collision_layer = 2
@@ -15,13 +16,15 @@ collision_mask = 0
 script = ExtResource("1_n0igq")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -14.16)
+position = Vector2(4, 6)
+rotation = -1.68075
 scale = Vector2(0.0698046, 0.0698046)
 sprite_frames = ExtResource("2_hjtyh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-6, -10)
-shape = SubResource("RectangleShape2D_n2t0o")
+position = Vector2(-8, 7)
+rotation = -0.137881
+shape = SubResource("CapsuleShape2D_hjtyh")
 
 [node name="CommandNode" parent="." node_paths=PackedStringArray("character", "muzzleSprite") instance=ExtResource("3_t80u2")]
 character = NodePath("..")
@@ -35,12 +38,12 @@ one_shot = true
 autostart = true
 
 [node name="AK47Source" parent="." instance=ExtResource("4_537r6")]
-position = Vector2(54, 0)
+position = Vector2(50.004, 0)
 projectile_type = 4
 
 [node name="MuzzleFlash" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2(58, 0)
+position = Vector2(57, 0)
 scale = Vector2(0.09375, 0.09375)
 sprite_frames = ExtResource("5_hjtyh")
 

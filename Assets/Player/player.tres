@@ -1,15 +1,13 @@
-[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://c872k3nc7g11i"]
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://c872k3nc7g11i"]
 
-[ext_resource type="Texture2D" uid="uid://bo3ijn066enh7" path="res://Assets/Player/player_1.png" id="1_1j7io"]
-[ext_resource type="Texture2D" uid="uid://dvnlpc7i0mhuh" path="res://Assets/Player/player_2.png" id="2_7ca2a"]
-[ext_resource type="Texture2D" uid="uid://cpd7wiy80125" path="res://Assets/Player/player_3.png" id="3_nmsjy"]
-[ext_resource type="Texture2D" uid="uid://dldexapndtblj" path="res://Assets/Player/player_4.png" id="4_mmeju"]
+[ext_resource type="Texture2D" uid="uid://bqny4pixli58a" path="res://Assets/Player/chud_son.png" id="1_q61ub"]
+[ext_resource type="Texture2D" uid="uid://cu2b36goomhsr" path="res://Assets/Player/gold_chud.png" id="2_5entk"]
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_1j7io")
+"texture": ExtResource("1_q61ub")
 }],
 "loop": true,
 "name": &"default",
@@ -17,18 +15,9 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_1j7io")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_7ca2a")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_nmsjy")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_mmeju")
+"texture": ExtResource("2_5entk")
 }],
 "loop": true,
-"name": &"walk",
-"speed": 10.0
+"name": &"gold",
+"speed": 5.0
 }]
