@@ -33,10 +33,10 @@ func processCommand(cmd:Command) -> void:
 						muzzleSprite.play("default")
 					bullet_source.fire()
 	character.movement_direction = character.movement_direction.normalized()
-	if character.movement_direction == Vector2.ZERO and character.sprite.animation == "walk":
-		character.sprite.play("default")
-	elif character.movement_direction != Vector2.ZERO and character.sprite.animation != "walk":
-		character.sprite.play("walk")
+	#if character.movement_direction == Vector2.ZERO and character.sprite.animation == "walk":
+		#character.sprite.play("default")
+	#elif character.movement_direction != Vector2.ZERO and character.sprite.animation != "walk":
+		#character.sprite.play("walk")
 	cmd.singleUse = true
 
 func _on_muzzle_flash_animation_finished() -> void:
