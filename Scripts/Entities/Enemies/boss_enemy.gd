@@ -63,7 +63,7 @@ func fireSwirlAttack() -> SwirlAttack:
 func fireTwinAttack() -> Node2D:
 	var twin:Node2D = twinAttack.instantiate()
 	twin.global_position = bullet_source.origin.global_position
-	twin.rotation_degrees = 90
+	twin.rotation_degrees = 180
 	get_parent().add_child(twin)
 	currentTwinAttack = twin
 	return twin
@@ -77,7 +77,7 @@ func fireGroundAttack() -> GroundExplosion:
 
 func fireHomingAttack() -> HomingAttack:
 	var homing:HomingAttack = homingAttack.instantiate()
-	homing.global_position = bullet_source.origin.global_position
+	homing.global_position = Managers.map_manager.getBulletSource(MainMap.DIRECTION.values().pick_random()).origin.global_position
 	get_parent().add_child(homing)
 	return homing
 
@@ -98,12 +98,12 @@ func fireBoxAttack() -> void:
 func fireFacingLineAttack() -> void:
 	var fLA:FacingLineAttack = facingLineAttack.instantiate()
 	fLA.global_position = global_position
-	fLA.global_rotation_degrees = wrapf(fLA.global_rotation_degrees - 90, -180, 180)
+	fLA.global_rotation_degrees = wrapf(fLA.global_rotation_degrees+180, -180, 180)
 	get_parent().add_child(fLA)
 
 func spawnCrystal() -> void:
 	var crystal:BossCrystal = crystalScene.instantiate()
-	var randomLocation:Vector2 = Vector2(global_position.x-randf_range(200,300),global_position.y+randf_range(-200,200))
+	var randomLocation:Vector2 = Vector2(global_position.x-randf_range(200,300),global_position.y+randf_range(0,200))
 	crystal.global_position = randomLocation
 	crystal.destroyed.connect(crystalDestroyed)
 	Managers.self_management.add_child(crystal)

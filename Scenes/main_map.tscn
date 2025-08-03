@@ -230,9 +230,9 @@ libraries = {
 }
 
 [node name="BossMarker" type="Marker2D" parent="."]
-position = Vector2(2040, 0)
+position = Vector2(1220, -856)
 
 [node name="PlayerBossMarker" type="Marker2D" parent="."]
-position = Vector2(1440, 0)
+position = Vector2(1220, -456)
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

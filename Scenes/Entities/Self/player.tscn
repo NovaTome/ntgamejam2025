@@ -46,7 +46,6 @@ z_index = 1
 scale = Vector2(0.999925, 0.999925)
 collision_mask = 8
 script = ExtResource("1_4yaow")
-speed = null
 
 [node name="HellCircle" type="AnimatedSprite2D" parent="."]
 process_mode = 3
@@ -60,7 +59,6 @@ frame_progress = 1.0
 position = Vector2(0, -14.16)
 scale = Vector2(0.07, 0.07)
 sprite_frames = ExtResource("2_pw7cj")
-frame_progress = 0.812568
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -80,6 +78,7 @@ one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -14.16)
+offset = Vector2(0, -300)
 enabled = false
 limit_left = -128
 limit_top = -1028

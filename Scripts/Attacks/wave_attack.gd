@@ -13,8 +13,8 @@ func _ready() -> void:
 	fire()
 
 func fire() -> void:
-	var rotate = (PI/2)
-	while rotate < 3*PI/2:
+	var rotate = 0
+	while rotate < PI:
 		var proj:BulletSource = bullet_source_scene.instantiate()
 		proj.projectile = projectile_scene
 		rotate += PI/16

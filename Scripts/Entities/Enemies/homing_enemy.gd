@@ -7,7 +7,9 @@ func _process(delta: float) -> void:
 	if attack_range.get_overlapping_bodies().has(target):
 		var dir:Vector2 = global_position.direction_to(target.global_position)*-1
 		movement_direction = dir.normalized()
-
+	elif not aggro_range.get_overlapping_bodies().has(target):
+		var dir:Vector2 = global_position.direction_to(target.global_position)
+		movement_direction = dir.normalized()
 
 func _on_attack_timer_timeout() -> void:
 	bullet_source.fire()

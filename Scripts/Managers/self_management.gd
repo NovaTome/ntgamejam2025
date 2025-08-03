@@ -150,6 +150,7 @@ func handleWaveEnd() -> void:
 		tutorialWaves = player.deaths
 	elif tutorialWaves != 1:
 		boss.phase = 1
+		player.camera_2d.offset = Vector2.ZERO
 		player.connect("died",Managers.map_manager.resetEnemies)
 		getGameHandler().state = STARTING_STATE
 		if get_parent() is MainGame and get_parent().DEBUG_MODE: get_tree().change_scene_to_file("res://Scenes/boss_room.tscn")
