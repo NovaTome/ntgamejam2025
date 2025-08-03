@@ -1,14 +1,19 @@
-[gd_scene load_steps=12 format=3 uid="uid://ciq371u7ni228"]
+[gd_scene load_steps=17 format=3 uid="uid://ciq371u7ni228"]
 
 [ext_resource type="Script" uid="uid://dblvl5rd8204o" path="res://Scripts/UI/gui.gd" id="1_vqpta"]
 [ext_resource type="Texture2D" uid="uid://bieclbc2u0d4p" path="res://Assets/face.png" id="2_q081c"]
 [ext_resource type="FontFile" uid="uid://lcrbq1y7yp2m" path="res://Assets/Orbitron-VariableFont_wght.ttf" id="3_81ldm"]
 [ext_resource type="Texture2D" uid="uid://lxn7is4qcamv" path="res://Assets/Clock/TheClock-01.png" id="3_nxoro"]
 [ext_resource type="Texture2D" uid="uid://fbqfxi0v0pup" path="res://Assets/Clock/TheClock-14.png" id="4_cksue"]
+[ext_resource type="Texture2D" uid="uid://cpxuq32apnb8a" path="res://Assets/Clock/Rings-01.png" id="4_o4x3o"]
+[ext_resource type="Texture2D" uid="uid://bi7kn3wpqfrko" path="res://Assets/Clock/Rings-02.png" id="5_cp45s"]
+[ext_resource type="Texture2D" uid="uid://bwcig4yg0d7l7" path="res://Assets/Clock/Rings-03.png" id="6_7mry4"]
 [ext_resource type="Texture2D" uid="uid://udduy0nvebyd" path="res://Assets/Player/KILLYOURSELFNOW-01.png" id="6_e2ke0"]
+[ext_resource type="Texture2D" uid="uid://cvn88k5cpwba7" path="res://Assets/Clock/Rings-04.png" id="7_7u2ep"]
 [ext_resource type="Texture2D" uid="uid://bl4tdfdtgb4cs" path="res://Assets/Player/KILLYOURSELFNOW-02.png" id="7_o4x3o"]
 [ext_resource type="Texture2D" uid="uid://d7jxkfp85pfy" path="res://Assets/Player/KILLYOURSELFNOW-03.png" id="8_xd00d"]
 [ext_resource type="Texture2D" uid="uid://b5usni336heu4" path="res://Assets/Player/KILLYOURSELFNOW-04.png" id="9_u7pkn"]
+[ext_resource type="Texture2D" uid="uid://ba24uertludu4" path="res://Assets/Clock/ringer_indicator.png" id="10_7mry4"]
 [ext_resource type="Texture2D" uid="uid://8np00pc1fwdq" path="res://Assets/Player/KILLYOURSELFNOW-05.png" id="10_cp45s"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7mry4"]
@@ -58,11 +63,6 @@ theme_override_constants/separation = 20
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_81ldm")
 text = "Ghosts Remaining:"
-
-[node name="RingerLabel" type="Label" parent="LabelBox"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_81ldm")
-text = "Ringer: 0"
 
 [node name="EnemyLabel" type="Label" parent="LabelBox"]
 layout_mode = 2
@@ -126,6 +126,71 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_q081c")
 
+[node name="Rings" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -102.0
+offset_top = 18.0
+offset_right = -102.0
+offset_bottom = 18.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Ring1" type="TextureRect" parent="Rings"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_right = 2250.0
+offset_bottom = 2250.0
+grow_horizontal = 2
+scale = Vector2(0.09, 0.09)
+texture = ExtResource("4_o4x3o")
+metadata/_edit_lock_ = true
+
+[node name="Ring2" type="TextureRect" parent="Rings"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_right = 2250.0
+offset_bottom = 2250.0
+grow_horizontal = 2
+scale = Vector2(0.09, 0.09)
+texture = ExtResource("5_cp45s")
+metadata/_edit_lock_ = true
+
+[node name="Ring3" type="TextureRect" parent="Rings"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_right = 2250.0
+offset_bottom = 2250.0
+grow_horizontal = 2
+scale = Vector2(0.09, 0.09)
+texture = ExtResource("6_7mry4")
+metadata/_edit_lock_ = true
+
+[node name="Ring4" type="TextureRect" parent="Rings"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_right = 2250.0
+offset_bottom = 2250.0
+grow_horizontal = 2
+scale = Vector2(0.09, 0.09)
+texture = ExtResource("7_7u2ep")
+metadata/_edit_lock_ = true
+
 [node name="ClockFaceTextureRect" type="TextureRect" parent="."]
 anchors_preset = 5
 anchor_left = 0.5
@@ -137,6 +202,7 @@ offset_bottom = 202.24
 grow_horizontal = 2
 texture = ExtResource("3_nxoro")
 expand_mode = 1
+metadata/_edit_lock_ = true
 
 [node name="ClockHandTextureRect" type="TextureRect" parent="ClockFaceTextureRect"]
 layout_mode = 1
@@ -148,6 +214,35 @@ pivot_offset = Vector2(143.06, 192.84)
 texture = ExtResource("4_cksue")
 expand_mode = 1
 flip_v = true
+metadata/_edit_lock_ = true
+
+[node name="Unlock1" type="TextureRect" parent="ClockFaceTextureRect"]
+visible = false
+layout_mode = 0
+offset_left = 135.0
+offset_top = 71.76
+offset_right = 232.0
+offset_bottom = 169.76
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("10_7mry4")
+
+[node name="Unlock2" type="TextureRect" parent="ClockFaceTextureRect"]
+visible = false
+offset_left = 73.0
+offset_top = 136.76
+offset_right = 170.0
+offset_bottom = 234.76
+scale = Vector2(0.19, 0.19)
+texture = ExtResource("10_7mry4")
+
+[node name="Unlock3" type="TextureRect" parent="ClockFaceTextureRect"]
+visible = false
+offset_left = 10.0
+offset_top = 71.76
+offset_right = 107.0
+offset_bottom = 169.76
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("10_7mry4")
 
 [node name="RingerClock" type="AnimatedSprite2D" parent="."]
 visible = false

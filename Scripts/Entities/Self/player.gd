@@ -23,6 +23,7 @@ var ringed: bool = false
 var rings: int = 0
 
 func _ready() -> void:
+	SignalBus.phase_change.connect(_handle_phase_change)
 	command_node.bullet_source = ak_47_source
 
 # used to determine if next life tick should record fire
@@ -107,8 +108,11 @@ func ringer_off() -> void:
 func _on_death_gap_timeout() -> void:
 	dead = false
 
-
 func _on_hell_circle_animation_finished() -> void:
 	Managers.self_management.process_mode = Node.PROCESS_MODE_INHERIT
 	hell_sprite.hide()
 	die(Enums.DeathType.UNKNOWN)
+
+func _handle_phase_change(phase: int):
+	if ringed:
+		ringer_off()
