@@ -228,6 +228,7 @@ texture = ExtResource("10_7mry4")
 
 [node name="Unlock2" type="TextureRect" parent="ClockFaceTextureRect"]
 visible = false
+layout_mode = 0
 offset_left = 73.0
 offset_top = 136.76
 offset_right = 170.0
@@ -237,6 +238,7 @@ texture = ExtResource("10_7mry4")
 
 [node name="Unlock3" type="TextureRect" parent="ClockFaceTextureRect"]
 visible = false
+layout_mode = 0
 offset_left = 10.0
 offset_top = 71.76
 offset_right = 107.0

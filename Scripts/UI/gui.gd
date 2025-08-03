@@ -122,6 +122,7 @@ func _on_timer_timeout() -> void:
 func resetProgress() -> void:
 	clock_progress = 0
 	crystal_hint.hide()
+	clock_face.texture = load("res://Assets/Clock/TheClock-01.png")
 
 func startJumpScare(str:String) -> void:
 	jump_scare.self_modulate.a = 0.5
