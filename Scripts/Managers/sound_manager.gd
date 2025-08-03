@@ -12,7 +12,8 @@ enum SOUNDS {
 	CRYSTAL_DEATH,
 	ROAR,
 	FIRE,
-	CLOCK
+	CLOCK,
+	RINGER
 }
 
 enum MUSIC {
@@ -75,6 +76,8 @@ func getSound(s:SOUNDS) -> AudioStream:
 			return load("res://Assets/Sounds/laser.wav")
 		SOUNDS.CLOCK:
 			return load("res://Assets/Sounds/ticking_clock.ogg")
+		SOUNDS.RINGER:
+			return load("res://Assets/Sounds/ghost.ogg")
 	return null
 
 func getMusic(m:MUSIC) -> AudioStream:

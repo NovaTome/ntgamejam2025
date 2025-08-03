@@ -60,6 +60,7 @@ func _process_actions():
 		command.inputs.append("right")
 	if Input.is_action_pressed("ring"):
 		if rings > 0 && not ringed:
+			Managers.sound_manager.playSound(SoundManager.SOUNDS.RINGER,global_position)
 			ringer_on()
 			ring_ability.emit()
 	
