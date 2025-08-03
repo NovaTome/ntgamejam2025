@@ -175,7 +175,7 @@ func getGameHandler() -> MainGame:
 
 # Debug method for creating ghosts
 func _unhandled_input(event):
-	if event.is_action_pressed("spawn"):
+	if event.is_action_pressed("spawn") and not player.ringed:
 		player.killSelf()
 
 # Logs any change in rotation to the rotation log
@@ -202,3 +202,6 @@ func check_for_held_actions():
 	for action in actions:
 		if Input.is_action_pressed(action):
 			addToInputArray(action)
+		else:
+			if inputs.has(action):
+				removeFromInputArray(action)

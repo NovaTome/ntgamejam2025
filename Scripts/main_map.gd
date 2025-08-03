@@ -48,6 +48,7 @@ func setUpBossPhase() -> void:
 	Managers.self_management.player.global_position = player_marker.global_position
 	Managers.self_management.playerStartingLocation = player_marker.global_position
 	Managers.self_management.boss.global_position = boss_marker.global_position
+	Managers.self_management.clearEverything()
 	Managers.self_management.player.connect("died",Managers.self_management.boss.reset)
 	for n:Node2D in Managers.self_management.get_children().filter(func(a): return a is Enemy or a is Ghost):
 		n.queue_free()

@@ -61,11 +61,15 @@ theme_override_constants/separation = 20
 
 [node name="GhostLabel" type="Label" parent="LabelBox"]
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 4
 theme_override_fonts/font = ExtResource("3_81ldm")
 text = "Ghosts Remaining:"
 
 [node name="EnemyLabel" type="Label" parent="LabelBox"]
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 4
 theme_override_fonts/font = ExtResource("3_81ldm")
 text = "Enemies Remaining: 0"
 
@@ -86,12 +90,19 @@ theme_override_constants/separation = 20
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 4
+theme_override_fonts/font = ExtResource("3_81ldm")
 text = "Press \"R\" to embrace The Deadringer"
 horizontal_alignment = 1
 
 [node name="CrystalHint" type="Label" parent="TopHints"]
 visible = false
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 4
+theme_override_fonts/font = ExtResource("3_81ldm")
 text = "Break your eternal chains above. Desecrate the Time Crystals."
 
 [node name="DeathHint" type="Label" parent="."]
@@ -100,10 +111,16 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -29.5
-offset_bottom = 29.5
+offset_left = 118.0
+offset_top = -29.0
+offset_right = -123.0
+offset_bottom = 45.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 30
 theme_override_fonts/font = ExtResource("3_81ldm")
 theme_override_font_sizes/font_size = 46
 text = "This is not the end for you..."
