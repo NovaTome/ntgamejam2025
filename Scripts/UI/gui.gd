@@ -12,8 +12,10 @@ class_name GUI
 @onready var ringer_label: Label = $LabelBox/RingerLabel
 @onready var enemy_label: Label = $LabelBox/EnemyLabel
 @onready var ringer_clock:AnimatedSprite2D = $RingerClock
-@onready var ringer_hint = $TopHints/RingerHint
-@onready var crystal_hint = $TopHints/CrystalHint
+@onready var ringer_hint: Label = $TopHints/RingerHint
+@onready var crystal_hint: Label = $TopHints/CrystalHint
+
+var clockTickingSound:AudioStreamPlayer2D
 
 signal timerUp()
 signal ringer_unlocked()
@@ -93,6 +95,7 @@ func resetProgress() -> void:
 	clock_progress = 0
 
 func startJumpScare(str:String) -> void:
+	Managers.sound_manager.playSound(SoundManager.SOUNDS.JUMPSCARE,Managers.self_management.player.global_position)
 	jump_scare.self_modulate.a = 0.5
 	jump_scare.show()
 	death_hint.text = str

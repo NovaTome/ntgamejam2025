@@ -34,6 +34,9 @@ func reset() -> void:
 	resetting.emit()
 	health = 3
 	animation_player.play("RESET")
+	if Managers.self_management.gui.crystal_hint.visible:
+		Managers.self_management.gui.crystal_hint.hide()
+		Managers.self_management.gui.time_crystal_acknowledged = false
 	for c:BossCrystal in Managers.self_management.get_children().filter(func(a): return a is BossCrystal):
 		c.queue_free()
 	stopAllAttacks()
@@ -43,7 +46,8 @@ func reset() -> void:
 	animation_player.play("phase_"+str(phase))
 
 func roar() -> void:
-	headSprite.play("attack")	
+	headSprite.play("attack")
+	Managers.sound_manager.playSound(SoundManager.SOUNDS.ROAR,global_position)
 
 func die() -> void:
 	var door:Door = endGameDoor.instantiate()
@@ -159,7 +163,6 @@ func stopBoxAttack() -> void:
 
 func connectTutorialWave() -> void:
 	target = Managers.self_management.player
-	Managers.sound_manager.playSound(SoundManager.SOUNDS.EXPLOSION, global_position)
 	fireWaveAttack().connect("finished",Managers.self_management.handleWaveEnd)
 
 func hitByProjectile(p:Projectile) -> void:

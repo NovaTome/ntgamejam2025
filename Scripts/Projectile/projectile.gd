@@ -61,7 +61,9 @@ func _on_body_entered(body: Node2D) -> void:
 		if body is Player:
 			body.die(Enums.DeathType.ATTACK)
 		elif body is Ghost: pass
-		elif body is Enemy: body.queue_free()
+		elif body is Enemy:
+			Managers.sound_manager.playSound(SoundManager.SOUNDS.SPIDER,global_position)
+			body.queue_free()
 		elif body is BossEnemy: body.hitByProjectile(self)
 		elif body is BossCrystal: body.gotHit(self)
 		destroy()

@@ -324,7 +324,7 @@ tracks/1/keys = {
 "args": [],
 "method": &"fireFacingLineAttack"
 }, {
-"args": [30],
+"args": [15],
 "method": &"spawnEnemy"
 }, {
 "args": [],
@@ -342,7 +342,7 @@ tracks/1/keys = {
 "args": [],
 "method": &"fireFacingLineAttack"
 }, {
-"args": [30],
+"args": [15],
 "method": &"spawnEnemy"
 }, {
 "args": [],

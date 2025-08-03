@@ -31,6 +31,8 @@ func processCommand(cmd:Command) -> void:
 					if bullet_source.cooldown.is_stopped():
 						muzzleSprite.show()
 						muzzleSprite.play("default")
+						if character is Player:
+							Managers.sound_manager.playSound(SoundManager.SOUNDS.GUNSHOT,character.global_position)
 					bullet_source.fire()
 	character.movement_direction = character.movement_direction.normalized()
 	if character.movement_direction == Vector2.ZERO and character.sprite.animation == "walk":

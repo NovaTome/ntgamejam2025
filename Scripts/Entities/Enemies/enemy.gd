@@ -22,6 +22,7 @@ func _process(delta: float) -> void:
 		movement_direction = global_position.direction_to(target.global_position).normalized()
 	elif target != null and attack_range.get_overlapping_bodies().has(target) and attack_timer.is_stopped():
 		look_at(target.global_position)
+		Managers.sound_manager.playSound(SoundManager.SOUNDS.FIRE,global_position)
 		bullet_source.fire()
 		attack_timer.start()
 	
