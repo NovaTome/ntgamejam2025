@@ -20,7 +20,9 @@ enum MUSIC {
 	BOSS
 }
 
+const MAX_VOLUME_DB = -10
 const RUMBLING = preload("res://Assets/Sounds/rumbling.ogg")
+
 var soundCooldown:Array[Dictionary] = []
 var cooldownTimer:Timer = Timer.new()
 
@@ -30,7 +32,7 @@ func _ready() -> void:
 	cooldownTimer.connect("timeout",handleCooldown)
 	add_child(cooldownTimer)
 
-var currentMusic:AudioStreamPlayer = null
+var currentMusic:AudioStreamPlayer
 
 func handleCooldown() -> void:
 	soundCooldown = soundCooldown.filter(func(a): return Time.get_ticks_msec() < a.time+100)
@@ -94,9 +96,9 @@ func playMusic(m:MUSIC) -> void:
 		currentMusic.queue_free()
 	
 	var newMusic:AudioStreamPlayer = AudioStreamPlayer.new()
-	
+	newMusic.bus = "Music"
 	newMusic.stream = getMusic(m)
-	newMusic.volume_db-=10
+
 	currentMusic = newMusic
 	add_child(newMusic)
 	currentMusic.play()
