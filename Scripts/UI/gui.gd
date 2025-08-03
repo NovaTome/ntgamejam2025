@@ -38,11 +38,8 @@ const RINGER_THREE_UNLOCK:float = CLOCK_MAX * 3/4
 var ring_1_unlocks = 0
 var ring_3_unlocks = 0
 
-
 const DEADRINGER_HINT_1: String = "Press 'R' to embrace The Deadringer"
 const DEADRINGER_HINT_2: String = "You have five seconds to create an eternal loop."
-
-var time_crystal_acknowledged:bool = false
 
 var player_rings: int = 0:
 	set(value):
@@ -178,13 +175,11 @@ func update_ringer_hint():
 	ringer_hint.hide()
 
 func handle_crystal_spawned():
-	if not time_crystal_acknowledged:
-		crystal_hint.show()
+	crystal_hint.show()
 
 func hide_crystal_hint():
 	if crystal_hint.visible:
 		crystal_hint.hide()
-	time_crystal_acknowledged = true
 
 func _set_clock_progress(i:int) -> void:
 	clock_progress = i
