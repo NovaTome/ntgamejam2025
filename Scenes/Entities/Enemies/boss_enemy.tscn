@@ -291,8 +291,8 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(1.3, 3, 4, 6, 6.5, 7, 9.66667, 10.0333, 11.8667, 12.9667, 14.0333, 16.6667, 18.2667, 19.3667, 20.6, 22.4, 23.6333, 26, 28, 30.3667, 33.5, 34.5, 35, 36.0667, 38.3333, 39.4, 40.1333, 42.7, 44.5333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(1.3, 3, 4, 6, 6.5, 7, 9.66667, 11.8667, 12.9667, 14.0333, 16.6667, 18.2667, 19.3667, 20.6, 22.4, 23.6333, 26, 28, 30.3667, 33.5, 34.5, 35, 36.0667, 38.3333, 39.4, 40.1333, 42.7, 44.5333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "values": [{
 "args": [],
 "method": &"fireWaveAttack"
@@ -306,25 +306,22 @@ tracks/1/keys = {
 "args": [],
 "method": &"fireGroundAttack"
 }, {
-"args": [],
-"method": &"fireGroundAttack"
-}, {
-"args": [],
-"method": &"fireGroundAttack"
-}, {
-"args": [],
-"method": &"fireWaveAttack"
-}, {
 "args": [5],
 "method": &"spawnEnemy"
 }, {
 "args": [],
+"method": &"fireGroundAttack"
+}, {
+"args": [],
 "method": &"fireFacingLineAttack"
 }, {
 "args": [],
 "method": &"fireFacingLineAttack"
 }, {
-"args": [30],
+"args": [],
+"method": &"fireFacingLineAttack"
+}, {
+"args": [15],
 "method": &"spawnEnemy"
 }, {
 "args": [],
@@ -342,7 +339,7 @@ tracks/1/keys = {
 "args": [],
 "method": &"fireFacingLineAttack"
 }, {
-"args": [30],
+"args": [15],
 "method": &"spawnEnemy"
 }, {
 "args": [],
@@ -351,7 +348,7 @@ tracks/1/keys = {
 "args": [],
 "method": &"fireGroundAttack"
 }, {
-"args": [10],
+"args": [5],
 "method": &"spawnEnemy"
 }, {
 "args": [],
