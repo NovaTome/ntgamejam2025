@@ -21,4 +21,4 @@ func _on_spin_box_value_changed(value):
 
 func _on_check_button_toggled(toggled_on):
 	check_button_status_label.text = "ON" if toggled_on else "OFF"
-	arachnophobia_mode_toggled.emit(toggled_on)
+	Managers.map_manager.bitchMode = toggled_on

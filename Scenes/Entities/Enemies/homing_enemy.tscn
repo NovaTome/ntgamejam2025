@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ddknmqi5sb88o" path="res://Scenes/Entities/Enemies/enemy.tscn" id="1_hdvlt"]
 [ext_resource type="Script" uid="uid://4w0evjau153x" path="res://Scripts/Entities/Enemies/homing_enemy.gd" id="2_bdv5r"]
 [ext_resource type="PackedScene" uid="uid://bf75m7yulj6gn" path="res://Scenes/Entities/Projectiles/homing_projectile.tscn" id="2_k01ho"]
-[ext_resource type="Shape2D" uid="uid://dkm3u0rt6oxa7" path="res://Scenes/Entities/Enemies/enemy_collison.tres" id="3_pyb1v"]
+[ext_resource type="Shape2D" path="res://Scenes/Entities/Enemies/enemy_collison.tres" id="3_pyb1v"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_efbp4"]
 radius = 371.0

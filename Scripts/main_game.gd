@@ -39,6 +39,7 @@ func _set_state(s:STATE) -> void:
 		STATE.BOSS:
 			Managers.sound_manager.playSound(SoundManager.SOUNDS.RUMBLING,Managers.self_management.player.global_position)
 			Managers.sound_manager.playMusic(SoundManager.MUSIC.BOSS)
+			gui.setup_clock_for_boss()
 			animation_player.play("boss")
 	if state != STATE.BOSS:
 		animation_player.play("pause")

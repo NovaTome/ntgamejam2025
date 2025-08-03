@@ -135,7 +135,7 @@ func startJumpScare(str:String) -> void:
 	var tween = get_tree().create_tween()
 	var fullColor:Color = jump_scare.self_modulate
 	fullColor.a = 1
-	tween.tween_property(jump_scare,"self_modulate",fullColor,3)
+	tween.tween_property(jump_scare,"modulate",fullColor,3)
 	tween.tween_callback(jump_scare.hide)
 	tween.tween_callback(death_hint.hide)
 
@@ -162,12 +162,7 @@ func _on_ringer_clock_animation_finished() -> void:
 	ringer_clock_on = false
 
 func _handle_phase_change(phase: int):
-	if phase == 0:
-		return
-	unlock_1.show()
-	unlock_3.show()
-	ring_1_unlocks += 1
-	ring_3_unlocks += 1
+	unlock()
 
 func update_ringer_hint():
 	if ringer_clock_on:
@@ -195,9 +190,21 @@ func _set_clock_progress(i:int) -> void:
 	clock_progress = i
 	var currentSecs:int = roundi(clock_progress/5)
 	var secsRemaining:int = 60 - currentSecs
-	print(secsRemaining)
 	if secsRemaining <= 5 and secsRemaining > 0 and clockTickingSound == null:
 		clockTickingSound = Managers.sound_manager.playSound(SoundManager.SOUNDS.CLOCK,Managers.self_management.player.global_position)
 	elif secsRemaining > 5 and clockTickingSound != null:
 		clockTickingSound.stop()
 		clockTickingSound.queue_free()
+
+func setup_clock_for_boss():
+	unlock_1.show()
+	unlock_3.show()
+	ring_1_unlocks = 1
+	ring_3_unlocks = 1
+	resetProgress()
+
+func unlock():
+	unlock_1.show()
+	unlock_3.show()
+	ring_1_unlocks += 1
+	ring_3_unlocks += 1
