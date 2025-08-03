@@ -120,6 +120,7 @@ texture = ExtResource("8_k33u3")
 flip_h = true
 
 [node name="SettingsMenuVBoxContainer" type="VBoxContainer" parent="."]
+visible = false
 offset_left = 256.0
 offset_top = 320.0
 offset_right = 904.0
@@ -194,7 +195,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MainMenuVBoxContainer" type="VBoxContainer" parent="."]
-visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
