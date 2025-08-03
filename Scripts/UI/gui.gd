@@ -162,12 +162,7 @@ func _on_ringer_clock_animation_finished() -> void:
 	ringer_clock_on = false
 
 func _handle_phase_change(phase: int):
-	if phase == 0:
-		return
-	unlock_1.show()
-	unlock_3.show()
-	ring_1_unlocks += 1
-	ring_3_unlocks += 1
+	unlock()
 
 func update_ringer_hint():
 	if ringer_clock_on:
@@ -201,3 +196,16 @@ func _set_clock_progress(i:int) -> void:
 	elif secsRemaining > 5 and clockTickingSound != null:
 		clockTickingSound.stop()
 		clockTickingSound.queue_free()
+
+func setup_clock_for_boss():
+	unlock_1.show()
+	unlock_3.show()
+	ring_1_unlocks = 1
+	ring_3_unlocks = 1
+	resetProgress()
+
+func unlock():
+	unlock_1.show()
+	unlock_3.show()
+	ring_1_unlocks += 1
+	ring_3_unlocks += 1
