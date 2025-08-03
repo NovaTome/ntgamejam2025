@@ -20,7 +20,6 @@ enum MUSIC {
 	BOSS
 }
 
-const MAX_VOLUME_DB = -10
 const RUMBLING = preload("res://Assets/Sounds/rumbling.ogg")
 
 var soundCooldown:Array[Dictionary] = []

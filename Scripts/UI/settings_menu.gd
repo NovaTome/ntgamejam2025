@@ -1,7 +1,5 @@
 extends VBoxContainer
 
-signal arachnophobia_mode_toggled
-
 @onready var volume_slider = $VolumeHBoxContainer/HSlider
 @onready var volume_spin_box = $VolumeHBoxContainer/SpinBox
 
