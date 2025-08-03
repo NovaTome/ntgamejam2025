@@ -12,8 +12,8 @@ class_name GUI
 @onready var ringer_label: Label = $LabelBox/RingerLabel
 @onready var enemy_label: Label = $LabelBox/EnemyLabel
 @onready var ringer_clock:AnimatedSprite2D = $RingerClock
-@onready var ringer_hint = $RingerHint
-@onready var crystal_hint = $CrystalHint
+@onready var ringer_hint = $TopHints/RingerHint
+@onready var crystal_hint = $TopHints/CrystalHint
 
 signal timerUp()
 signal ringer_unlocked()
@@ -29,6 +29,8 @@ var ringer_unlock: Array[float] = [CLOCK_TICK_INTERVAL, PHASE_ONE_RINGER_UNLOCK]
 
 const DEADRINGER_HINT_1: String = "Press 'R' to embrace The Deadringer"
 const DEADRINGER_HINT_2: String = "You have five seconds to create an eternal loop."
+
+var time_crystal_acknowledged:bool = false
 
 var player_rings: int = 0:
 	set(value):
@@ -144,3 +146,12 @@ func update_ringer_hint():
 		return
 	
 	ringer_hint.hide()
+
+func handle_crystal_spawned():
+	if not time_crystal_acknowledged:
+		crystal_hint.show()
+
+func hide_crystal_hint():
+	if crystal_hint.visible:
+		crystal_hint.hide()
+	time_crystal_acknowledged = true
