@@ -544,7 +544,6 @@ visible = false
 
 [node name="BossEnemy" parent="SelfManagement" instance=ExtResource("6_bb2iq")]
 visible = false
-DEBUG_MODE = false
 
 [node name="BulletManager" type="Node2D" parent="."]
 script = ExtResource("5_6y7pd")
