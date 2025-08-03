@@ -132,6 +132,18 @@ tracks/6/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("SelfManagement/BossEnemy:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_r0mdn"]
 resource_name = "boss"
@@ -197,7 +209,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1012, -3)]
+"values": [Vector2(1220, -256)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -209,7 +221,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1438, 0)]
+"values": [Vector2(1220, -550)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -218,10 +230,10 @@ tracks/6/path = NodePath("SelfManagement/BossEnemy:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 1.9),
-"transitions": PackedFloat32Array(8.57419, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(8.57419),
 "update": 0,
-"values": [Vector2(2046, -552), Vector2(2046, 0)]
+"values": [Vector2(1220, -856)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -248,6 +260,18 @@ tracks/8/keys = {
 "args": [],
 "method": &"setUpBossPhase"
 }]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("SelfManagement/BossEnemy:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_tpqse"]
@@ -439,6 +463,7 @@ metadata/_edit_lock_ = true
 [node name="SelfManagement" type="Node2D" parent="."]
 process_mode = 4
 script = ExtResource("2_mgc0q")
+STARTING_STATE = 4
 
 [node name="Player" parent="SelfManagement" instance=ExtResource("3_bb2iq")]
 position = Vector2(1220, -281)

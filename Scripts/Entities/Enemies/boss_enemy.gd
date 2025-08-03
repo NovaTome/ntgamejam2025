@@ -16,6 +16,7 @@ signal resetting()
 
 @onready var bullet_source: BulletSource = $BulletSource
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var headSprite:AnimatedSprite2D = $Head
 
 @export var phase:int = 0:set=_phase_changed
 @export var health:int = 3
@@ -41,6 +42,9 @@ func reset() -> void:
 		phase = 1
 	animation_player.play("phase_"+str(phase))
 
+func roar() -> void:
+	headSprite.play("attack")	
+
 func die() -> void:
 	var door:Door = endGameDoor.instantiate()
 	door.global_position = global_position
@@ -48,6 +52,7 @@ func die() -> void:
 	queue_free()
 
 func fireWaveAttack() -> WaveAttack:
+	roar()
 	var wave:WaveAttack = waveAttack.instantiate()
 	wave.global_position = bullet_source.origin.global_position
 	get_parent().add_child(wave)
@@ -61,9 +66,9 @@ func fireSwirlAttack() -> SwirlAttack:
 	return swirl
 
 func fireTwinAttack() -> Node2D:
+	roar()
 	var twin:Node2D = twinAttack.instantiate()
 	twin.global_position = bullet_source.origin.global_position
-	twin.rotation_degrees = 180
 	get_parent().add_child(twin)
 	currentTwinAttack = twin
 	return twin
@@ -76,6 +81,7 @@ func fireGroundAttack() -> GroundExplosion:
 	return groundAttack
 
 func fireHomingAttack() -> HomingAttack:
+	roar()
 	var homing:HomingAttack = homingAttack.instantiate()
 	homing.global_position = Managers.map_manager.getBulletSource(MainMap.DIRECTION.values().pick_random()).origin.global_position
 	get_parent().add_child(homing)
@@ -175,3 +181,8 @@ func _get_target() -> Player:
 	if target == null:
 		target = Managers.self_management.player
 	return target
+
+
+func _on_head_animation_finished() -> void:
+	if headSprite.animation == "attack":
+		headSprite.play("default")

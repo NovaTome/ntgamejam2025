@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://by48x72g25wal"]
+[gd_scene load_steps=18 format=3 uid="uid://by48x72g25wal"]
 
 [ext_resource type="Script" uid="uid://cmnxtp5mk7kd" path="res://Scripts/Entities/Enemies/boss_enemy.gd" id="1_4tvdv"]
 [ext_resource type="Texture2D" uid="uid://iy8ol6l86hi" path="res://Assets/Enemies/boss_body.png" id="2_wmgoi"]
+[ext_resource type="Texture2D" uid="uid://d3sji2iw8w0sy" path="res://roar.png" id="3_8bvao"]
 [ext_resource type="PackedScene" uid="uid://dxtlhaoalm7os" path="res://Scenes/Entities/Projectiles/Source/bullet_source.tscn" id="3_wmgoi"]
 [ext_resource type="PackedScene" uid="uid://b3ifmidv1nnnd" path="res://Scenes/Entities/Projectiles/projectile.tscn" id="4_fj6eq"]
 [ext_resource type="Texture2D" uid="uid://co0rw6s7xhsph" path="res://Assets/Projectile/SpectralExplosion.png" id="5_wmgoi"]
@@ -133,7 +134,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(2046, 0)]
+"values": [Vector2(1220, -856)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -253,6 +254,20 @@ tracks/3/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Head")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"attack", 1.0, false],
+"method": &"play"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_4tvdv"]
 resource_name = "phase_1"
@@ -276,8 +291,8 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(1.3, 3, 4, 6, 6.5, 7, 10.0333, 14.0333, 16.6667, 18.2667, 19.3667, 20.6, 22.4, 23.6333, 26, 28, 30.3667, 33.5, 34.5, 35, 36.0667, 38.3333, 39.4, 40.1333, 42.7, 44.5333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(1.3, 3, 4, 6, 6.5, 7, 9.66667, 10.0333, 11.8667, 12.9667, 14.0333, 16.6667, 18.2667, 19.3667, 20.6, 22.4, 23.6333, 26, 28, 30.3667, 33.5, 34.5, 35, 36.0667, 38.3333, 39.4, 40.1333, 42.7, 44.5333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "values": [{
 "args": [],
 "method": &"fireWaveAttack"
@@ -297,8 +312,17 @@ tracks/1/keys = {
 "args": [],
 "method": &"fireGroundAttack"
 }, {
+"args": [],
+"method": &"fireWaveAttack"
+}, {
 "args": [5],
 "method": &"spawnEnemy"
+}, {
+"args": [],
+"method": &"fireFacingLineAttack"
+}, {
+"args": [],
+"method": &"fireFacingLineAttack"
 }, {
 "args": [30],
 "method": &"spawnEnemy"
@@ -666,6 +690,17 @@ animations = [{
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("3_8bvao")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_8bvao")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("6_fj6eq")
 }],
 "loop": true,
@@ -708,3 +743,5 @@ projectile = ExtResource("4_fj6eq")
 [node name="Explosion" type="Sprite2D" parent="."]
 visible = false
 texture = ExtResource("5_wmgoi")
+
+[connection signal="animation_finished" from="Head" to="." method="_on_head_animation_finished"]
